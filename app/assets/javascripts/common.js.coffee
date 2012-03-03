@@ -2,6 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+$.fn.showProfile = (text) ->
+  initial_text = $(this).text()
+  $(this).mouseover(() ->
+    $(this).text(text)
+  )
+  $(this).mouseout(() ->
+    $(this).text(initial_text)
+  )
+
 jQuery ->
   $(".groups").hide()
   $("#manage_groups").click((event) ->
@@ -15,3 +24,5 @@ jQuery ->
   $("html").click(() ->
     $(".groups").hide()
   )
+
+  $("#user_settings").showProfile("change user settings")

@@ -56,10 +56,6 @@ jQuery ->
 
   addTag()
 
-  #  $("#completed_tasks")
-  #    .find('table')
-  #    .removeColumn(3)
-
   # change link text color
   $(".delete, .edit, .stop").each () ->
     $(this).css('color', '#000000')
@@ -74,9 +70,6 @@ jQuery ->
 
   for element in $("#tabs").children()
     $(element).removeClass("ui-tabs-panel ui-widget-content")
-
-#  $(".groups").draggable()
-#  $("#main").setPositionRelativeToMe('.groups', 50, -910)
 
   $("#ongoing_tasks > .tablesorter").tablesorter
     widthFixed: false,
