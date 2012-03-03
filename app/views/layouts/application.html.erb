@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TimeZen - <%= yield(:title) %></title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+</head>
+<body>
+<div id="header">
+  <div id="user_nav">
+    <% if user_signed_in? %>
+        <%= link_to 'home', root_url %> | <%= link_to "sign out", destroy_user_session_path, :method => :delete %>
+    <% else %>
+        <span class="right"><%= link_to 'about', about_path %></span>
+    <% end %>
+  </div>
+  <h1>Time Zen</h1>
+</div>
+<% if user_signed_in? %>
+    <div id="menu" class="ui-tabs-nav ui-widget-header">
+      <%= image_tag avatar_url(current_user) %>
+      <span class="intro"><%= link_to current_user.display_name, edit_user_registration_path, :id => 'user_settings', :class => "intro" %></span>
+      <span class="right"><%= link_to 'add old tasks', new_task_path %> | <%= link_to 'analyze tasks', tasks_path %>
+        | <%= link_to 'manage groups', "#", :id => 'manage_groups' %> | <%= link_to 'manage tags', tags_path %></span>
+    </div>
+<% end %>
+<div id="main">
+  <div class="title"><%= yield(:title) %>
+    <hr/>
+  </div>
+  <% flash.each do |key, value| %>
+      <% if key.to_s != "error" && !value.blank? %>
+          <div class="<%= key %>"><%= value %></div>
+      <% end %>
+  <% end %>
+  <% if flash.count > 0 %>
+      <br/>
+  <% end %>
+  <%= render "shared/groups" %>
+  <%= yield %>
+</div>
+<% if !user_signed_in? %>
+    <div id="footer" class="ui-tabs-nav ui-widget-header">
+      <span>© 2012 TimeZen</span>
+    </div>
+<% end %>
+</body>
+</html>

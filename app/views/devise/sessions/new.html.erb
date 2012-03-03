@@ -1,0 +1,38 @@
+<% title "sign in" %>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= render "shared/error_messages" %>
+    <div class="content_left">
+      <div><%= f.label :email %>
+        <br/>
+        <%= f.email_field :email %>
+      </div>
+      <br/>
+
+      <div><%= f.label :password %>
+        <br/>
+        <%= f.password_field :password %>
+      </div>
+      <p></p>
+      <% if devise_mapping.rememberable? %>
+          <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+      <% end %>
+      <p></p>
+
+      <div>
+        <%= f.submit "Sign in", :class => 'button' %>
+      </div>
+      <%= render :partial => "devise/shared/links" %>
+    </div>
+    <div class="content_right">
+      <div class="title">Sign in using your account with</div>
+      <div id="authentication_services">
+        <%= link_to image_tag("facebook_32.png", :size => "32x32", :alt => "facebook"), "/auth/facebook" %>
+        <%= link_to image_tag("twitter_32.png", :size => "32x32", :alt => "twitter"), "/auth/twitter" %>
+        <%= link_to image_tag("github_32.png", :size => "32x32", :alt => "github"), "/auth/github" %>
+        <span class="intro">*</span>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="content_right">*github can be used only if you have public email address set up.</div>
+<% end %>

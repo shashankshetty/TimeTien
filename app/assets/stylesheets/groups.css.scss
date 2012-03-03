@@ -1,0 +1,23 @@
+// Place all the styles related to the Groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "layout";
+
+.group_title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.groups {
+  float: left;
+  position: absolute;
+  padding: 10px 20px;
+  border: 1px solid #9E9E9E;
+  background-color: $background;
+}
+
+#group_admins {
+  width: 400px;
+  height: 150px;
+}

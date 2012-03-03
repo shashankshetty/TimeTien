@@ -1,0 +1,22 @@
+<%= javascript_include_tag "tasks" %>
+<%= form_for(@task) do |f| %>
+    <%= render "shared/messages", :target => @task %>
+    <div class="field">
+      <%= f.label :start_time %>
+      <br/>
+      <%= f.text_field :start_time, :value => format_time_m_d_y(@task.start_time), :class => "datetime" %>
+    </div><br/>
+    <div class="field">
+      <%= f.label :end_time %>
+      <br/>
+      <%= f.text_field :end_time, :value => format_time_m_d_y(@task.end_time), :class => "datetime" %>
+    </div><br/>
+    <div class="field">
+      <%= f.label :tag_id %>
+      <br/>
+      <%= f.collection_select(:tag_id, current_user.tags, :id, :name, :include_blank => "Select") %>
+    </div><br/>
+    <div class="actions">
+      <%= f.submit :class => "button" %>
+    </div>
+<% end %>

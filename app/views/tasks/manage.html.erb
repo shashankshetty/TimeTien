@@ -1,0 +1,26 @@
+<% title "task management" %>
+<%= javascript_include_tag "tasks" %>
+<%= form_tag :action => "start_task" do |f| %>
+    <%= render "shared/messages", :target => @task %>
+    <% if !flash[:error].blank? %>
+        <div class="error"><%= flash[:error] %></div><br/>
+    <% end %>
+    <div class="field">
+      <%= label_tag "start new task: " %>
+      <%= select_tag(:select_tag, options_for_select(available_tags_with_select, @manage_task.tag_id)) %>&nbsp;<%= text_field_tag(:add_tag) %>&nbsp;<%= submit_tag "start", :class => 'play' %>
+    </div>
+    <p>&nbsp;</p>
+    <div id="tabs">
+      <ul>
+        <li><%= link_to 'Ongoing Tasks', '#ongoing_tasks' %></li>
+        <li><%= link_to 'Completed Tasks', '#completed_tasks' %></li>
+      </ul>
+
+      <div id="ongoing_tasks">
+        <%= render :partial => "task", :locals => {:tasks => ongoing_tasks, :tasks_type => "ongoing"} %>
+      </div>
+      <div id="completed_tasks">
+        <%= render :partial => "task", :locals => {:tasks => completed_tasks, :tasks_type => "completed"} %>
+      </div>
+    </div>
+<% end %>

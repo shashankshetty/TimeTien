@@ -1,0 +1,11 @@
+<div class="groups ui-tabs-nav ui-widget-header ui-corner-all">
+  <span class="group_title"><%= link_to 'my groups', groups_path %></span><hr/>
+  <% user_groups = get_user_groups
+     if user_groups.count > 0 %>
+      <% user_groups.each do |group| %>
+          <div align="center"><%= link_to group.name, edit_group_path(group) %></div>
+      <% end %>
+  <% else %>
+      <div align="center">You are not part<br/>of any groups.</div>
+  <% end %>
+</div>

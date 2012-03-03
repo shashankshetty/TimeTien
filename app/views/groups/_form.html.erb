@@ -1,0 +1,52 @@
+<%= form_for(@group) do |f| %>
+    <%= render "shared/messages", :target => @group %>
+    <% if params[:action] == "new" || @group.get_membership(current_user.id).is_admin %>
+        <div class="field">
+          <%= f.label :name %>
+          <br/>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label :description %>
+          <br/>
+          <%= f.text_area :description, :rows => 1 %>
+        </div>
+        <% if params[:action] != "new" && (params[:action] != "create" || !@group.errors.any?) %>
+            <div>
+              <%= f.label :user_tokens, "Members" %>
+              <br/>
+              <%= f.text_field :user_tokens, "data-pre" => @group.users.collect { |x| GroupUser.new(x.id, "#{x.display_name} (#{x.email})") }.to_json %>
+            </div><br/>
+            <div>
+              <%= f.label :admins, "Group Admins" %>
+              <br/>
+              <%= select_tag :group_admins, options_for_select(@group.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @group.admins.collect { |x| x.user_id }), :multiple => true, :size =>5 %>
+            </div>
+        <% end %><br />
+        <div class="actions">
+          <%= f.submit :class => "button" %>
+          <%= link_to 'Delete', @group, confirm: 'Are you sure?', method: :delete, :class => "button" %>
+        </div>
+    <% else %>
+        <p>
+          <span><b>Name</b></span><br/>
+          <%= @group.name %>
+        </p>
+        <p>
+          <b>Description</b><br/>
+          <%= @group.description %>
+        </p>
+        <p>
+          <b>Members</b><br/>
+          <% @group.users.each do |member| %>
+              <%= "#{member.display_name} (#{member.email})" %><br/>
+          <% end %>
+        </p>
+        <p>
+          <b>Group Admins</b><br/>
+          <% @group.admins.each do |admin| %>
+              <%= "#{admin.user.display_name} (#{admin.user.email})" %><br/>
+          <% end %>
+        </p>
+    <% end %>
+<% end %>

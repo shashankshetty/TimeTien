@@ -1,0 +1,30 @@
+<% title "manage authentication services" %>
+<%= render "shared/error_messages" %>
+<table id="authentications" class="tablesorter">
+  <thead>
+  <tr>
+    <th>Authentication Service</th>
+    <th></th>
+  </tr>
+  </thead>
+  <% @authentications.each do |authentication| %>
+      <tr>
+        <td align="center"><%= image_tag "#{authentication.provider}_32.png", :size => "24x24" %></td>
+        <% msg = @authentications.count == 1 ? "Removing #{authentication.provider} can lock you out of TimeZen unless you remember login credentials to your account" : "Are you sure you want to remove #{authentication.provider}?" %>
+         <td align="center"><%= link_to '', authentication, confirm: msg, method: :delete, :class => "delete_short" %></td>
+      </tr>
+  <% end %>
+</table>
+
+<div class="title">add more authentications to your account</div>
+<div id="authentication_services">
+  <% if @authentications.select {|item|"facebook" == item.provider }.empty? %>
+    <%= link_to image_tag("facebook_32.png", :size => "24x24", :alt => "facebook"), "/auth/facebook" %>
+  <% end  %>
+  <% if @authentications.select {|item|"twitter" == item.provider }.empty? %>
+    <%= link_to image_tag("twitter_32.png", :size => "24x24", :alt => "twitter"), "/auth/twitter" %>
+  <% end %>
+  <% if @authentications.select {|item|"github" == item.provider }.empty? %>
+    <%= link_to image_tag("github_32.png", :size => "24x24", :alt => "github"), "/auth/github" %>
+  <% end %>
+</div>

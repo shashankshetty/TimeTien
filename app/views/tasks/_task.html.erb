@@ -1,0 +1,29 @@
+<% if tasks.count == 0 %>
+    <div class="center notice">You have no <%= tasks_type %> tasks!</div>
+<% else %>
+    <table class='tablesorter'>
+      <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Start time</th>
+        <th><% if tasks_type == 'completed' %>End time<% end %></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <% tasks.each do |task| %>
+          <tr>
+            <td align="center"><%= task.tag.name %></td>
+            <td align="center"><%= format_time_d_m_y(task.start_time) %></td>
+            <% if tasks_type == 'completed' %>
+                <td align="center"><%= format_time_d_m_y(task.end_time) %></td>
+            <% end %>
+            <% if tasks_type == 'ongoing' %>
+                <td align="center"><%= link_to 'stop', stop_task_path(task), :class => 'stop' %></td>
+            <% end %>
+            <td align="center"><%= link_to '', edit_task_path(task), :class => 'edit_short' %></td>
+            <td align="center"><%= link_to '', delete_path(task), confirm: 'Are you sure?', :class => 'delete_short' %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

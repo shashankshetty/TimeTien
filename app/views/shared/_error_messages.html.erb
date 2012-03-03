@@ -1,0 +1,8 @@
+<% flash.each do |key, value| %>
+    <% if key.to_s == "error" && !value.blank? %>
+        <div class="<%= key %>"><%= value %></div>
+    <% end %>
+<% end %>
+<% if flash.count > 0 %>
+    <br/>
+<% end %>

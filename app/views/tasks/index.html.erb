@@ -1,0 +1,61 @@
+<% title "search/analyze tasks" %>
+<%= javascript_include_tag "tasks" %>
+
+<%= form_tag :action => "query_tasks" do |f| %>
+    <div class="search_criteria">
+      <div class="field">
+        <%= label_tag "Tag" %>
+        <br/>
+        <%= select_tag(:select_tag, options_for_select(available_tags, @search_task.tag_id)) %></div>
+      <div class="field">
+        <%= label_tag "From" %>
+        <br/>
+        <%= text_field_tag :start_time, @search_task.start_time, :class => "datetime" %></div>
+      <div class="field">
+        <%= label_tag "To" %>
+        <br/>
+        <%= text_field_tag :end_time, @search_task.end_time, :class => "datetime" %></div>
+      <br/>
+
+      <div>
+        <%= submit_tag "Search", :name => 'query', :class => 'search' %>
+        <%= submit_tag "Analyze", :name => 'query', :class => 'search' %>
+      </div>
+    </div>
+    <table id='task_results' class='tablesorter'>
+      <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Start Task</th>
+        <th>End Task</th>
+        <th>Goal</th>
+        <th>Time Spent</th>
+        <% if @search_task.search_type == "Search" %>
+            <th></th>
+        <% end %>
+        <% if @search_task.search_type == "Analyze" %>
+            <th>How am I doin'</th>
+        <% end %>
+      </tr>
+      </thead>
+      <% @search_task.tasks.each do |task| %>
+          <tr>
+            <td align="center"><%= task.tag.group.nil? ? task.tag.name : "#{task.tag.name} (G)" %></td>
+            <td align="center"><%= format_time_d_m_y(task.start_time) %></td>
+            <td align="center"><%= format_time_d_m_y(task.end_time) %></td>
+            <td align="center"><%= time_allocated(task.tag) %></td>
+            <% if @search_task.search_type == "Search" %>
+                <td align="right"><%= display_time(task.time_spent) %></td>
+                <td align="center"><%= link_to '', delete_task_path(task), confirm: 'Are you sure?', :class => 'delete_short' %></td>
+            <% end %>
+            <% if @search_task.search_type == "Analyze" %>
+                <td align="right"><%= display_time(task.performance) %></td>
+                <td align="right">
+                  <span id="over_the_limit>"><%= display_time_with_performance(task.my_performance()) %></span>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+    </table>
+    <%= paginate @search_task.tasks %>
+<% end %>
