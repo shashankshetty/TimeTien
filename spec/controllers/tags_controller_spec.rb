@@ -28,6 +28,7 @@ describe TagsController do
   describe "GET index" do
     it "assigns all tags as @tags" do
       tag = Factory(:tag)
+      tag.complete_within = true
       tag.user = @user
       tag.save
       get :index

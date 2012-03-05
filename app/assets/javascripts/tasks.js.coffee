@@ -52,7 +52,6 @@ jQuery ->
     buttonImageOnly: true
     }
   )
-  $('table').hide() if $('table > tbody > tr').length == 0
 
   addTag()
 
@@ -71,9 +70,13 @@ jQuery ->
   for element in $("#tabs").children()
     $(element).removeClass("ui-tabs-panel ui-widget-content")
 
+  $("#search_tag").multiselect()
+
   $("#ongoing_tasks > .tablesorter").tablesorter
     widthFixed: false,
-    sortList: [[1, 0]],
+    sortList: [
+      [1, 0]
+    ],
     headers:
       2:
         sorter: false,
@@ -84,20 +87,25 @@ jQuery ->
 
   $("#completed_tasks > .tablesorter").tablesorter
     widthFixed: false,
-    sortList: [[1, 0]],
+    sortForce: [
+      [1, 0]
+    ],
     headers:
       3:
         sorter: false,
       4:
         sorter: false
 
-  $("#task_results").tablesorter
-    widthFixed: false,
-    sortList: [[0, 0]],
-    headers:
-      3:
-        sorter: false,
-      4:
-        sorter: false,
-      5:
-        sorter: false
+  if ($("#task_results").is(":visible"))
+    $("#task_results").tablesorter
+      widthFixed: false,
+      sortList: [
+        [0, 0]
+      ],
+      headers:
+        3:
+          sorter: false,
+        4:
+          sorter: false,
+        5:
+          sorter: false

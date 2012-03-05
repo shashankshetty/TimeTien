@@ -216,10 +216,20 @@ describe TasksController do
     end
   end
 
+  describe "POST query tasks" do
+    it "returns message to select atleast one tag" do
+      task = Task.create! valid_attributes
+      post :query_tasks, :query => "Search"
+      assigns(:search_task).search_type.should be == "Search"
+      assigns(:search_task).tasks.should eq([])
+      flash[:info].should_not be_empty
+    end
+  end
+
   describe "POST search tasks" do
     it "returns all the relevant tasks" do
       task = Task.create! valid_attributes
-      post :query_tasks, :query => "Search"
+      post :query_tasks, :query => "Search", :search_tag => [task.tag.id]
       assigns(:search_task).search_type.should be == "Search"
       assigns(:search_task).tasks.should eq([task])
     end

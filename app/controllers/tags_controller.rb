@@ -68,12 +68,10 @@ class TagsController < ApplicationController
   end
 
   def populate_tag
-    @tag.name = params[:tag][:name]
-    @tag.description = params[:tag][:description]
+    @tag.update_attributes(params[:tag])
     hours = params[:hours].to_i
     minutes = params[:minutes].to_i
     @tag.time_allocated = hours * 60 + minutes
     @tag.time_allocated = nil if @tag.time_allocated == 0
-    @tag.frequency = params[:tag][:frequency]
   end
 end

@@ -13,10 +13,13 @@
     </div>
     <div class="field">
       <%= f.label :time_allocated %><span> (HH:MM)</span>
-      <br/>
+      <a class="title" href="#" title="Typical time to complete the task|Set a target to complete a task to measure how you are doing? "><span class="ui-icon-info ui-icon"></span></a>
       <%= text_field_tag :hours, get_hours, :class => 'time' %> : <%= text_field_tag :minutes, get_minutes, :class => 'time' %> /
       <%= f.collection_select(:frequency, task_frequencies, :first, :last, :include_blank => "Select") %>
-    </div><br/>
+    </div>
+    <div class="field">
+      <%= f.check_box :complete_within %><%= label_tag "Check if your goal is to complete the task within the allocated time" %>
+    </div>
     <div class="field">
       <%= f.label :group_id %>
       <br/>

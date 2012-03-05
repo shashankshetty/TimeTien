@@ -12,24 +12,25 @@ class TasksController < ApplicationController
   def search
     tasks = Kaminari.paginate_array(Task.search(@search_task)).page(params[:page]).per(12)
     flash.now[:info] = "No tasks found!" if tasks.count == 0
-    @search_task.tasks = tasks
-    respond_to do |format|
-      format.html { render action: :index }
-    end
+    @search_task.search_type = "Search"
+    display_index tasks
   end
 
   def analyze
     tasks = Kaminari.paginate_array(Task.analyze(@search_task)).page(params[:page]).per(12)
     flash.now[:info] = "No tasks found with goal! Assign goal to tags to analyze how you are doing" if tasks.count == 0
-    @search_task.tasks = tasks
-    respond_to do |format|
-      format.html { render action: :index }
-    end
+    @search_task.search_type = "Analyze"
+    display_index tasks
   end
 
   def query_tasks
     @search_task = SearchTask.new(params, current_user)
     @search_task.search_type = params[:query]
+    if @search_task.tags.nil?
+      flash.now[:info] = "Select atleast one tag before you continue..."
+      display_index Kaminari.paginate_array([]).page(params[:page]).per(12)
+      return
+    end
     if (@search_task.search_type == 'Search')
       search
     end
@@ -117,6 +118,13 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def display_index(tasks)
+    @search_task.tasks = tasks
+    respond_to do |format|
+      format.html { render action: :index }
+    end
+  end
 
   def destroy(url = root_url)
     @task = Task.find(params[:id])

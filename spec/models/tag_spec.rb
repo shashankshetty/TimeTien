@@ -8,7 +8,13 @@ describe Tag, "When asked to validate" do
     tag.errors[:name].should_not be_empty
   end
 
-  it "should not create a multiple tags for the same name and user combination" do
+  it "should not create a new instance if the length of name is more than 50 characters" do
+    tag = Tag.new(:name => "1234567890123456789012345678901234567890123456789012")
+    tag.should_not be_valid
+    tag.errors[:name].should_not be_empty
+  end
+
+  it "should not create multiple tags for the same name and user combination" do
     tag = Factory(:tag)
     tag1 = Factory(:tag)
     tag1.name = tag.name

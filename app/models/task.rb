@@ -53,6 +53,18 @@ class Task < ActiveRecord::Base
         grouped_tasks << Task.new(:start_time => day.beginning_of_day, :end_time => day.end_of_day, :tag => tag, :performance => task_performance)
       end
     end
+    tags.find_all { |g| g.frequency == 'week' }.each do |tag|
+      tag_tasks = tasks.find_all { |t| t.tag.name == tag.name }
+      tasks_by_week = tag_tasks.group_by { |t| t.start_time.beginning_of_week }
+      tasks_by_week.each do |week, week_tasks|
+        total_time_spent = 0
+        week_tasks.each do |week_task|
+          total_time_spent = ((week_task.end_time || Time.now) - week_task.start_time)
+        end
+        task_performance = total_time_spent
+        grouped_tasks << Task.new(:start_time => week.beginning_of_week, :end_time => week.end_of_week, :tag => tag, :performance => task_performance)
+      end
+    end
     grouped_tasks
   end
 end

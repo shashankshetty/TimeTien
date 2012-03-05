@@ -7,8 +7,8 @@ class SearchTask
     @user = user
   end
 
-  def tag_id
-    options[:select_tag]
+  def tags
+    @options[:search_tag]
   end
 
   def user_id
@@ -16,15 +16,15 @@ class SearchTask
   end
 
   def start_time
-    options[:start_time]
+    @options[:start_time]
   end
 
   def end_time
-    options[:end_time]
+    @options[:end_time]
   end
 
-  def has_tag?
-    tag_id.present?
+  def has_tags?
+    tags.present?
   end
 
   def has_user?
@@ -50,9 +50,8 @@ class SearchTask
       parameters << "#{user_id}"
     end
 
-    if has_tag?
-      conditions << "tag_id = ?"
-      parameters << "#{tag_id}"
+    if has_tags?
+      conditions << "tag_id in (#{tags.collect{|c| c}.join(',')})"
     end
 
     if has_start_time?

@@ -41,7 +41,7 @@ describe TasksHelper do
 
   describe "When asked to display the time_allocated given in seconds" do
     it "should display time in d h m format" do
-      helper.display_time_with_performance(6400).should == "-1h 47m over"
+      helper.display_time_with_performance(6400, true).should == "-1h 47m over"
     end
   end
 
@@ -56,19 +56,35 @@ describe TasksHelper do
     end
   end
 
-  describe "When asked to relative performance" do
+  describe "When asked to relative performance with complete_within is true" do
     before :each do
       Time.zone = "Central Time (US & Canada)"
     end
 
-    it "should display time in {d}{h}{m} over for positive number" do
+    it "should display time in {d}{h}{m} over for positive number with negative sign" do
       t = Time.now
-      helper.display_time_with_performance(3700).should == "-1h 2m over"
+      helper.display_time_with_performance(3700, true).should == "-1h 2m over"
     end
 
-    it "should display time in {d}{h}{m} under for negative number" do
+    it "should display time in {d}{h}{m} under for negative number with positive sign" do
       t = Time.now
-      helper.display_time_with_performance(-3700).should == "+1h 2m under"
+      helper.display_time_with_performance(-3700, true).should == "+1h 2m under"
+    end
+  end
+
+  describe "When asked to relative performance with complete_within is false" do
+    before :each do
+      Time.zone = "Central Time (US & Canada)"
+    end
+
+    it "should display time in {d}{h}{m} over for positive number with positive sign" do
+      t = Time.now
+      helper.display_time_with_performance(3700, false).should == "+1h 2m over"
+    end
+
+    it "should display time in {d}{h}{m} under for negative number with negative sign" do
+      t = Time.now
+      helper.display_time_with_performance(-3700, false).should == "-1h 2m under"
     end
   end
 end

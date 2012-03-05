@@ -73,6 +73,12 @@ describe GroupsController do
         assigns(:group).should be_persisted
       end
 
+      it "adds the user to the newly created group and makes him the admin" do
+        post :create, {:group => valid_attributes}
+        assigns(:group).users.count.should == 1
+        assigns(:group).get_membership(@user.id).is_admin.should be_true
+      end
+
       it "render the edit template" do
         post :create, :group => valid_attributes
         response.should render_template("edit")

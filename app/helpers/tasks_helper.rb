@@ -28,11 +28,21 @@ module TasksHelper
   end
 
   # http://stufftohelpyouout.blogspot.com/2010/02/seconds-to-days-minutes-hours-seconds.html
-  def display_time_with_performance(total_seconds)
+  def display_time_with_performance(task)
+    total_seconds = task.my_performance
+    display_time_with_performance(total_seconds, task.tag.complete_within)
+  end
+
+  def display_time_with_performance(total_seconds, complete_within)
     return "n/a" if total_seconds.blank?
-    performance = total_seconds >=0 ? "-" : "+"
     display = display_time(total_seconds)
-    return performance == "-" ? "#{performance}#{display} over" : "#{performance}#{display} under"
+    if total_seconds >=0
+      performance = complete_within ? "-" : "+"
+      "#{performance}#{display} over"
+    else
+      performance = complete_within ? "+" : "-"
+      "#{performance}#{display} under"
+    end
   end
 
   def display_time(total_seconds)
@@ -61,5 +71,9 @@ module TasksHelper
     end
     #display = display + display_concat + "#{seconds}s"
     return display
+  end
+
+  def search_title
+    @search_task.blank? || @search_task.search_type.blank? ? "search/analyze tasks" : @search_task.search_type
   end
 end

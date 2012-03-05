@@ -26,3 +26,5 @@ jQuery ->
   )
 
   $("#user_settings").showProfile("change user settings")
+
+  $('table').hide() if $('table > tbody > tr').length == 0

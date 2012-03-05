@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("#group_user_tokens").tokenInput("/groups/get_group_users.json", {
+  $("#group_user_tokens").tokenInput("/groups/show.json", {
   crossDomain: false,
   preventDuplicates: true,
   prePopulate: $("#group_user_tokens").data("pre"),

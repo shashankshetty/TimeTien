@@ -14,7 +14,7 @@ Timezen::Application.routes.draw do
   resources :tags
 
   resources :groups do
-    get :get_group_users
+    #get :get_group_users
   end
   resources :authentications, :only => [:index, :authenticate, :destroy]
 

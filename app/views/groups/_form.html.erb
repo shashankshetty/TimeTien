@@ -1,6 +1,7 @@
+<%= javascript_include_tag "groups" %>
 <%= form_for(@group) do |f| %>
     <%= render "shared/messages", :target => @group %>
-    <% if params[:action] == "new" || @group.get_membership(current_user.id).is_admin %>
+    <% if params[:action] == "new" || @group.get_membership(current_user.id).nil? ? true : @group.get_membership(current_user.id).is_admin %>
         <div class="field">
           <%= f.label :name %>
           <br/>

@@ -8,7 +8,7 @@ $blue: #0000FF;
 $yellow: #FFFF00;
 $green: #00CC00;
 $red: #FF0000;
-$background: #f7f3de url(images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
+$background: #f7f3de url(jquery_ui_theme/images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
 $font-family: Arial, "Trebuchet MS", Helvetica, sans-serif;
 
 @mixin rounded-corners($radius){
@@ -145,7 +145,6 @@ select {
   padding: 5px 10px 5px 10px;
   cursor: pointer;
   &:hover {
-    background-color: $white;
     color: #FF9900;
   }
   @include rounded-corners(3px);
@@ -164,7 +163,11 @@ select {
   color: $black;
   &:hover {
     background-color: $white;
-    color: #FF9900;
+  }
+  a {
+    &:hover {
+      color: #FF9900;
+    }
   }
   @include rounded-corners(3px);
   background-repeat: no-repeat;
@@ -190,6 +193,7 @@ select {
 
 .search {
   @extend .button;
+  background: $background;
   width: 80px;
 }
 
@@ -312,4 +316,8 @@ hr {
   height: 30px;
   width: 100%;
   text-align: center;
+}
+
+.ui-multiselect {
+  width: 30px;
 }

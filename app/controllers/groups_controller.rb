@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
     end
   end
 
-  def get_group_users
+  def show
     if (!params[:q].blank?)
       @users = User.where("display_name like ? or email like ?", "%#{params[:q]}%", "%#{params[:q]}%")
     else
@@ -32,9 +32,14 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new
-    populate_group
-    @group.update_admins([], current_user)
+    @group.update_attributes(params[:group])
     result = @group.save
+    if result
+      member_result = Membership.create!(:user => current_user, :group => @group, :is_admin => true)
+      if !member_result
+        result = member_result
+      end
+    end
     set_message_for_render result, "created"
     respond_to do |format|
       if result
@@ -47,7 +52,7 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    populate_group
+    @group.update_attributes(params[:group])
     @group.update_users(params[:group][:user_tokens], current_user)
     @group.update_admins(params[:group_admins], current_user)
     set_message_for_render @group.save, "updated"
@@ -65,11 +70,6 @@ class GroupsController < ApplicationController
   end
 
   private
-
-  def populate_group
-    @group.name = params[:group][:name]
-    @group.description = params[:group][:description]
-  end
 
   def set_message_for_redirect(result, action)
     if result

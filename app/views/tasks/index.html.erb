@@ -1,4 +1,4 @@
-<% title "search/analyze tasks" %>
+<% title search_title %>
 <%= javascript_include_tag "tasks" %>
 
 <%= form_tag :action => "query_tasks" do |f| %>
@@ -6,7 +6,7 @@
       <div class="field">
         <%= label_tag "Tag" %>
         <br/>
-        <%= select_tag(:select_tag, options_for_select(available_tags, @search_task.tag_id)) %></div>
+        <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_task.tags), :multiple => true, :size =>5 %></div>
       <div class="field">
         <%= label_tag "From" %>
         <br/>
@@ -38,6 +38,7 @@
         <% end %>
       </tr>
       </thead>
+      <tbody>
       <% @search_task.tasks.each do |task| %>
           <tr>
             <td align="center"><%= task.tag.group.nil? ? task.tag.name : "#{task.tag.name} (G)" %></td>
@@ -51,11 +52,12 @@
             <% if @search_task.search_type == "Analyze" %>
                 <td align="right"><%= display_time(task.performance) %></td>
                 <td align="right">
-                  <span id="over_the_limit>"><%= display_time_with_performance(task.my_performance()) %></span>
+                  <span id="over_the_limit>"><%= display_time_with_performance(task) %></span>
                 </td>
             <% end %>
           </tr>
       <% end %>
+      </tbody>
     </table>
     <%= paginate @search_task.tasks %>
 <% end %>

@@ -83,6 +83,21 @@ describe Task, "When asked to analyze tasks" do
     grouped_tasks = Task.group_tasks(tasks)
     grouped_tasks.count.should be == 1
     grouped_tasks[0].performance.should be > 0
+    end
+
+  it "should group tasks with frequency week" do
+    tag = Factory(:tag)
+    tag.name = "Work12"
+    tag.time_allocated = 86400
+    tag.frequency = 'day'
+    user = Factory(:user)
+    tasks = []
+    tasks << get_task(tag, user)
+    tasks << get_task(tag, user)
+    tasks << get_task(tag, user)
+    grouped_tasks = Task.group_tasks(tasks)
+    grouped_tasks.count.should be == 1
+    grouped_tasks[0].performance.should be > 0
   end
 
   def get_task(tag, user)

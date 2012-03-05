@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120225005334) do
+ActiveRecord::Schema.define(:version => 20120304061139) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -40,12 +40,13 @@ ActiveRecord::Schema.define(:version => 20120225005334) do
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.integer  "time_allocated"
     t.string   "frequency"
     t.integer  "group_id"
+    t.boolean  "complete_within"
   end
 
   add_index "tags", ["name", "user_id"], :name => "index_tags_on_name_and_user_id", :unique => true
