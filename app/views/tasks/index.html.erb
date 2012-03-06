@@ -52,7 +52,7 @@
             <% if @search_task.search_type == "Analyze" %>
                 <td align="right"><%= display_time(task.performance) %></td>
                 <td align="right">
-                  <span id="over_the_limit>"><%= display_time_with_performance(task) %></span>
+                  <span id="over_the_limit>"><%= display_time_with_performance_for(task) %></span>
                 </td>
             <% end %>
           </tr>

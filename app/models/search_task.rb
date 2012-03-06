@@ -11,6 +11,10 @@ class SearchTask
     @options[:search_tag]
   end
 
+  def groups
+    @options[:search_group]
+  end
+
   def user_id
     user.id
   end

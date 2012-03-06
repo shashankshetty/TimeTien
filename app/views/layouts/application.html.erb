@@ -22,7 +22,7 @@
       <%= image_tag avatar_url(current_user) %>
       <span class="intro"><%= link_to current_user.display_name, edit_user_registration_path, :id => 'user_settings', :class => "intro" %></span>
       <span class="right"><%= link_to 'add old tasks', new_task_path %> | <%= link_to 'analyze tasks', tasks_path %>
-        | <%= link_to 'manage groups', "#", :id => 'manage_groups' %> | <%= link_to 'manage tags', tags_path %></span>
+        | <%= link_to 'manage groups↓', "#", :id => 'manage_groups' %> | <%= link_to 'manage tags', tags_path %></span>
     </div>
 <% end %>
 <div id="main">

@@ -28,7 +28,7 @@ module TasksHelper
   end
 
   # http://stufftohelpyouout.blogspot.com/2010/02/seconds-to-days-minutes-hours-seconds.html
-  def display_time_with_performance(task)
+  def display_time_with_performance_for(task)
     total_seconds = task.my_performance
     display_time_with_performance(total_seconds, task.tag.complete_within)
   end

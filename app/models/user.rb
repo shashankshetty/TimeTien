@@ -24,8 +24,10 @@ class User < ActiveRecord::Base
         end
       end
     end
-    tags
-    .sort_by { |x| x.group_id || 0 }
-    .collect { |tag| [tag.group.nil? ? tag.name : "#{tag.name} (G: #{tag.group.name.first(5)})", tag.id.to_s] }
+    tags.sort_by { |x| x.group_id || 0 }.collect { |tag| [tag.group.nil? ? tag.name : "#{tag.name} (G: #{tag.group.name.first(5)})", tag.id.to_s] }
+  end
+
+  def get_groups
+    groups.sort_by { |x| x.name }.collect { |group| [group.name, group.id.to_s] }
   end
 end
