@@ -10,14 +10,14 @@ class TasksController < ApplicationController
   end
 
   def search
-    tasks = Kaminari.paginate_array(Task.search(@search_task)).page(params[:page]).per(12)
+    tasks = Kaminari.paginate_array(Tassk.search(@search_task)).page(params[:page]).per(12)
     flash.now[:info] = "No tasks found!" if tasks.count == 0
     @search_task.search_type = "Search"
     display_index tasks
   end
 
   def analyze
-    tasks = Kaminari.paginate_array(Task.analyze(@search_task)).page(params[:page]).per(12)
+    tasks = Kaminari.paginate_array(Tassk.analyze(@search_task)).page(params[:page]).per(12)
     flash.now[:info] = "No tasks found with goal! Assign goal to tags to analyze how you are doing" if tasks.count == 0
     @search_task.search_type = "Analyze"
     display_index tasks
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Tassk.new
     respond_to do |format|
       format.html
     end
@@ -54,14 +54,14 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = Tassk.find(params[:id])
     respond_to do |format|
       format.html
     end
   end
 
   def stop_task
-    @task = Task.find(params[:id])
+    @task = Tassk.find(params[:id])
     @task.end_time = Time.now
     set_message_for_render @task.save, "stopped"
     render_manage
@@ -73,7 +73,7 @@ class TasksController < ApplicationController
     else
       @tag = get_tag
       if flash.now[:error].blank?
-        @task = Task.new
+        @task = Tassk.new
         @task.user = current_user
         @task.start_time = Time.now
         @task.tag = @tag
@@ -84,9 +84,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params[:task])
+    @task = Tassk.new(params[:task])
     @task.start_time = parse_datetime(params[:task]["start_time"])
     @task.end_time = parse_datetime(params[:task]["end_time"])
+    @task.user = current_user
     result = @task.save
     set_message_for_render result, "created"
     respond_to do |format|
@@ -99,7 +100,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = Tassk.find(params[:id])
     @task.update_attributes(params[:task])
     @task.start_time = parse_datetime(params[:task]["start_time"])
     @task.end_time = parse_datetime(params[:task]["end_time"])
@@ -127,7 +128,7 @@ class TasksController < ApplicationController
   end
 
   def destroy(url = root_url)
-    @task = Task.find(params[:id])
+    @task = Tassk.find(params[:id])
     set_message_for_redirect @task.destroy, "deleted"
     respond_to do |format|
       format.html { redirect_to url }

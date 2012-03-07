@@ -1,10 +1,10 @@
 module TasksHelper
-  def available_tags_with_select
+  def available_tags_with_option_to_add
     [['Select', ''], ['[Add New Tag]', '[new_tag]']].concat(current_user.get_tags)
   end
 
   def available_tags
-    [['All', '']].concat(current_user.get_tags)
+    [['Select', '']].concat(current_user.get_tags)
   end
 
   def ongoing_tasks
@@ -17,14 +17,14 @@ module TasksHelper
 
   def format_time_m_d_y(t)
     return t if t.blank?
-    return t.strftime('%I:%M %p') if (t.to_date == Date.today)
-    return t.strftime('%m/%d/%Y %I:%M %p')
+    return t.strftime('%I:%M %p').gsub(/ 0(\d\D)/, ' \1') if (t.to_date == Date.today)
+    return t.strftime('%m/%d/%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
   end
 
   def format_time_d_m_y(t)
     return t if t.blank?
-    return t.strftime('%I:%M %p') if (t.to_date == Date.today)
-    return t.strftime('%d-%b-%Y %I:%M %p')
+    return t.strftime('%I:%M %p').gsub(/ 0(\d\D)/, ' \1') if (t.to_date == Date.today)
+    return t.strftime('%d-%b-%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
   end
 
   # http://stufftohelpyouout.blogspot.com/2010/02/seconds-to-days-minutes-hours-seconds.html

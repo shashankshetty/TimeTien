@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :tasks, :dependent => :destroy
+  has_many :tasks, :class_name => "Tassk", :dependent => :destroy
   has_many :tags, :dependent => :destroy
   has_many :membership
   has_many :authentications, :dependent => :destroy

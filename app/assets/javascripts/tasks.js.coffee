@@ -46,7 +46,8 @@ jQuery ->
   $(".datetime").datetimepicker(
     {
     ampm: true,
-    dateFormat: 'd-M-yy',
+    dateFormat: 'm/d/yy',
+    timeFormat: 'h:mm tt'
     showOn: "button",
     buttonImage: "/assets/calendar.gif",
     buttonImageOnly: true

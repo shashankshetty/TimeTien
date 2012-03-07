@@ -14,7 +14,7 @@ Factory.define :tag_with_user, :parent => :tag do |f|
   f.user { Factory(:user) }
 end
 
-Factory.define :task do |f|
+Factory.define :tassk do |f|
   f.tag { Factory(:tag) }
   f.start_time Time.now-2.days
 end

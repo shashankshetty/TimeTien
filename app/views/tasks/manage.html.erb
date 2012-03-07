@@ -7,7 +7,7 @@
     <% end %>
     <div class="field">
       <%= label_tag "start new task: " %>
-      <%= select_tag(:select_tag, options_for_select(available_tags_with_select, @manage_task.tag_id)) %>&nbsp;<%= text_field_tag(:add_tag) %>&nbsp;<%= submit_tag "start", :class => 'play' %>
+      <%= select_tag(:select_tag, options_for_select(available_tags_with_option_to_add, @manage_task.tag_id)) %>&nbsp;<%= text_field_tag(:add_tag) %>&nbsp;<%= submit_tag "start", :class => 'play' %>
     </div>
     <p>&nbsp;</p>
     <div id="tabs">

@@ -1,4 +1,5 @@
-class Task < ActiveRecord::Base
+class Tassk < ActiveRecord::Base
+  self.table_name = "Tasks"
   belongs_to :tag
   belongs_to :user
 
@@ -38,7 +39,7 @@ class Task < ActiveRecord::Base
       tag_tasks = tasks.find_all { |t| t.tag.name == tag.name }
       tag_tasks.each do |task|
         task_performance = ((task.end_time || Time.now) - task.start_time)
-        grouped_tasks << Task.new(:start_time => task.start_time, :end_time => task.end_time, :tag => tag, :performance => task_performance)
+        grouped_tasks << Tassk.new(:start_time => task.start_time, :end_time => task.end_time, :tag => tag, :performance => task_performance)
       end
     end
     tags.find_all { |g| g.frequency == 'day' }.each do |tag|
@@ -50,7 +51,7 @@ class Task < ActiveRecord::Base
           total_time_spent = ((day_task.end_time || Time.now) - day_task.start_time)
         end
         task_performance = total_time_spent
-        grouped_tasks << Task.new(:start_time => day.beginning_of_day, :end_time => day.end_of_day, :tag => tag, :performance => task_performance)
+        grouped_tasks << Tassk.new(:start_time => day.beginning_of_day, :end_time => day.end_of_day, :tag => tag, :performance => task_performance)
       end
     end
     tags.find_all { |g| g.frequency == 'week' }.each do |tag|
@@ -62,7 +63,7 @@ class Task < ActiveRecord::Base
           total_time_spent = ((week_task.end_time || Time.now) - week_task.start_time)
         end
         task_performance = total_time_spent
-        grouped_tasks << Task.new(:start_time => week.beginning_of_week, :end_time => week.end_of_week, :tag => tag, :performance => task_performance)
+        grouped_tasks << Tassk.new(:start_time => week.beginning_of_week, :end_time => week.end_of_week, :tag => tag, :performance => task_performance)
       end
     end
     grouped_tasks

@@ -12,6 +12,6 @@ class ManageTask
   end
 
   def tasks
-    @user.tasks
+    @user.tasks || []
   end
 end

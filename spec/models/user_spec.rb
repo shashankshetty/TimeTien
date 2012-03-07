@@ -9,7 +9,7 @@ describe User, "When asked to validate" do
   end
 end
 
-describe Task, "When asked to get all tags" do
+describe Tassk, "When asked to get all tags" do
   before :each do
     Time.zone = "Central Time (US & Canada)"
   end
