@@ -16,12 +16,12 @@
             <div>
               <%= f.label :user_tokens, "Members" %>
               <br/>
-              <%= f.text_field :user_tokens, "data-pre" => @group.users.collect { |x| GroupUser.new(x.id, "#{x.display_name} (#{x.email})") }.to_json %>
+              <%= f.text_field :user_tokens, "data-pre" => @group.users.collect { |x| GroupUsers.new(x.id, "#{x.display_name} (#{x.email})") }.to_json %>
             </div><br/>
             <div>
               <%= f.label :admins, "Group Admins" %>
               <br/>
-              <%= select_tag :group_admins, options_for_select(@group.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @group.admins.collect { |x| x.user_id }), :multiple => true, :size =>5 %>
+              <%= select_tag :group_admins, options_for_select(@group.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @group.admins.collect { |x| x.user_id }), :multiple => true, :size =>5, :class => "multiselect" %>
             </div>
         <% end %><br />
         <div class="actions">

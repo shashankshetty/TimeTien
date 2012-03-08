@@ -184,7 +184,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  chronic (= 0.6.6)
+  chronic
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise (= 1.5.3)

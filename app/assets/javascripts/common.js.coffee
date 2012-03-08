@@ -27,4 +27,17 @@ jQuery ->
 
   $("#user_settings").showProfile("change user settings")
 
+  $(".datetime").datetimepicker(
+    {
+    ampm: true,
+    dateFormat: 'm/d/yy',
+    timeFormat: 'h:mm tt'
+    showOn: "button",
+    buttonImage: "/assets/calendar.gif",
+    buttonImageOnly: true
+    }
+  )
+
+  $(".multiselect").multiselect().multiselectfilter()
+
   $('table').hide() if $('table > tbody > tr').length == 0

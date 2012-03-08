@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
     else
       @users = User.all
     end
-    @group_users = @users.collect { |x| GroupUser.new(x.id, "#{x.display_name} (#{x.email})") }
+    @group_users = @users.collect { |x| GroupUsers.new(x.id, "#{x.display_name} (#{x.email})") }
     respond_to do |format|
       format.json { render json: @group_users }
     end

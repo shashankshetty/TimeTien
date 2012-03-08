@@ -34,13 +34,6 @@ describe TasksController do
     }
   end
 
-  describe "GET index" do
-    it "assigns all tasks as @tasks" do
-      get :index
-      assigns(:search_task).tasks.should eq([])
-    end
-  end
-
   describe "GET manage" do
     it "assigns all tasks as @tasks" do
       task = Tassk.create! valid_attributes
@@ -149,19 +142,13 @@ describe TasksController do
     it "destroys the requested task" do
       task = Tassk.create! valid_attributes
       expect {
-        delete :delete, :id => task.id
+        delete :destroy, :id => task.id
       }.to change(Tassk, :count).by(-1)
-    end
-
-    it "redirects to the tasks list" do
-      task = Tassk.create! valid_attributes
-      delete :delete_task, :id => task.id
-      response.should redirect_to(tasks_url)
     end
 
     it "redirects to home page" do
       task = Tassk.create! valid_attributes
-      delete :delete, :id => task.id
+      delete :destroy, :id => task.id
       response.should redirect_to(root_url)
     end
   end
@@ -213,33 +200,6 @@ describe TasksController do
       task = Tassk.create! valid_attributes
       post :stop_task, :id => task.id, :select_tag => task.tag
       response.should render_template("manage")
-    end
-  end
-
-  describe "POST query tasks" do
-    it "returns message to select atleast one tag" do
-      task = Tassk.create! valid_attributes
-      post :query_tasks, :query => "Search"
-      assigns(:search_task).search_type.should be == "Search"
-      assigns(:search_task).tasks.should eq([])
-      flash[:info].should_not be_empty
-    end
-  end
-
-  describe "POST search tasks" do
-    it "returns all the relevant tasks" do
-      task = Tassk.create! valid_attributes
-      post :query_tasks, :query => "Search", :search_tag => [task.tag.id]
-      assigns(:search_task).search_type.should be == "Search"
-      assigns(:search_task).tasks.should eq([task])
-    end
-  end
-
-  describe "POST analyze tasks" do
-    it "returns all the relevant tasks" do
-      post :query_tasks, :query => "Analyze"
-      assigns(:search_task).search_type.should be == "Analyze"
-      assigns(:search_task).tasks.should eq([])
     end
   end
 end

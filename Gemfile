@@ -9,7 +9,7 @@ gem 'sqlite3'
 
 gem 'devise', '1.5.3'
 
-gem 'chronic', '0.6.6'
+gem 'chronic'
 
 gem 'rake'
 

@@ -15,8 +15,6 @@ jQuery ->
     $("#group_admins").multiselect("refresh")
   })
 
-  $("#group_admins").multiselect()
-
   $("#groups").tablesorter
     widthFixed: false,
     sortList: [

@@ -1,44 +1,4 @@
 class TasksController < ApplicationController
-  def index
-    if @search_task.nil?
-      @search_task = SearchTask.new(params, current_user)
-      @search_task.tasks = Kaminari.paginate_array(Array.new).page(params[:page]).per(12)
-    end
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def search
-    tasks = Kaminari.paginate_array(Tassk.search(@search_task)).page(params[:page]).per(12)
-    flash.now[:info] = "No tasks found!" if tasks.count == 0
-    @search_task.search_type = "Search"
-    display_index tasks
-  end
-
-  def analyze
-    tasks = Kaminari.paginate_array(Tassk.analyze(@search_task)).page(params[:page]).per(12)
-    flash.now[:info] = "No tasks found with goal! Assign goal to tags to analyze how you are doing" if tasks.count == 0
-    @search_task.search_type = "Analyze"
-    display_index tasks
-  end
-
-  def query_tasks
-    @search_task = SearchTask.new(params, current_user)
-    @search_task.search_type = params[:query]
-    if @search_task.tags.nil?
-      flash.now[:info] = "Select atleast one tag before you continue..."
-      display_index Kaminari.paginate_array([]).page(params[:page]).per(12)
-      return
-    end
-    if (@search_task.search_type == 'Search')
-      search
-    end
-    if (@search_task.search_type == 'Analyze')
-      analyze
-    end
-  end
-
   def new
     @task = Tassk.new
     respond_to do |format|
@@ -110,30 +70,15 @@ class TasksController < ApplicationController
     end
   end
 
-  def delete
-    destroy(root_url)
-  end
-
-  def delete_task
-    destroy(tasks_url)
-  end
-
-  private
-
-  def display_index(tasks)
-    @search_task.tasks = tasks
-    respond_to do |format|
-      format.html { render action: :index }
-    end
-  end
-
-  def destroy(url = root_url)
+  def destroy
     @task = Tassk.find(params[:id])
     set_message_for_redirect @task.destroy, "deleted"
     respond_to do |format|
-      format.html { redirect_to url }
+      format.html { redirect_to root_url }
     end
   end
+
+  private
 
   def get_tag
     if params[:select_tag] == '[new_tag]'

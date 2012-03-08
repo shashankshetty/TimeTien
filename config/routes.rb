@@ -3,15 +3,9 @@ Timezen::Application.routes.draw do
 
   devise_for :users, :path_names => {:sign_up => "register"}, :controllers => {:registrations => 'registrations'}
 
-  resources :tasks do
-    get :get_ongoing_tasks, :on => :member
-    post :query_tasks, :on => :member
-    post :start_task, :on => :member
-    put :stop_task, :on => :member
-    delete :delete, :on => :member
-    delete :delete_task, :on => :member
-  end
+  resources :tasks
   resources :tags
+  resources :search_tasks
 
   resources :groups do
     #get :get_group_users
@@ -20,11 +14,11 @@ Timezen::Application.routes.draw do
 
   match 'about', :to => 'pages#about', :as => :about
 
-  match 'query_tasks' => 'tasks#query_tasks', :as => 'query_tasks'
+  match 'query_tasks' => 'search_tasks#query_tasks', :as => 'query_tasks'
   match 'start_task' => 'tasks#start_task', :as => 'start_task'
   match 'stop_task/:id' => 'tasks#stop_task', :as => 'stop_task'
-  match 'delete/:id', :to => 'tasks#delete', :as => 'delete'
-  match 'delete_task/:id', :to => 'tasks#delete_task', :as => 'delete_task'
+  match 'delete_task/:id', :to => 'tasks#destroy', :as => 'delete_task'
+  match 'delete_search_task/:id', :to => 'search_tasks#destroy', :as => 'delete_search_task'
   #match 'get_group_users/:q', :to => 'groups#get_group_users', :as => 'get_group_users'
   match '/auth/:service/callback' => 'authentications#authenticate'
 
