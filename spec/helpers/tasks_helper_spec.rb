@@ -29,7 +29,7 @@ describe TasksHelper do
 
     it "should return date and time if time is not today" do
       t = (Time.now-2.days)
-      helper.format_time_d_m_y(t).should == t.strftime('%d-%b-%Y %I:%M %p')
+      helper.format_time_d_m_y(t).should == t.strftime('%d-%b-%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
     end
   end
 

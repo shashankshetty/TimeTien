@@ -19,12 +19,22 @@ class User < ActiveRecord::Base
     self.tags.each { |tag| tags << tag }
     self.groups.each do |group|
       group.tags.each do |tag|
-        unless group.tags.include?(tag)
+        unless tags.include?(tag)
           tags << tag
         end
       end
     end
     tags.sort_by { |x| x.group_id || 0 }.collect { |tag| [tag.group.nil? ? tag.name : "#{tag.name} (G: #{tag.group.name.first(5)})", tag.id.to_s] }
+  end
+
+  def get_group_tags
+    tags = []
+    self.groups.each do |group|
+      group.tags.each do |tag|
+          tags << tag
+      end
+    end
+    tags.sort_by { |x| x.group_id || 0 }.collect { |tag| [tag.name, tag.id.to_s] }
   end
 
   def get_groups

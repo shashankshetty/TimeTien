@@ -13,12 +13,16 @@ class SearchQuery
     @user = user
   end
 
-  def tags
-    @options[:search_tag]
+  def analyze
+    @options[:analyze]
   end
 
   def groups
     @options[:search_group]
+  end
+
+  def tags
+    @options[:search_tag]
   end
 
   def user_id
@@ -31,6 +35,10 @@ class SearchQuery
 
   def end_time
     parse_datetime(@options[:end_time])
+  end
+
+  def has_groups?
+    groups.present?
   end
 
   def has_tags?
@@ -55,13 +63,13 @@ class SearchQuery
 
     return nil if options.empty?
 
-    if has_user?
+    if has_user? && analyze == 'task'
       conditions << "user_id = ?"
       parameters << "#{user_id}"
     end
 
     if has_tags?
-      conditions << "tag_id in (#{tags.collect{|c| c}.join(',')})"
+      conditions << "tag_id in (#{tags.collect { |c| c }.join(',')})"
     end
 
     if has_start_time?
@@ -79,6 +87,11 @@ class SearchQuery
     else
       nil
     end
+  end
+
+  def get_tags_for_groups
+    return Tag.find(:all, :conditions => "group_id in (#{groups.collect { |c| c }.join(',')})").collect { |x| [x.name, x.id.to_s] } if has_groups?
+    []
   end
 
   private

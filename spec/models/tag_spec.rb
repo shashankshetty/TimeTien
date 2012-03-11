@@ -22,4 +22,11 @@ describe Tag, "When asked to validate" do
     tag1.should_not be_valid
     tag1.errors[:name].should_not be_empty
   end
+
+  it "should not check complete_within if time allocated is blank" do
+    tag = Factory(:tag)
+    tag.complete_within = true
+    tag.should_not be_valid
+    tag.errors[:complete_within].should_not be_empty
+  end
 end

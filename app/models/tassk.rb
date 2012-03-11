@@ -20,6 +20,6 @@ class Tassk < ActiveRecord::Base
   end
 
   def my_performance()
-    return performance - (tag.time_allocated * 60)
+    return performance - ((tag.time_allocated || 0) * 60)
   end
 end

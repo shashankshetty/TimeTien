@@ -41,6 +41,21 @@ jQuery ->
 
   $('#task_results').setSearchCriteriaPosition()
   $('span[id^="over_the_limit"]').formatPerformanceColumn()
+  $("#search_group").multiselect({
+  header: false
+  })
+
+  $("#search_group").change(() ->
+    jQuery.post(
+      '/get_group_tags/'
+      {groups: $("#search_group").val()}
+    (group_tags) ->
+      $("#search_tag").multiselect('destroy')
+      $("#search_tag").find('option').remove()
+      $("#search_tag").append('<option value="' + group_tag.id + '">' + group_tag.name + '</option>') for group_tag in group_tags
+      $("#search_tag").multiselect()
+    )
+  )
 
   if ($("#task_results").is(":visible"))
     $("#task_results").tablesorter

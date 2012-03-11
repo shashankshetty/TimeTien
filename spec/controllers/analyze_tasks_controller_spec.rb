@@ -21,7 +21,7 @@ require 'time'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe SearchTasksController do
+describe AnalyzeTasksController do
   login_user
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
@@ -36,8 +36,44 @@ describe SearchTasksController do
 
   describe "GET index" do
     it "assigns all tasks as @tasks" do
-      get :index
+      get :analyze_user_tasks
       assigns(:search_query).tasks.should eq([])
+    end
+  end
+
+  describe "GET index to group tasks" do
+    it "assigns all tasks as @tasks" do
+      get :analyze_group_tasks
+      assigns(:search_query).tasks.should eq([])
+    end
+  end
+
+  describe "POST get tags groups" do
+    it "returns all the tags for the selected groups" do
+      tag1 = Factory(:tag)
+      tag2 = Factory(:tag)
+      group = Factory(:group)
+      tag1.group = group
+      tag2.group = group
+      tag1.save
+      tag2.save
+      post :get_group_tags, :groups => [group.id], :format => :json
+      parsed_body = JSON.parse(response.body)
+      parsed_body[0]["name"].should == tag1.name
+      parsed_body[1]["name"].should == tag2.name
+    end
+
+    it "returns no tags if no group is selected" do
+      post :get_group_tags, :groups => "null", :format => :json
+      parsed_body = JSON.parse(response.body)
+      parsed_body.should be_empty
+    end
+
+    it "returns no tags if the group has no tags" do
+      group = Factory(:group)
+      post :get_group_tags, :groups => [group.id], :format => :json
+      parsed_body = JSON.parse(response.body)
+      parsed_body.should be_empty
     end
   end
 

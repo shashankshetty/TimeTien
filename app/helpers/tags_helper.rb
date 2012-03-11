@@ -11,6 +11,7 @@ module TagsHelper
 
   def task_frequencies
     values = {
+        '' => 'Select',
         'task' => 'Task',
         'day' => 'Day',
         'week' => 'Week'

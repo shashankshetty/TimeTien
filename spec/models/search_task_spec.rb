@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'factory_girl'
 
-describe SearchTask, "When asked to analyze tasks" do
+describe AnalyzeTask, "When asked to analyze tasks" do
   before :each do
     Time.zone = "Central Time (US & Canada)"
   end
@@ -16,7 +16,7 @@ describe SearchTask, "When asked to analyze tasks" do
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
-    tasks = SearchTask.group_tasks(tasks)
+    tasks = AnalyzeTask.group_tasks(tasks)
     tasks.count.should be == 3
     tasks[0].performance.should be > 0
   end
@@ -31,7 +31,7 @@ describe SearchTask, "When asked to analyze tasks" do
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
-    grouped_tasks = SearchTask.group_tasks(tasks)
+    grouped_tasks = AnalyzeTask.group_tasks(tasks)
     grouped_tasks.count.should be == 1
     grouped_tasks[0].performance.should be > 0
     end
@@ -46,7 +46,7 @@ describe SearchTask, "When asked to analyze tasks" do
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
-    grouped_tasks = SearchTask.group_tasks(tasks)
+    grouped_tasks = AnalyzeTask.group_tasks(tasks)
     grouped_tasks.count.should be == 1
     grouped_tasks[0].performance.should be > 0
   end

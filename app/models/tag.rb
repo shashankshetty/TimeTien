@@ -6,4 +6,12 @@ class Tag < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => {:scope => :user_id}
   validates :user_id, :uniqueness => {:scope => :name}
   validates_length_of :name, :maximum => 50
+
+  validate :validate_complete_within
+
+    def validate_complete_within
+      if complete_within
+        errors.add(:complete_within, "cannot be checked if the Allocated Time is blank") if (time_allocated.blank? || frequency.blank?)
+      end
+    end
 end

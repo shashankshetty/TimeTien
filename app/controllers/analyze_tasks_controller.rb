@@ -1,17 +1,35 @@
-class SearchTasksController < ApplicationController
-  def index
+class AnalyzeTasksController < ApplicationController
+  def analyze_user_tasks
     render_search_results_with_message [], ""
   end
 
+  def analyze_group_tasks
+    render_search_results_with_message [], ""
+  end
+
+  def get_group_tags
+    #if params[:groups] == "all"
+    #  memberships = Membership.find(:all, :conditions => {:user_id => current_user.id})
+    #  group_tags = Tag.find(:all, :conditions => "group_id in (#{memberships.collect { |c| c.group_id }.join(',')})").collect { |x| GroupUsers.new(x.id, x.name) }
+    #els
+    if params[:groups] != "null" && (params[:groups].present?)
+      group_tags = Tag.find(:all, :conditions => "group_id in (#{params[:groups].collect { |c| c }.join(',')})").collect { |x| GroupUsers.new(x.id, x.name) }
+    end
+    respond_to do |format|
+      format.json { render json: group_tags || [] }
+      #render :partial => "tags", :locals => {:group_tags => group_tags}
+    end
+  end
+
   def search
-    tasks = SearchTask.search(@search_query)
+    tasks = AnalyzeTask.search(@search_query)
     message = "No tasks found!" if tasks.count == 0
     @search_query.search_type = "Search"
     render_search_results_with_message tasks, message
   end
 
   def analyze
-    tasks = SearchTask.analyze(@search_query)
+    tasks = AnalyzeTask.analyze(@search_query)
     message = "No tasks found with goal! Assign goal to tags to analyze how you are doing" if tasks.count == 0
     @search_query.search_type = "Analyze"
     render_search_results_with_message tasks, message

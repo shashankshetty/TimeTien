@@ -1,12 +1,27 @@
 <% title search_title %>
-<%= javascript_include_tag "search_tasks" %>
-
+<%= javascript_include_tag "analyze_tasks" %>
 <%= form_tag :action => "query_tasks" do |f| %>
     <div class="search_criteria">
-      <div class="field">
-        <%= label_tag "Tag" %>
-        <br/>
-        <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size =>5, :class=> "multiselect" %></div>
+      <% if params[:action] == "analyze_group_tasks" || @search_query.analyze == 'group' %>
+          <div class="field">
+            <%= label_tag "Group" %>
+            <br/>
+            <%= select_tag :search_group, options_for_select(current_user.get_groups, @search_query.groups), :multiple => true, :size => 5 %>
+          </div>
+          <div class="field">
+            <%= label_tag "Tag" %>
+            <br/>
+            <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_groups, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
+          </div>
+          <%= hidden_field_tag :analyze, "group" %>
+      <% else %>
+          <div class="field">
+            <%= label_tag "Tag" %>
+            <br/>
+            <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
+          </div>
+          <%= hidden_field_tag :analyze, "task" %>
+      <% end %>
       <div class="field">
         <%= label_tag "From" %>
         <br/>
@@ -26,6 +41,9 @@
       <thead>
       <tr>
         <th>Tag</th>
+        <% if @search_query.search_type == "Search" && @search_query.analyze == "group" %>
+            <th>User</th>
+        <% end %>
         <th>Start Task</th>
         <th>End Task</th>
         <th>Goal</th>
@@ -41,13 +59,18 @@
       <tbody>
       <% @search_query.tasks.each do |task| %>
           <tr>
-            <td align="center"><%= task.tag.group.nil? ? task.tag.name : "#{task.tag.name} (G)" %></td>
+            <% if @search_query.analyze == "group" %>
+                <td align="center"><%= task.tag.name %></td>
+            <% end %>
+            <% if @search_query.search_type == "Search" && @search_query.analyze == "group" %>
+                <td align="center"><%= task.user.display_name %></td>
+            <% end %>
             <td align="center"><%= format_time_d_m_y(task.start_time) %></td>
             <td align="center"><%= format_time_d_m_y(task.end_time) %></td>
             <td align="center"><%= time_allocated(task.tag) %></td>
             <% if @search_query.search_type == "Search" %>
                 <td align="right"><%= display_time(task.time_spent) %></td>
-                <td align="center"><%= link_to '', delete_search_task_path(task), confirm: 'Are you sure?', :class => 'delete_short' %></td>
+                <td align="center"><%= link_to '', delete_analyze_task_path(task), confirm: 'Are you sure?', :class => 'delete_short' %></td>
             <% end %>
             <% if @search_query.search_type == "Analyze" %>
                 <td align="right"><%= display_time(task.performance) %></td>
