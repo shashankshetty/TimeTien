@@ -22,6 +22,13 @@ end
 Factory.define :group do |f|
   f.sequence(:name) { |n| "Group#{n}" }
   f.description "Group description"
+  end
+
+Factory.define :membership do |f|
+  f.user { Factory(:user) }
+  f.group { Factory(:group) }
+  f.is_admin true
+  f.accepted false
 end
 
 Factory.define :authentication do |f|

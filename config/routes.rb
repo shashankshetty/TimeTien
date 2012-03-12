@@ -23,6 +23,7 @@ Timezen::Application.routes.draw do
   match 'analyze_user_tasks', :to => 'analyze_tasks#analyze_user_tasks', :as => 'analyze_user_tasks'
   #match 'get_group_users/:q', :to => 'groups#get_group_users', :as => 'get_group_users'
   match 'get_group_tags', :to => 'analyze_tasks#get_group_tags', :as => 'get_group_tags'
+  match 'accept_invite/:id', :to => 'groups#accept_invite', :as => 'accept_invite'
   match '/auth/:service/callback' => 'authentications#authenticate'
 
   root :to => 'tasks#manage'

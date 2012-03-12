@@ -14,10 +14,19 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :display_name, :email, :password, :password_confirmation, :has_random_password, :remember_me, :time_zone
 
+  def get_user_groups
+    my_memberships = self.membership.where("accepted = ?", true)
+    user_groups = []
+    my_memberships.each do |member|
+      user_groups << member.group
+    end
+    user_groups
+  end
+
   def get_tags
     tags = []
     self.tags.each { |tag| tags << tag }
-    self.groups.each do |group|
+    get_user_groups.each do |group|
       group.tags.each do |tag|
         unless tags.include?(tag)
           tags << tag
@@ -29,15 +38,15 @@ class User < ActiveRecord::Base
 
   def get_group_tags
     tags = []
-    self.groups.each do |group|
+    get_user_groups.each do |group|
       group.tags.each do |tag|
-          tags << tag
+        tags << tag
       end
     end
     tags.sort_by { |x| x.group_id || 0 }.collect { |tag| [tag.name, tag.id.to_s] }
   end
 
   def get_groups
-    groups.sort_by { |x| x.name }.collect { |group| [group.name, group.id.to_s] }
+    get_user_groups.sort_by { |x| x.name }.collect { |group| [group.name, group.id.to_s] }
   end
 end

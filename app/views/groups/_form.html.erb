@@ -1,7 +1,8 @@
 <%= javascript_include_tag "groups" %>
 <%= form_for(@group) do |f| %>
     <%= render "shared/messages", :target => @group %>
-    <% if params[:action] == "new" || @group.get_membership(current_user.id).nil? ? true : @group.get_membership(current_user.id).is_admin %>
+    <% membership = @group.get_membership(current_user.id)
+       if (params[:action] == "new" && membership.nil?) || membership.is_admin && membership.accepted %>
         <div class="field">
           <%= f.label :name %>
           <br/>
@@ -21,7 +22,7 @@
             <div>
               <%= f.label :admins, "Group Admins" %>
               <br/>
-              <%= select_tag :group_admins, options_for_select(@group.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @group.admins.collect { |x| x.user_id }), :multiple => true, :size =>5, :class => "multiselect" %>
+              <%= select_tag :group_admins, options_for_select(@group.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @group.admins.collect { |x| x.user_id }), :multiple => true, :size => 5, :class => "multiselect" %>
             </div>
         <% end %><br />
         <div class="actions">
@@ -49,5 +50,11 @@
               <%= "#{admin.user.display_name} (#{admin.user.email})" %><br/>
           <% end %>
         </p>
+        <% if !membership.accepted %>
+            <p>&nbsp;</p>
+            <div class="actions">
+              <%= link_to 'Accept Invite', accept_invite_path(@group), :class => 'button' %>
+            </div>
+        <% end %>
     <% end %>
 <% end %>

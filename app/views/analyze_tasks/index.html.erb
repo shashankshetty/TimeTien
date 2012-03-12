@@ -59,9 +59,7 @@
       <tbody>
       <% @search_query.tasks.each do |task| %>
           <tr>
-            <% if @search_query.analyze == "group" %>
-                <td align="center"><%= task.tag.name %></td>
-            <% end %>
+            <td align="center"><%= task.tag.name %></td>
             <% if @search_query.search_type == "Search" && @search_query.analyze == "group" %>
                 <td align="center"><%= task.user.display_name %></td>
             <% end %>

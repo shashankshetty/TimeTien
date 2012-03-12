@@ -35,9 +35,8 @@ describe GroupsController do
 
   describe "GET index" do
     it "assigns all groups as @groups" do
-      p valid_attributes
       group = Group.create! valid_attributes
-      group.update_users("", @user)
+      Membership.create!(:user => @user, :group => group, :is_admin => true, :accepted => true)
       get :index
       assigns(:groups).should eq([group])
     end
@@ -53,7 +52,7 @@ describe GroupsController do
   describe "GET edit" do
     it "assigns the requested group as @group" do
       group = Group.create! valid_attributes
-      group.update_users("", @user)
+      Membership.create!(:user => @user, :group => group, :is_admin => true, :accepted => true)
       get :edit, {:id => group.id}
       assigns(:group).should eq(group)
     end
@@ -157,4 +156,37 @@ describe GroupsController do
     end
   end
 
+  describe "Accept Group invite" do
+    it "updates the accepted column" do
+      group = Group.create! valid_attributes
+      Membership.create!(:user => @user, :group => group)
+      get :accept_invite, {:id => group.id}
+      group.get_membership(@user.id).accepted.should be_true
+    end
+
+    it "redirect to the groups list" do
+      group = Group.create! valid_attributes
+      Membership.create!(:user => @user, :group => group)
+      get :accept_invite, {:id => group.id}
+      response.should redirect_to(groups_url)
+    end
+  end
+
+  describe "with invalid params" do
+    it "not update the accepted column" do
+      group = Group.create! valid_attributes
+      Membership.create!(:user => @user, :group => group)
+      Membership.any_instance.stub(:save).and_return(false)
+      get :accept_invite, {:id => group.id}
+      group.get_membership(@user.id).accepted.should be_false
+    end
+
+    it "re-renders the 'edit' template" do
+      group = Group.create! valid_attributes
+      Membership.create!(:user => @user, :group => group)
+      Membership.any_instance.stub(:save).and_return(false)
+      get :accept_invite, {:id => group.id}
+      response.should render_template("edit")
+    end
+  end
 end

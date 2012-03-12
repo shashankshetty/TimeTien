@@ -12,8 +12,10 @@ describe Group, "When asked to update users" do
   it "should add users to group including current user" do
     group = Factory(:group)
     user = Factory(:user)
+    Membership.create!(:user => user, :group => group, :is_admin => true, :accepted => true)
     add_user = Factory(:user)
-    group.update_users(add_user.id.to_s, user)
+    users_to_add = [user.id, add_user.id]
+    group.update_users(users_to_add.collect { |c| c }.join(','), user)
     group.save
     group.users.length.should be == 2
     group.users.include?(user).should be_true
@@ -24,8 +26,7 @@ describe Group, "When asked to update users" do
     it "should get users that belong to the group" do
       group = Factory(:group)
       user = Factory(:user)
-      group.update_users("", user)
-      group.save
+      Membership.create!(:user => user, :group => group, :is_admin => true, :accepted => true)
       member = group.get_membership(user.id)
       member.user_id.should be == user.id
       member.group_id.should be == group.id
@@ -36,25 +37,25 @@ describe Group, "When asked to update users" do
     it "should get users that are admin of that group" do
       group = Factory(:group)
       user = Factory(:user)
+      Membership.create!(:user => user, :group => group, :is_admin => true, :accepted => true)
       add_user = Factory(:user)
       group.update_users(add_user.id.to_s, user)
       group.save
-      member = group.get_membership(user.id)
-      member.is_admin = true
-      member.save
-
       group.users.length.should be == 2
       group.admins.length.should be == 1
+      member = group.get_membership(user.id)
       member.is_admin.should be_true
     end
   end
 
   describe Group, "When asked to update admins" do
-    it "should set the user to admin including the current user" do
+    it "should set the user to admin including the current user even if current user is not selected in the list" do
       group = Factory(:group)
       user = Factory(:user)
+      Membership.create!(:user => user, :group => group, :is_admin => true, :accepted => true)
       add_user = Factory(:user)
-      group.update_users(add_user.id.to_s, user)
+      users_to_add = [user.id, add_user.id]
+      group.update_users(users_to_add.collect { |c| c }.join(','), user)
       group.update_admins([add_user.id.to_s], user)
       group.save
       group.admins.length.should be == 2

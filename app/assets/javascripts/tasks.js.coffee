@@ -16,6 +16,9 @@ jQuery ->
   $("#tabs").tabs()
   $("#tabs").removeClass("ui-widget-content")
 
+  $(".group_invites").draggable()
+  $("#main").setPositionRelativeToMe('.group_invites', 530, -800)
+
   for element in $("#tabs").children()
     $(element).removeClass("ui-tabs-panel ui-widget-content")
 

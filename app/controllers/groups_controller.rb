@@ -35,7 +35,7 @@ class GroupsController < ApplicationController
     @group.update_attributes(params[:group])
     result = @group.save
     if result
-      member_result = Membership.create!(:user => current_user, :group => @group, :is_admin => true)
+      member_result = Membership.create!(:user => current_user, :group => @group, :is_admin => true, :accepted => true)
       if !member_result
         result = member_result
       end
@@ -66,6 +66,23 @@ class GroupsController < ApplicationController
     set_message_for_redirect @group.destroy, "deleted"
     respond_to do |format|
       format.html { redirect_to groups_url }
+    end
+  end
+
+  def accept_invite
+    @group = Group.find(params[:id])
+    membership = @group.membership.where("user_id = ?", current_user.id).first
+    membership.accepted = true
+    if membership.save
+      flash[:success] = "Congratulations! You are now part of #{@group.name}."
+      respond_to do |format|
+        format.html { redirect_to groups_url }
+      end
+    else
+      flash.now[:error] = @group.errors.full_messages
+      respond_to do |format|
+        format.html { render action: :edit }
+      end
     end
   end
 

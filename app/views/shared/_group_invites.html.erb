@@ -1,0 +1,9 @@
+<% group_invites = Group.get_user_group_invites(current_user)
+   if group_invites.count > 0 %>
+    <div  align="center" class="group_invites ui-tabs-nav ui-widget-header ui-corner-all">
+      <span class="group_title">Click on group(s) to accept your invite: </span>
+      <% group_invites.each do |group| %>
+          <span><%= link_to group.name, edit_group_path(group) %>&nbsp;&nbsp;</span>
+      <% end %>
+    </div>
+<% end %>

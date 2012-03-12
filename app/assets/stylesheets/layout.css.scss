@@ -321,3 +321,12 @@ hr {
 .ui-multiselect {
   width: 30px;
 }
+
+.group_invites {
+  width: 900px;
+  padding: 1px 5px;
+  border-bottom: solid 2px darken($black, 10%);
+  h1 {
+    font-size: 21px;
+  }
+}
