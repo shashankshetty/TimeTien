@@ -27,6 +27,7 @@ jQuery ->
 
   $('#task_results').setSearchCriteriaPosition()
   $('span[id^="over_the_limit"]').formatPerformanceColumn()
+  $('.list_text').css 'color', '#131B3B'
   $("#search_group").multiselect({
   header: false
   })
@@ -42,16 +43,3 @@ jQuery ->
       $("#search_tag").multiselect()
     )
   )
-
-  if ($("#task_results").is(":visible"))
-    $("#task_results").tablesorter
-      widthFixed: false,
-      sortList: [
-        [0, 0]
-      ],
-      headers:
-        3:
-          sorter: false,
-          4:
-            sorter: false,
-            5: sorter: false

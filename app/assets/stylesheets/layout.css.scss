@@ -330,3 +330,19 @@ hr {
     font-size: 21px;
   }
 }
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list li {
+  margin: 4px;
+  padding: 0.6em;
+}
+
+.list_text {
+  font-weight: normal;
+  font-color: green;
+}
