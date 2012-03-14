@@ -17,6 +17,7 @@ gem 'kaminari'
 
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-openid'
 
 group :development, :test do
   gem 'rspec-rails'	

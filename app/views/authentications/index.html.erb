@@ -18,12 +18,9 @@
 
 <div class="title">add more authentications to your account</div>
 <div id="authentication_services">
-  <% if @authentications.select {|item|"facebook" == item.provider }.empty? %>
-    <%= link_to image_tag("facebook_32.png", :size => "24x24", :alt => "facebook"), "/auth/facebook" %>
+  <% if @authentications.select {|item|"google" == item.provider }.empty? %>
+    <%= link_to image_tag("google_32.png", :size => "24x24", :alt => "google"), "/auth/google" %>
   <% end  %>
-  <% if @authentications.select {|item|"twitter" == item.provider }.empty? %>
-    <%= link_to image_tag("twitter_32.png", :size => "24x24", :alt => "twitter"), "/auth/twitter" %>
-  <% end %>
   <% if @authentications.select {|item|"github" == item.provider }.empty? %>
     <%= link_to image_tag("github_32.png", :size => "24x24", :alt => "github"), "/auth/github" %>
   <% end %>

@@ -7,7 +7,8 @@ class AuthenticationsController < ApplicationController
   end
 
   def authenticate
-    auth_details = Authentication.get_authentication_provider_details(params[:service], request.env['omniauth.auth'])
+    authentication = Authentication.new
+    auth_details = authentication.get_authentication_provider_details(params[:service], request.env['omniauth.auth'])
     if auth_details['has_error']
       flash[:error] = auth_details['error']
       redirect_to user_signed_in? ? authentications_path : new_user_session_path
