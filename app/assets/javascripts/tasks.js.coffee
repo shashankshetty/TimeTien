@@ -30,9 +30,10 @@ jQuery ->
     headers:
       2:
         sorter: false,
-        3:
-          sorter: false,
-          4: sorter: false
+      3:
+        sorter: false,
+      4:
+        sorter: false
 
   $("#completed_tasks > .tablesorter").tablesorter
     widthFixed: false,
@@ -42,4 +43,5 @@ jQuery ->
     headers:
       3:
         sorter: false,
-        4: sorter: false
+      4:
+        sorter: false

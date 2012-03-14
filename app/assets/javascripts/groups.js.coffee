@@ -20,4 +20,6 @@ jQuery ->
     sortList: [
       [0, 0]
     ],
-    headers: 2: sorter: false
+    headers:
+      2:
+        sorter: false

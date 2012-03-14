@@ -11,6 +11,7 @@
     <th></th>
   </tr>
   </thead>
+  <tbody>
   <% @groups.each do |group| %>
       <tr>
         <td align="center"><%= group.name %></td>
@@ -18,4 +19,5 @@
         <td align="center"><%= link_to '', edit_group_path(group), :class => "edit_short" %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>

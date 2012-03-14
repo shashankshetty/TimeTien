@@ -13,6 +13,7 @@
     <th></th>
   </tr>
   </thead>
+  <tbody>
   <% @tags.each do |tag| %>
       <tr>
         <td align="center"><%= tag.name %></td>
@@ -23,6 +24,7 @@
         <td align="center"><%= link_to '', tag, confirm: 'Are you sure?', method: :delete, :class => "delete_short" %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>
 
 
