@@ -73,6 +73,12 @@ module TasksHelper
     return display
   end
 
+  def calculate_earning(tag, total_seconds)
+    return nil if tag.pay_rate.nil?
+    earning = (tag.pay_rate * total_seconds)/3600
+    number_to_currency(earning, :unit => tag.pay_currency)
+  end
+
   def search_title
     @search_query.blank? || @search_query.search_type.blank? ? "search/analyze tasks" : @search_query.search_type
   end

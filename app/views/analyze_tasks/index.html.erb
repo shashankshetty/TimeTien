@@ -52,10 +52,18 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <% if @search_query.search_type == "Analyze" %>
                     <span>Time Spent: </span><span class="list_text"><%= display_time(task.performance) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>How am I doin': </span><span id="over_the_limit>"><%= display_time_with_performance_for(task) %></span>
+                    <span>How am I doin': </span><span id="over_the_limit>"><%= display_time_with_performance_for(task) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <% earning = calculate_earning(task.tag, task.performance)
+                       if !earning.nil? %>
+                        <span>Earning: </span><span class="list_text"><%= earning %></span>
+                    <% end %>
                 <% end %>
                 <% if @search_query.search_type == "Search" %>
-                    <span>Time Spent: </span><span class="list_text"><%= display_time(task.time_spent) %></span>
+                    <span>Time Spent: </span><span class="list_text"><%= display_time(task.time_spent) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <% earning = calculate_earning(task.tag, task.time_spent)
+                       if !earning.nil? %>
+                        <span>Earning: </span><span class="list_text"><%= earning %></span>
+                    <% end %>
                 <% end %>
               </div>
             </div>

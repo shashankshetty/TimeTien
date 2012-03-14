@@ -13,7 +13,7 @@ describe TasksHelper do
 
     it "should return date and time if time is not today" do
       t = (Time.now-2.days)
-      helper.format_time_m_d_y(t).should == t.strftime('%m/%d/%Y %I:%M %p')
+      helper.format_time_m_d_y(t).should == t.strftime('%m/%d/%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
     end
   end
 
@@ -85,6 +85,20 @@ describe TasksHelper do
     it "should display time in {d}{h}{m} under for negative number with negative sign" do
       t = Time.now
       helper.display_time_with_performance(-3700, false).should == "-1h 2m under"
+    end
+  end
+
+  describe "When asked to calculate earning" do
+    before :each do
+      Time.zone = "Central Time (US & Canada)"
+    end
+
+    it "should return the total earning with the currency" do
+      tag = Factory(:tag)
+      tag.pay_rate = 10
+      tag.pay_currency = "$"
+      total_seconds = 36000
+      helper.calculate_earning(tag, total_seconds).should == "$100.00"
     end
   end
 end

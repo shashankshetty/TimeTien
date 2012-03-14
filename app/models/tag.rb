@@ -7,6 +7,8 @@ class Tag < ActiveRecord::Base
   validates :user_id, :uniqueness => {:scope => :name}
   validates_length_of :name, :maximum => 50
 
+  validates_numericality_of :pay_rate, :greater_than => 0, :less_than => 10000, :allow_nil => true
+
   validate :validate_complete_within
 
     def validate_complete_within

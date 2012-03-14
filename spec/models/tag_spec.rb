@@ -28,5 +28,19 @@ describe Tag, "When asked to validate" do
     tag.complete_within = true
     tag.should_not be_valid
     tag.errors[:complete_within].should_not be_empty
+    end
+
+  it "should not allow pay rate greater than 9999" do
+    tag = Factory(:tag)
+    tag.pay_rate = 10000
+    tag.should_not be_valid
+    tag.errors[:pay_rate].should_not be_empty
+  end
+
+  it "should not allow pay rate less than 0" do
+    tag = Factory(:tag)
+    tag.pay_rate = -100
+    tag.should_not be_valid
+    tag.errors[:pay_rate].should_not be_empty
   end
 end

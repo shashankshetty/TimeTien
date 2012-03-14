@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20120304061139) do
     t.integer  "user_id"
     t.integer  "time_allocated"
     t.string   "frequency"
+    t.decimal  "pay_rate"
+    t.string   "pay_currency"
     t.integer  "group_id"
     t.boolean  "complete_within"
   end

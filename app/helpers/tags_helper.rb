@@ -19,6 +19,15 @@ module TagsHelper
     values
   end
 
+  def currencies
+    values = {
+        'USD' => '$',
+        'EUR' => 'EUR',
+        'CAD' => 'CAD'
+    }
+    values
+  end
+
   def time_allocated(tag)
     return nil if tag.time_allocated.blank?
     "#{display_time(tag.time_allocated*60)}/#{tag.frequency}"

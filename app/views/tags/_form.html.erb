@@ -19,6 +19,12 @@
       <%= f.collection_select(:frequency, task_frequencies, :first, :last) %>
     </div>
     <div class="field">
+      <%= f.label :pay_rate %>
+      <a class="title" href="#" title="Pay Rate|Pay rate per hour">
+        <%=  image_tag("info.png", :size => "16x16", :alt => "facebook") %></a><br />
+      <%= f.collection_select(:pay_currency, currencies, :first, :last) %> <%= f.text_field :pay_rate, :class => "amount", :maxlength => 7 %> /hour
+    </div>
+    <div class="field">
       <%= f.check_box :complete_within %><%= label_tag "Check if your goal is to complete the task within the allocated time" %>
     </div>
     <div class="field">
