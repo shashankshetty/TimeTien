@@ -15,9 +15,4 @@ module ApplicationHelper
     gravatar_id = Digest::MD5::hexdigest(user.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=18"
   end
-
-  def get_user_groups
-    return [] if current_user.nil?
-    current_user.groups
-  end
 end

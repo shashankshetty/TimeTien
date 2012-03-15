@@ -15,7 +15,7 @@ $.fn.formatPerformanceColumn = () ->
 jQuery ->
   $(".search_criteria").draggable()
 
-  $("#main").setPositionRelativeToMe('.search_criteria', 50, 95)
+  $("#main").setPositionRelativeToMe('.search_criteria', 50, 50)
   $(".search_criteria").css('padding-left', '10px')
   $(".search_criteria").css('padding-right', '10px')
 
@@ -45,7 +45,8 @@ jQuery ->
         {id: id}
       (message) ->
         if (message.status == "success")
-          $("#li_" + id).remove()
+          alert("hello")
+          $("#li" + id).remove()
         $("#message").addClass(message.status)
         $("#message").text(message.text)
       )

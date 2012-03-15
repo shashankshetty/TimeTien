@@ -53,7 +53,7 @@ jQuery ->
   )
 
   $(".multiselect").multiselect({
-    selectedList: 2
+  selectedList: 2
   }).multiselectfilter()
 
   $('table').hide() if $('table > tbody > tr').length == 0

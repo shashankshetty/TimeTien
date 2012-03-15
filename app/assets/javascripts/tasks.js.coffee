@@ -17,8 +17,10 @@ jQuery ->
   $("#tabs").removeClass("ui-widget-content")
 
   $(".group_invites").draggable()
-  $("#main").setPositionRelativeToMe('.group_invites', 530, -800)
-
+  topOffset = ($(document).height()-$(".group_invites").height())
+  $("#main").setPositionRelativeToMe('.group_invites', 50, 100)
+  $("#close").click(() ->
+  )
   for element in $("#tabs").children()
     $(element).removeClass("ui-tabs-panel ui-widget-content")
 
@@ -30,10 +32,9 @@ jQuery ->
     headers:
       2:
         sorter: false,
-      3:
-        sorter: false,
-      4:
-        sorter: false
+        3:
+          sorter: false,
+          4: sorter: false
 
   $("#completed_tasks > .tablesorter").tablesorter
     widthFixed: false,
@@ -43,5 +44,4 @@ jQuery ->
     headers:
       3:
         sorter: false,
-      4:
-        sorter: false
+        4: sorter: false

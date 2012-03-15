@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   attr_accessible :display_name, :email, :password, :password_confirmation, :has_random_password, :remember_me, :time_zone
 
   def get_user_groups
-    my_memberships = self.membership.where("accepted = ?", true)
+    my_memberships =  self.membership.where("accepted = ?", true)
     user_groups = []
     my_memberships.each do |member|
       user_groups << member.group
@@ -48,5 +48,14 @@ class User < ActiveRecord::Base
 
   def get_groups
     get_user_groups.sort_by { |x| x.name }.collect { |group| [group.name, group.id.to_s] }
+  end
+
+  def get_group_invites
+    group_invites = []
+    unaccepted_memberships = Membership.find(:all, :conditions => {:user_id => id, :accepted => false})
+    unaccepted_memberships.each do |membership|
+      group_invites << membership.group
+    end
+    group_invites
   end
 end

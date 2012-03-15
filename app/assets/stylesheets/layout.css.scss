@@ -88,7 +88,7 @@ body {
   background-color: $black;
   width: 100%;
   color: $white;
-  padding: 1px 5px;
+  padding-top: 5px;
   border-bottom: solid 2px darken($black, 10%);
   h1 {
     font-size: 21px;
@@ -277,7 +277,7 @@ hr {
   float: right;
   font-size: 16px;
   padding-top: 10px;
-  padding-right: 15px;
+  padding-right: 5px;
 }
 
 #menu {
@@ -323,12 +323,16 @@ hr {
 }
 
 .group_invites {
-  width: 900px;
+  width: 200px;
   padding: 1px 5px;
-  border-bottom: solid 2px darken($black, 10%);
   h1 {
     font-size: 21px;
   }
+}
+
+.group_title {
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .list {
@@ -350,6 +354,7 @@ hr {
 .amount {
   width: 60px;
 }
+
 .pagination {
   background-color: #d4d1bf;
   text-align: center;

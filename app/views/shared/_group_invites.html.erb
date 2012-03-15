@@ -1,9 +1,16 @@
-<% group_invites = Group.get_user_group_invites(current_user)
+<% group_invites = current_user.nil? ? []: current_user.get_group_invites
    if group_invites.count > 0 %>
-    <div  align="center" class="group_invites ui-tabs-nav ui-widget-header ui-corner-all">
-      <span class="group_title">Click on group(s) to accept your invite: </span>
-      <% group_invites.each do |group| %>
-          <span><%= link_to group.name, edit_group_path(group) %>&nbsp;&nbsp;</span>
-      <% end %>
+    <div align="center" class="group_invites ui-tabs-nav ui-widget-header ui-corner-all">
+      <div class="group_title">
+        <div style="text-decoration: underline">Your Group Invites</div>
+        <div style="font-style:italic">(Click to accept)</div>
+      </div>
+      <p></p>
+
+      <div id="groups">
+        <% group_invites.each do |group| %>
+            <div><%= link_to group.name, edit_group_path(group) %>&nbsp;&nbsp;</div>
+        <% end %>
+      </div>
     </div>
 <% end %>

@@ -58,17 +58,6 @@ class Group < ActiveRecord::Base
       membership << current_user_membership
     end
   end
-
-  def self.get_user_group_invites(user)
-    group_invites = []
-    return group_invites if user.nil?
-    unaccepted_memberships = Membership.find(:all, :conditions => {:user_id => user.id, :accepted => false})
-    unaccepted_memberships.each do |membership|
-      group_invites << membership.group
-    end
-    group_invites
-  end
-
 end
 
 
