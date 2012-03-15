@@ -1,23 +1,18 @@
 class AnalyzeTasksController < ApplicationController
   def analyze_user_tasks
-    render_search_results_with_message [], ""
+    display_index [], :index
   end
 
   def analyze_group_tasks
-    render_search_results_with_message [], ""
+    display_index [], :index
   end
 
   def get_group_tags
-    #if params[:groups] == "all"
-    #  memberships = Membership.find(:all, :conditions => {:user_id => current_user.id})
-    #  group_tags = Tag.find(:all, :conditions => "group_id in (#{memberships.collect { |c| c.group_id }.join(',')})").collect { |x| GroupUsers.new(x.id, x.name) }
-    #els
     if params[:groups] != "null" && (params[:groups].present?)
       group_tags = Tag.find(:all, :conditions => "group_id in (#{params[:groups].collect { |c| c }.join(',')})").collect { |x| GroupUsers.new(x.id, x.name) }
     end
     respond_to do |format|
       format.json { render json: group_tags || [] }
-      #render :partial => "tags", :locals => {:group_tags => group_tags}
     end
   end
 
@@ -51,27 +46,37 @@ class AnalyzeTasksController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy_task
     @task = Tassk.find(params[:id])
-    message = @task.destroy ? "Task was successfully deleted." : @task.errors.full_messages
-    render_search_results_with_message [], message
+    if @task.destroy
+      message = {:status => "success", :text => "Task was successfully deleted."}
+    else
+      messages = []
+      @task.errors.full_messages.each do |key, value|
+        messages << value
+      end
+      message = {:status => "error", :text => messages.join(", ")}
+    end
+    respond_to do |format|
+      format.json { render json: message }
+    end
   end
 
   private
 
   def render_search_results_with_message(tasks, message)
     flash.now[:info] = message
-    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(12)
+    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(12), :results
     return
   end
 
-  def display_index(tasks)
+  def display_index(tasks, view)
     if @search_query.nil?
       @search_query = SearchQuery.new(params, current_user)
     end
     @search_query.tasks = tasks
     respond_to do |format|
-      format.html { render action: :index }
+      format.html { render action: view }
     end
   end
 end

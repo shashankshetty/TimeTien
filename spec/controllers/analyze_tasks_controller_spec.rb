@@ -108,15 +108,15 @@ describe AnalyzeTasksController do
     it "destroys the requested task" do
       task = Tassk.create! valid_attributes
       expect {
-        delete :destroy, :id => task.id
+        post :destroy_task, :id => task.id, :format => :json
       }.to change(Tassk, :count).by(-1)
     end
 
-    it "redirects to the search index" do
+    it "returns a success message" do
       task = Tassk.create! valid_attributes
-      delete :destroy, :id => task.id
-      response.should render_template("index")
+      post :destroy_task, :id => task.id, :format => :json
+      parsed_body = JSON.parse(response.body)
+      parsed_body["status"].should == "success"
     end
   end
-
 end

@@ -350,3 +350,9 @@ hr {
 .amount {
   width: 60px;
 }
+.pagination {
+  background-color: #d4d1bf;
+  text-align: center;
+  font-weight: bold;
+  @include rounded-corners(3px);
+}

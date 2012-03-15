@@ -1,0 +1,44 @@
+<% title search_title %>
+<%= javascript_include_tag "analyze_results" %>
+<div id="message"></div>
+<%= render "search", :search_query => @search_query %>
+<ul id='task_results' class='list'>
+  <% @search_query.tasks.each do |task| %>
+      <li id="li_<%=task.id %>" class="ui-tabs-nav ui-widget-header">
+        <div>
+          <span><%= task.tag.name %></span>
+          <div>
+            <% if @search_query.search_type == "Search" && @search_query.analyze == "group" %>
+                <span>User: <span class="list_text"><%= task.user.display_name %></span></span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <% end %>
+            <span>Goal: </span><span class="list_text"><%= time_allocated(task.tag) || " unavailable" %></span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <% if @search_query.search_type == "Analyze" %>
+                <span>Time Spent: </span><span class="list_text"><%= display_time(task.performance) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>How am I doin': </span><span id="over_the_limit>"><%= display_time_with_performance_for(task) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <% earning = calculate_earning(task.tag, task.performance)
+                   if !earning.nil? %>
+                    <span>Earning: </span><span class="list_text"><%= earning %></span>
+                <% end %>
+            <% end %>
+            <% if @search_query.search_type == "Search" %>
+                <span>Time Spent: </span><span class="list_text"><%= display_time(task.time_spent) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <% earning = calculate_earning(task.tag, task.time_spent)
+                   if !earning.nil? %>
+                    <span>Earning: </span><span class="list_text"><%= earning %></span>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div><span>Start: </span><span class="list_text"><%= format_time_d_m_y(task.start_time) %></span>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>End: </span><span class="list_text"><%= format_time_d_m_y(task.end_time) || "ongoing" %></span>
+          <% if @search_query.search_type == "Search" && task.user == current_user %>
+              <span class="right"><%= link_to '', '#', confirm: 'Are you sure?', :class => 'delete_short', :id => "delete_#{task.id}" %></span>
+          <% end %></div>
+      </li>
+  <% end %>
+</ul>
+<p>&nbsp;</p>
+<%= paginate @search_query.tasks %>

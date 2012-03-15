@@ -18,7 +18,7 @@ Timezen::Application.routes.draw do
   match 'start_task' => 'tasks#start_task', :as => 'start_task'
   match 'stop_task/:id' => 'tasks#stop_task', :as => 'stop_task'
   match 'delete_task/:id', :to => 'tasks#destroy', :as => 'delete_task'
-  match 'delete_analyze_task/:id', :to => 'analyze_tasks#destroy', :as => 'delete_analyze_task'
+  match 'delete_analyze_task', :to => 'analyze_tasks#destroy_task', :as => 'delete_analyze_task'
   match 'analyze_group_tasks', :to => 'analyze_tasks#analyze_group_tasks', :as => 'analyze_group_tasks'
   match 'analyze_user_tasks', :to => 'analyze_tasks#analyze_user_tasks', :as => 'analyze_user_tasks'
   #match 'get_group_users/:q', :to => 'groups#get_group_users', :as => 'get_group_users'
