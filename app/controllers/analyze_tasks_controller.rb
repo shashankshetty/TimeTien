@@ -48,7 +48,9 @@ class AnalyzeTasksController < ApplicationController
 
   def destroy_task
     @task = Tassk.find(params[:id])
-    if @task.destroy
+    if @task.user != current_user
+      message = {:status => "error", :text => "You are only authorized to delete tasks that you own."}
+    elsif @task.destroy
       message = {:status => "success", :text => "Task was successfully deleted."}
     else
       messages = []

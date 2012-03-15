@@ -105,6 +105,16 @@ describe AnalyzeTasksController do
   end
 
   describe "DELETE destroy" do
+    it "cannot destroy other users task" do
+      task = Tassk.create! valid_attributes
+      user = Factory(:user)
+      task.user = user
+      task.save
+      post :destroy_task, :id => task.id, :format => :json
+      parsed_body = JSON.parse(response.body)
+      parsed_body["status"].should == "error"
+    end
+
     it "destroys the requested task" do
       task = Tassk.create! valid_attributes
       expect {
