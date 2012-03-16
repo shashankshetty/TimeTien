@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$.fn.showProfile = (text) ->
+$.fn.changeTextOnHover = (text) ->
   initial_text = $(this).text()
   $(this).mouseover(() ->
     $(this).text(text)
@@ -10,20 +10,6 @@ $.fn.showProfile = (text) ->
   $(this).mouseout(() ->
     $(this).text(initial_text)
   )
-
-$.fn.removeColumn = (column) ->
-  column = 1 if (!column)
-  $('tr td:nth-child(' + column + '), tr th:nth-child(' + column + ')', this).remove()
-  return this
-
-$.fn.setPositionRelativeToMe = (element, topOffset, leftOffset) ->
-  pos = $(this).position()
-  width = $(element).width()
-  $(element).css({
-  position: "absolute",
-  top: pos.top + topOffset + "px",
-  left: (pos.left - width - leftOffset) + "px"
-  })
 
 jQuery ->
   $(".groups").hide()
@@ -52,7 +38,7 @@ jQuery ->
     $(".group_invites").hide()
   )
 
-  $("#user_settings").showProfile("change user settings")
+  $("#user_settings").changeTextOnHover("change user settings")
 
   $(".datetime").datetimepicker(
     {

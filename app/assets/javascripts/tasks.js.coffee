@@ -16,11 +16,6 @@ jQuery ->
   $("#tabs").tabs()
   $("#tabs").removeClass("ui-widget-content")
 
-  $(".group_invites").draggable()
-  topOffset = ($(document).height()-$(".group_invites").height())
-  $("#main").setPositionRelativeToMe('.group_invites', 50, 100)
-  $("#close").click(() ->
-  )
   for element in $("#tabs").children()
     $(element).removeClass("ui-tabs-panel ui-widget-content")
 

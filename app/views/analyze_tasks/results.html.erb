@@ -1,8 +1,10 @@
 <% title search_title %>
 <%= javascript_include_tag "analyze_results" %>
 <div id="message"></div>
+<div class="content_left">
 <%= render "search", :search_query => @search_query %>
-<ul id='task_results' class='list'>
+</div>
+<ul id='task_results' class='list content_right'>
   <% @search_query.tasks.each do |task| %>
       <li id="li_<%=task.id %>" class="ui-tabs-nav ui-widget-header">
         <div>
@@ -26,7 +28,7 @@
                 <span>Time Spent: </span><span class="list_text"><%= display_time(task.time_spent) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <% earning = calculate_earning(task.tag, task.time_spent)
                    if !earning.nil? %>
-                    <span>Earning: </span><span class="list_text"><%= earning %></span>
+                    <span>Earnings: </span><span class="list_text"><%= earning %></span>
                 <% end %>
             <% end %>
           </div>
@@ -35,10 +37,13 @@
           <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>End: </span><span class="list_text"><%= format_time_d_m_y(task.end_time) || "ongoing" %></span>
           <% if @search_query.search_type == "Search" && task.user == current_user %>
-              <span class="right"><%= link_to '', '#', confirm: 'Are you sure?', :class => 'delete_short', :id => "delete_#{task.id}" %></span>
+              <span class="right"><%= link_to '', '#', :class => 'delete_short', :id => "delete_#{task.id}", :taskId => task.id %></span>
           <% end %></div>
       </li>
   <% end %>
 </ul>
 <p>&nbsp;</p>
 <%= paginate @search_query.tasks %>
+<div id="dialog-task" title="Confirm Delete">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you want to delete?</p>
+</div>

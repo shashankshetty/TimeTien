@@ -21,7 +21,7 @@ module TagsHelper
 
   def currencies
     values = {
-        'USD' => '$',
+        '$' => '$',
         'EUR' => 'EUR',
         'CAD' => 'CAD'
     }

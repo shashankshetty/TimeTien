@@ -39,3 +39,21 @@
   background: $background;
   width: 80px;
 }
+
+.content_left {
+  padding: 10px;
+  margin-left: -320px;
+  width: 100px;
+}
+
+.content_right {
+  margin-left: 0px;
+}
+
+.content_center {
+  margin-left: 100px;
+  margin-top: 50px;
+  .search_criteria {
+    padding: 40px 100px;
+  }
+}

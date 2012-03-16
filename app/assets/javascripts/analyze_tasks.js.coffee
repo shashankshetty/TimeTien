@@ -3,10 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("#main").setPositionRelativeToMe('.search_criteria', 100, -300)
-  $(".search_criteria").css('padding-left', '100px')
-  $(".search_criteria").css('padding-right', '100px')
-
   $("#search_group").multiselect({
   selectedList: 2
   })

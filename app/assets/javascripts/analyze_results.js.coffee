@@ -12,17 +12,27 @@ $.fn.formatPerformanceColumn = () ->
       $(this).text(performance.substring(1, performance.length))
       $(this).css 'color', '#00CC00'
 
+$.fn.deleteTask = () ->
+  id = $(this).attr("id").split("_")[1]
+  jQuery.post(
+    '/delete_analyze_task/'
+    {id: id}
+  (message) ->
+    if (message.status == "success")
+      $("#li_" + id).css("border", "solid red 1px")
+      $("#li_" + id).hide("blind", {direction: "vertical"}, 1000)
+      $("#li_" + id).remove()
+    $("#message").addClass(message.status)
+    $("#message").text(message.text)
+  )
+
 jQuery ->
   $(".search_criteria").draggable()
-
-  $("#main").setPositionRelativeToMe('.search_criteria', 50, 100)
-  $(".search_criteria").css('padding-left', '10px')
-  $(".search_criteria").css('padding-right', '10px')
 
   $('span[id^="over_the_limit"]').formatPerformanceColumn()
   $('.list_text').css 'color', '#131B3B'
   $("#search_group").multiselect({
-  header: false
+  selectedList: 2
   })
 
   $("#search_group").change(() ->
@@ -36,19 +46,26 @@ jQuery ->
       $("#search_tag").multiselect()
     )
   )
+  $("#dialog-task").hide()
+
+  $("#dialog-task").dialog({
+  autoOpen: false,
+  modal: true,
+  buttons:
+    {
+    "OK": ()  ->
+      $(this).dialog("close")
+      id =  $("#dialog-task").data("linkId")
+      $("#" + id).deleteTask()
+    "Cancel": () ->
+      $(this).dialog("close")
+    }
+  })
 
   $("a[id^='delete_']").each(() ->
     $(this).click(() ->
-      id = $(this).attr("id").split("_")[1]
-      jQuery.post(
-        '/delete_analyze_task/'
-        {id: id}
-      (message) ->
-        if (message.status == "success")
-          alert("hello")
-          $("#li" + id).remove()
-        $("#message").addClass(message.status)
-        $("#message").text(message.text)
-      )
+      $("#dialog-task").data("linkId", $(this).attr("id"))
+      $("#dialog-task").dialog({ position: 'center' })
+      $("#dialog-task").dialog("open")
     )
   )
