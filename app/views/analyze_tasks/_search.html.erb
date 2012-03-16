@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "analyze_tasks" %>
 <%= form_tag :action => "query_tasks" do |f| %>
     <div class="search_criteria">
       <% if params[:action] == "analyze_group_tasks" || @search_query.analyze == 'group' %>
@@ -5,25 +6,25 @@
             <%= label_tag "Group" %>
             <br/>
             <%= select_tag :search_group, options_for_select(current_user.get_groups, @search_query.groups), :multiple => true, :size => 5 %>
-          </div>
+          </div><br/>
           <div class="field">
             <%= label_tag "Tag" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_groups, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
-          </div>
+          </div><br/>
           <%= hidden_field_tag :analyze, "group" %>
       <% else %>
           <div class="field">
             <%= label_tag "Tag" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
-          </div>
+          </div><br/>
           <%= hidden_field_tag :analyze, "task" %>
       <% end %>
       <div class="field">
         <%= label_tag "From" %>
         <br/>
-        <%= text_field_tag :start_time, format_time_m_d_y(@search_query.start_time), :class => "datetime" %></div>
+        <%= text_field_tag :start_time, format_time_m_d_y(@search_query.start_time), :class => "datetime" %></div><br/>
       <div class="field">
         <%= label_tag "To" %>
         <br/>

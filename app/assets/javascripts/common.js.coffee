@@ -11,23 +11,26 @@ $.fn.showProfile = (text) ->
     $(this).text(initial_text)
   )
 
-  $.fn.removeColumn = (column) ->
-    column = 1 if (!column)
-    $('tr td:nth-child(' + column + '), tr th:nth-child(' + column + ')', this).remove()
-    return this
+$.fn.removeColumn = (column) ->
+  column = 1 if (!column)
+  $('tr td:nth-child(' + column + '), tr th:nth-child(' + column + ')', this).remove()
+  return this
 
-  $.fn.setPositionRelativeToMe = (element, topOffset, leftOffset) ->
-    pos = $(this).position()
-    width = $(element).width()
-    $(element).css({
-    position: "absolute",
-    top: pos.top + topOffset + "px",
-    left: (pos.left - width - leftOffset) + "px"
-    })
+$.fn.setPositionRelativeToMe = (element, topOffset, leftOffset) ->
+  pos = $(this).position()
+  width = $(element).width()
+  $(element).css({
+  position: "absolute",
+  top: pos.top + topOffset + "px",
+  left: (pos.left - width - leftOffset) + "px"
+  })
 
 jQuery ->
   $(".groups").hide()
+  $(".group_invites").hide()
+
   $("#manage_groups").click((event) ->
+    $(".group_invites").hide()
     event.stopPropagation()
     left = $(this).position().left - $(this).outerWidth() + 73
     top = $(this).position().top - ($(document).scrollTop() - ($("#menu").outerHeight()) - 5)
@@ -35,8 +38,18 @@ jQuery ->
     $(".groups").show("blind")
   )
 
+  $("#group_invites").click((event) ->
+    $(".groups").hide()
+    event.stopPropagation()
+    left = $(this).position().left - $(this).outerWidth() + 93
+    top = $(this).position().top - ($(document).scrollTop() - ($("#menu").outerHeight()) - 5)
+    $(".group_invites").css('top': top, 'left': left)
+    $(".group_invites").show("blind")
+  )
+
   $("html").click(() ->
     $(".groups").hide()
+    $(".group_invites").hide()
   )
 
   $("#user_settings").showProfile("change user settings")

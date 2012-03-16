@@ -2,8 +2,7 @@
   <div align="center" class="group_title"><%= link_to 'add new group', new_group_path %></div>
   <div align="center" class="group_title"><%= link_to 'analyze group tasks', analyze_group_tasks_path %></div>
   <hr/><div align="center" class="group_title"><%= link_to 'my group listings', groups_path %></div><p></p>
-  <% user_groups = current_user.nil? ? []: current_user.get_user_groups
-     if user_groups.count > 0 %>
+  <% if user_groups.count > 0 %>
       <% user_groups.each do |group| %>
           <div align="center"><%= link_to group.name, edit_group_path(group) %></div>
       <% end %>

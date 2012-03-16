@@ -18,11 +18,17 @@
   <h1>Time Zen</h1>
 </div>
 <% if user_signed_in? %>
+    <% group_invites = current_user.nil? ? [] : current_user.get_group_invites %>
+    <% user_groups = current_user.nil? ? [] : current_user.get_user_groups %>
     <div id="menu" class="ui-tabs-nav ui-widget-header">
       <%= image_tag avatar_url(current_user) %>
       <span class="intro"><%= link_to current_user.display_name, edit_user_registration_path, :id => 'user_settings', :class => "intro" %></span>
-      <span class="right"><%= link_to 'add old tasks', new_task_path %> | <%= link_to 'analyze tasks', analyze_user_tasks_path %>
-        | <%= link_to 'manage groups↓', "#", :id => 'manage_groups' %> | <%= link_to 'manage tags', tags_path %></span>
+      <span class="right"><a id="group_invites" href="#">group
+        invites↓<span id="invite"><%= group_invites.count %></span></a> |
+        <%= link_to 'add old tasks', new_task_path %> |
+        <%= link_to 'analyze tasks', analyze_user_tasks_path %> |
+        <%= link_to 'manage groups↓', "#", :id => 'manage_groups' %> |
+        <%= link_to 'manage tags', tags_path %></span>
     </div>
 <% end %>
 <div id="main">
@@ -37,13 +43,15 @@
   <% if !(flash[:info].nil? && flash[:notice].nil? && flash[:success].nil? && flash[:error].nil?) %>
       <br/>
   <% end %>
-  <%= render "shared/groups" %>
   <%= yield %>
 </div>
 <% if !user_signed_in? %>
     <div id="footer" class="ui-tabs-nav ui-widget-header">
       <span>© 2012 TimeZen</span>
     </div>
+<% else %>
+    <%= render "shared/groups", :user_groups => user_groups  %>
+    <%= render "shared/group_invites", :group_invites => group_invites %>
 <% end %>
 </body>
 </html>

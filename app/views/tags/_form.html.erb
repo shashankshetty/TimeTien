@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "tags" %>
 <%= javascript_include_tag "tags" %>
 <%= form_for(@tag) do |f| %>
     <%= render "shared/messages", :target => @tag %>
@@ -5,12 +6,12 @@
       <%= f.label :name %>
       <br/>
       <%= f.text_field :name %>
-    </div>
+    </div><br/>
     <div class="field">
       <%= f.label :description %>
       <br/>
       <%= f.text_area :description, :rows => 1 %>
-    </div>
+    </div><br/>
     <div class="field">
       <%= f.label :time_allocated %>
       <span> (HH:MM)</span>
@@ -19,20 +20,20 @@
       <%= text_field_tag :hours, get_hours, :class => 'time' %>
       : <%= text_field_tag :minutes, get_minutes, :class => 'time' %> /
       <%= f.collection_select(:frequency, task_frequencies, :first, :last) %>
-    </div>
+    </div><br/>
     <div class="field">
       <%= f.label :pay_rate %>
       <a class="title" href="#" title="Pay Rate|Pay rate per hour">
         <%= image_tag("info.png", :size => "16x16", :alt => "facebook") %></a><br/>
       <%= f.collection_select(:pay_currency, currencies, :first, :last) %> <%= f.text_field :pay_rate, :class => "amount", :maxlength => 7 %>
       /hour
-    </div>
+    </div><br/>
     <div class="field">
       <%= f.check_box :complete_within %><%= label_tag "Check if your goal is to complete the task within the allocated time" %>
       <a class="title" href="#" title="Measure against Time allocated|If checked you get a green signal if you complete the task within the allocated time else you get a red signal. Ex: Tasks bound by time line.<br/>
       If unchecked you get a red signal if you complete the task within the allocated time else you get a green signal. Ex: Tasks like spending time with your kids.">
         <%= image_tag("info.png", :size => "16x16", :alt => "facebook") %></a><br/>
-    </div>
+    </div><br/>
     <div class="field">
       <%= f.label :group_id %>
       <br/>

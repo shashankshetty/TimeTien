@@ -1,0 +1,41 @@
+// Place all the styles related to the Groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "layout";
+
+.pagination {
+  background-color: #d4d1bf;
+  text-align: center;
+  font-weight: bold;
+  @include rounded-corners(3px);
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list li {
+  margin: 4px;
+  padding: 0.6em;
+}
+
+.list_text {
+  font-weight: normal;
+  font-color: green;
+}
+
+.search_criteria {
+  float: left;
+  position: absolute;
+  padding: 20px;
+  border: 1px solid #9E9E9E;
+}
+
+.search {
+  @extend .button;
+  background: $background;
+  width: 80px;
+}

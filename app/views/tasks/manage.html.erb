@@ -1,4 +1,5 @@
 <% title "task management" %>
+<%= stylesheet_link_tag "tasks" %>
 <%= javascript_include_tag "tasks" %>
 <%= form_tag :action => "start_task" do |f| %>
     <%= render "shared/messages", :target => @task %>
@@ -23,5 +24,4 @@
         <%= render :partial => "task", :locals => {:tasks => completed_tasks, :tasks_type => "completed"} %>
       </div>
     </div>
-  <%= render "shared/group_invites" %>
 <% end %>

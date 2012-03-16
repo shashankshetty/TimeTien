@@ -1,16 +1,12 @@
-<% group_invites = current_user.nil? ? []: current_user.get_group_invites
-   if group_invites.count > 0 %>
-    <div align="center" class="group_invites ui-tabs-nav ui-widget-header ui-corner-all">
-      <div class="group_title">
-        <div style="text-decoration: underline">Your Group Invites</div>
-        <div style="font-style:italic">(Click to accept)</div>
-      </div>
-      <p></p>
-
-      <div id="groups">
+<div align="center" class="group_invites ui-tabs-nav ui-widget-header ui-corner-all">
+  <div id="group_invites">
+    <% if group_invites.count > 0 %>
+        <div style="font-style:italic;font-size: smaller;">(Click to accept)</div><div></div>
         <% group_invites.each do |group| %>
-            <div><%= link_to group.name, edit_group_path(group) %>&nbsp;&nbsp;</div>
+            <div align="center"><%= link_to group.name, edit_group_path(group) %></div>
         <% end %>
-      </div>
-    </div>
-<% end %>
+    <% else %>
+        <div align="center">You have no<br/>outstanding invites.</div>
+    <% end %>
+  </div>
+</div>

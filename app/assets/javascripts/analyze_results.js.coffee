@@ -15,7 +15,7 @@ $.fn.formatPerformanceColumn = () ->
 jQuery ->
   $(".search_criteria").draggable()
 
-  $("#main").setPositionRelativeToMe('.search_criteria', 50, 50)
+  $("#main").setPositionRelativeToMe('.search_criteria', 50, 100)
   $(".search_criteria").css('padding-left', '10px')
   $(".search_criteria").css('padding-right', '10px')
 
