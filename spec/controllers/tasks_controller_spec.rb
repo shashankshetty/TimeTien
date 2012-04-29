@@ -28,7 +28,7 @@ describe TasksController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-        :tag_id => Factory(:tag),
+        :tag_id => FactoryGirl.create(:tag),
         :start_time => Time.now,
         :user_id => @user.id
     }

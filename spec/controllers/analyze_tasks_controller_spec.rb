@@ -28,7 +28,7 @@ describe AnalyzeTasksController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-        :tag_id => Factory(:tag),
+        :tag_id => FactoryGirl.create(:tag),
         :start_time => Time.now,
         :user_id => @user.id
     }
@@ -50,9 +50,9 @@ describe AnalyzeTasksController do
 
   describe "POST get tags groups" do
     it "returns all the tags for the selected groups" do
-      tag1 = Factory(:tag)
-      tag2 = Factory(:tag)
-      group = Factory(:group)
+      tag1 = FactoryGirl.create(:tag)
+      tag2 = FactoryGirl.create(:tag)
+      group = FactoryGirl.create(:group)
       tag1.group = group
       tag2.group = group
       tag1.save
@@ -70,7 +70,7 @@ describe AnalyzeTasksController do
     end
 
     it "returns no tags if the group has no tags" do
-      group = Factory(:group)
+      group = FactoryGirl.create(:group)
       post :get_group_tags, :groups => [group.id], :format => :json
       parsed_body = JSON.parse(response.body)
       parsed_body.should be_empty
@@ -107,7 +107,7 @@ describe AnalyzeTasksController do
   describe "DELETE destroy" do
     it "cannot destroy other users task" do
       task = Tassk.create! valid_attributes
-      user = Factory(:user)
+      user = FactoryGirl.create(:user)
       task.user = user
       task.save
       post :destroy_task, :id => task.id, :format => :json

@@ -7,11 +7,11 @@ describe AnalyzeTask, "When asked to analyze tasks" do
   end
 
   it "should group tasks with frequency tasks" do
-    tag = Factory(:tag)
+    tag = FactoryGirl.create(:tag)
     tag.name = "Work12"
     tag.time_allocated = 60
     tag.frequency = 'task'
-    user = Factory(:user)
+    user = FactoryGirl.create(:user)
     tasks = []
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
@@ -22,11 +22,11 @@ describe AnalyzeTask, "When asked to analyze tasks" do
   end
 
   it "should group tasks with frequency day" do
-    tag = Factory(:tag)
+    tag = FactoryGirl.create(:tag)
     tag.name = "Work12"
     tag.time_allocated = 360
     tag.frequency = 'day'
-    user = Factory(:user)
+    user = FactoryGirl.create(:user)
     tasks = []
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)
@@ -37,11 +37,11 @@ describe AnalyzeTask, "When asked to analyze tasks" do
     end
 
   it "should group tasks with frequency week" do
-    tag = Factory(:tag)
+    tag = FactoryGirl.create(:tag)
     tag.name = "Work12"
     tag.time_allocated = 86400
     tag.frequency = 'day'
-    user = Factory(:user)
+    user = FactoryGirl.create(:user)
     tasks = []
     tasks << get_task(tag, user)
     tasks << get_task(tag, user)

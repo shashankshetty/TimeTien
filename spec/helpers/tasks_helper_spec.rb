@@ -94,7 +94,7 @@ describe TasksHelper do
     end
 
     it "should return the total earning with the currency" do
-      tag = Factory(:tag)
+      tag = FactoryGirl.create(:tag)
       tag.pay_rate = 10
       tag.pay_currency = "$"
       total_seconds = 36000

@@ -1,37 +1,39 @@
-Factory.define :user do |f|
-  f.sequence(:email) { |n| "test#{n}@example.com" }
-  f.password "abcdef"
-end
-
-Factory.define :tag do |f|
-  f.sequence(:name) { |n| "Work#{n}" }
-  f.description "Work description"
-end
-
-Factory.define :tag_with_user, :parent => :tag do |f|
-  f.sequence(:name) { |n| "Work#{n}" }
-  f.description "Work description"
-  f.user { Factory(:user) }
-end
-
-Factory.define :tassk do |f|
-  f.tag { Factory(:tag) }
-  f.start_time Time.now-2.days
-end
-
-Factory.define :group do |f|
-  f.sequence(:name) { |n| "Group#{n}" }
-  f.description "Group description"
+FactoryGirl.define do
+  factory :user do |f|
+    f.sequence(:email) { |n| "test#{n}@example.com" }
+    f.password "abcdef"
   end
 
-Factory.define :membership do |f|
-  f.user { Factory(:user) }
-  f.group { Factory(:group) }
-  f.is_admin true
-  f.accepted false
-end
+  factory :tag do |f|
+    f.sequence(:name) { |n| "Work#{n}" }
+    f.description "Work description"
+  end
 
-Factory.define :authentication do |f|
-  f.user { Factory(:user) }
-  f.group { Factory(:group) }
+  factory :tag_with_user, :parent => :tag do |f|
+    f.sequence(:name) { |n| "Work#{n}" }
+    f.description "Work description"
+    f.user { FactoryGirl.create(:user) }
+  end
+
+  factory :tassk do |f|
+    f.tag { FactoryGirl.create(:tag) }
+    f.start_time Time.now-2.days
+  end
+
+  factory :group do |f|
+    f.sequence(:name) { |n| "Group#{n}" }
+    f.description "Group description"
+    end
+
+  factory :membership do |f|
+    f.user { FactoryGirl.create(:user) }
+    f.group { FactoryGirl.create(:group) }
+    f.is_admin true
+    f.accepted false
+  end
+
+  factory :authentication do |f|
+    f.user { FactoryGirl.create(:user) }
+    f.group { FactoryGirl.create(:group) }
+  end
 end

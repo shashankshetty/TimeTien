@@ -27,7 +27,7 @@ describe TagsController do
 
   describe "GET index" do
     it "assigns all tags as @tags" do
-      tag = Factory(:tag)
+      tag = FactoryGirl.create(:tag)
       tag.user = @user
       tag.save
       get :index
@@ -44,7 +44,7 @@ describe TagsController do
 
   describe "GET edit" do
     it "assigns the requested tag as @tag" do
-      tag = Tag.create! Factory.attributes_for(:tag)
+      tag = Tag.create! FactoryGirl.attributes_for(:tag)
       get :edit, :id => tag.id
       assigns(:tag).should eq(tag)
     end
@@ -54,23 +54,23 @@ describe TagsController do
     describe "with valid params" do
       it "creates a new Tag" do
         expect {
-          post :create, :tag => Factory.attributes_for(:tag)
+          post :create, :tag => FactoryGirl.attributes_for(:tag)
         }.to change(Tag, :count).by(1)
       end
 
       it "assigns a newly created tag as @tag" do
-        post :create, :tag => Factory.attributes_for(:tag)
+        post :create, :tag => FactoryGirl.attributes_for(:tag)
         assigns(:tag).should be_a(Tag)
         assigns(:tag).should be_persisted
       end
 
       it "render the edit template" do
-        post :create, :tag => Factory.attributes_for(:tag)
+        post :create, :tag => FactoryGirl.attributes_for(:tag)
         response.should render_template("edit")
       end
 
       it "should set time allocated" do
-        post :create, :tag => Factory.attributes_for(:tag), :hours => "1", :minutes => "30"
+        post :create, :tag => FactoryGirl.attributes_for(:tag), :hours => "1", :minutes => "30"
         tag = assigns(:tag)
         tag.time_allocated.should be == 90
       end
@@ -96,27 +96,27 @@ describe TagsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested tag" do
-        tag = Tag.create! Factory.attributes_for(:tag)
+        tag = Tag.create! FactoryGirl.attributes_for(:tag)
         #Tag.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => tag.id, :tag => {:name => tag.name, :description => tag.description}
       end
 
       it "assigns the requested tag as @tag" do
-        tag = Tag.create! Factory.attributes_for(:tag)
-        put :update, :id => tag.id, :tag => Factory.attributes_for(:tag)
+        tag = Tag.create! FactoryGirl.attributes_for(:tag)
+        put :update, :id => tag.id, :tag => FactoryGirl.attributes_for(:tag)
         assigns(:tag).should eq(tag)
       end
 
       it "render the edit template" do
-        tag = Tag.create! Factory.attributes_for(:tag)
-        put :update, :id => tag.id, :tag => Factory.attributes_for(:tag)
+        tag = Tag.create! FactoryGirl.attributes_for(:tag)
+        put :update, :id => tag.id, :tag => FactoryGirl.attributes_for(:tag)
         response.should render_template :edit
       end
     end
 
     describe "with invalid params" do
       it "assigns the tag as @tag" do
-        tag = Tag.create! Factory.attributes_for(:tag)
+        tag = Tag.create! FactoryGirl.attributes_for(:tag)
         # Trigger the behavior that occurs when invalid params are submitted
         Tag.any_instance.stub(:save).and_return(false)
         put :update, :id => tag.id, :tag => {}
@@ -124,7 +124,7 @@ describe TagsController do
       end
 
       it "re-renders the 'edit' template" do
-        tag = Tag.create! Factory.attributes_for(:tag)
+        tag = Tag.create! FactoryGirl.attributes_for(:tag)
         # Trigger the behavior that occurs when invalid params are submitted
         Tag.any_instance.stub(:save).and_return(false)
         put :update, :id => tag.id, :tag => {}
@@ -135,14 +135,14 @@ describe TagsController do
 
   describe "DELETE destroy" do
     it "destroys the requested tag" do
-      tag = Tag.create! Factory.attributes_for(:tag)
+      tag = Tag.create! FactoryGirl.attributes_for(:tag)
       expect {
         delete :destroy, :id => tag.id
       }.to change(Tag, :count).by(-1)
     end
 
     it "redirects to the tags list" do
-      tag = Tag.create! Factory.attributes_for(:tag)
+      tag = Tag.create! FactoryGirl.attributes_for(:tag)
       delete :destroy, :id => tag.id
       response.should redirect_to(tags_url)
     end

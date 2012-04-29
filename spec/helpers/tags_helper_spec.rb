@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "When asked to get hours and minutes portion of time_allocated" do
   before :each do
-    @tag = Factory(:tag)
+    @tag = FactoryGirl.create(:tag)
     @tag.time_allocated = 100
   end
 

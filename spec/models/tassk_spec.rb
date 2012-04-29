@@ -9,13 +9,13 @@ describe Tassk, "When asked to validate" do
   end
 
   it "should not create a new instance if the start_time is empty" do
-    task = Factory(:tassk)
+    task = FactoryGirl.create(:tassk)
     task.start_time = nil
     task.should_not be_valid
   end
 
   it "should not have start time greater than end time" do
-    task = Factory(:tassk)
+    task = FactoryGirl.create(:tassk)
     task.end_time = task.start_time-1.day
     task.should_not be_valid
   end
@@ -23,7 +23,7 @@ end
 
 describe Tassk, "When asked to get time spent on a task" do
   it "should get the difference between (end_time - start_time) and time allocated" do
-    task = Factory(:tassk)
+    task = FactoryGirl.create(:tassk)
     task.tag.time_allocated = 60
     task.tag.frequency = 'task'
     task.end_time = task.start_time + 120
@@ -31,7 +31,7 @@ describe Tassk, "When asked to get time spent on a task" do
   end
 
   it "should get the difference between (end_time - Time.now) and time allocated" do
-    task = Factory(:tassk)
+    task = FactoryGirl.create(:tassk)
     task.tag.time_allocated = 60
     task.tag.frequency = 'task'
     now = task.start_time + 60
@@ -42,7 +42,7 @@ end
 
 describe Tassk, "When asked to get my performance" do
   it "should get the difference between (total_time_spent - tag.time_allocated * 60))" do
-    task = Factory(:tassk)
+    task = FactoryGirl.create(:tassk)
     task.tag.time_allocated = 60
     task.tag.frequency = 'task'
     task.performance = 3720

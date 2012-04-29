@@ -15,13 +15,13 @@ describe Tassk, "When asked to get all tags" do
   end
 
   it "should return tags associated with the user" do
-    user = Factory(:user)
-    tag = Factory(:tag)
+    user = FactoryGirl.create(:user)
+    tag = FactoryGirl.create(:tag)
     tag.user = user
     tag.save
 
-    group = Factory(:group)
-    tag2 = Factory(:tag)
+    group = FactoryGirl.create(:group)
+    tag2 = FactoryGirl.create(:tag)
     tag2.user = user
     tag2.save
     group.tags << tag2

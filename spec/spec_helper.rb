@@ -33,6 +33,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  config.include RequestMacros, :type => :request
 
   config.filter_run_excluding :ignore => true
 
