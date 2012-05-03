@@ -1,16 +1,10 @@
 class TagsController < ApplicationController
   def index
     @tags = current_user.tags
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
     @tag = Tag.new
-    respond_to do |format|
-      format.html
-    end
   end
 
   def edit
@@ -26,8 +20,10 @@ class TagsController < ApplicationController
     respond_to do |format|
       if result
         format.html { render action: :edit }
+        format.mobile { render action: :edit }
       else
         format.html { render action: :new }
+        format.mobile { render action: :new }
       end
     end
   end
@@ -38,6 +34,7 @@ class TagsController < ApplicationController
     set_message_for_render @tag.save, "updated"
     respond_to do |format|
       format.html { render action: :edit }
+      format.mobile { render action: :edit }
     end
   end
 
@@ -46,6 +43,7 @@ class TagsController < ApplicationController
     set_message_for_redirect @tag.destroy, "deleted"
     respond_to do |format|
       format.html { redirect_to tags_url }
+      format.mobile { redirect_to tags_url }
     end
   end
 
@@ -73,5 +71,10 @@ class TagsController < ApplicationController
     minutes = params[:minutes].to_i
     @tag.time_allocated = hours * 60 + minutes
     @tag.time_allocated = nil if @tag.time_allocated == 0
+    if params[:complete_within] == "true" || params[:complete_within] == "on"
+      @tag.complete_within = true
+    else
+      @tag.complete_within = false
+    end
   end
 end

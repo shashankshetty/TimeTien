@@ -2,17 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-addTag = () ->
-  $("#add_tag").hide()
-  $("#select_tag").bind 'change', ->
-    if($("#select_tag").val() == "[new_tag]")
-      $("#add_tag").show()
-    else
-      $("#add_tag").hide()
-
 jQuery ->
-  addTag()
-
   $("#tabs").tabs()
   $("#tabs").removeClass("ui-widget-content")
 

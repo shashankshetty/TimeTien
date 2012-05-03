@@ -21,9 +21,6 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    respond_to do |format|
-      format.html
-    end
   end
 
   def edit
@@ -77,11 +74,14 @@ class GroupsController < ApplicationController
       flash[:success] = "Congratulations! You are now part of #{@group.name}."
       respond_to do |format|
         format.html { redirect_to groups_url }
+        format.mobile { redirect_to groups_url }
       end
     else
       flash.now[:error] = @group.errors.full_messages
       respond_to do |format|
         format.html { render action: :edit }
+        format.mobile { render action: :edit }
+
       end
     end
   end

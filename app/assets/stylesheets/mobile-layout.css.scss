@@ -1,0 +1,60 @@
+$black: #3D3D3D;
+$white: #FFFFFF;
+$blue: #0000FF;
+$yellow: #FFFF00;
+$green: #00CC00;
+$red: #FF0000;
+
+.center {
+  text-align: center;
+  float: inherit;
+}
+
+.right {
+  text-align: right;
+  float: right;
+}
+
+.left {
+  text-align: left;
+  float: left;
+}
+
+.success {
+  padding-left: 20px;
+  color: $green;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.notice {
+  padding-left: 20px;
+  color: $green;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.error {
+  padding-left: 20px;
+  color: $red;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.alert {
+  padding-left: 20px;
+  color: $red;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ui-icon-play {
+  color: $green;
+  background: url('play.png') 50% 50% no-repeat;
+}
+
+.ui-icon-stop {
+  color: $red;
+  background: url('stop.png') 50% 50% no-repeat;
+  background-size:  20px 20px;
+}

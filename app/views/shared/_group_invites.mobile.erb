@@ -1,0 +1,13 @@
+<div align="center" class="m_group_invites ui-tabs-nav ui-widget-header ui-corner-all">
+  <div id="group_invites">
+    <% if group_invites.count > 0 %>
+        <div style="font-style:italic;font-size: smaller;">(Click to accept)</div>
+        <div></div>
+        <% group_invites.each do |group| %>
+            <div align="center"><%= link_to group.name, edit_group_path(group) %></div>
+        <% end %>
+    <% else %>
+        <div align="center">You have no<br/>outstanding invites.</div>
+    <% end %>
+  </div>
+</div>

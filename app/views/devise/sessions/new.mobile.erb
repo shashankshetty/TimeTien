@@ -1,0 +1,28 @@
+<% title "sign in" %>
+<%= stylesheet_link_tag "authentications" %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= render "shared/error_messages" %>
+    <div>
+      <%= f.email_field :email, :placeholder => "Enter Email" %>
+    </div>
+    <br/>
+
+    <div>
+      <%= f.password_field :password, :placeholder => "Enter Password" %>
+    </div>
+    <p></p>
+    <% if devise_mapping.rememberable? %>
+        <div><%= f.check_box :remember_me, "data-inline" => "true" %> <%= f.label :remember_me %></div>
+    <% end %>
+    <div>
+      <%= f.submit "Sign in", :class => 'button' %>
+    </div>
+    <%= render :partial => "devise/shared/links" %>
+    <div>
+      <div class="title">You can also sign in using your account with</div>
+      <div id="authentication_services">
+        <%= link_to image_tag("google_32.png", :size => "32x32", :alt => "google"), "/auth/google", "data-role" => "button" %>
+        <%= link_to image_tag("github_32.png", :size => "32x32", :alt => "github"), "/auth/github", "data-role" => "button" %>
+      </div>
+    </div>
+<% end %>

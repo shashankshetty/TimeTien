@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!, :set_time_zone, :except => [:about, :authenticate]
+  before_filter :authenticate_user!, :except => [:about, :authenticate]
+  before_filter :set_time_zone, :prepare_for_mobile
 
   private
 
@@ -13,6 +14,33 @@ class ApplicationController < ActionController::Base
       edit_user_registration_path
     else
       super
+    end
+  end
+
+  def after_sign_out_path_for(resource)
+    if mobile_device?
+      new_user_session_path
+    else
+      super
+    end
+  end
+
+  def mobile_device?
+    if session[:mobile_request]
+      session[:mobile_request] == "1"
+    else
+      request.user_agent =~ /Mobile/
+    end
+  end
+
+  helper_method :mobile_device?
+
+  def prepare_for_mobile
+    session[:mobile_request] =  params[:mobile] if params[:mobile]
+    if mobile_device?
+      request.format = :mobile
+    #else
+    #  request.format = :html
     end
   end
 end

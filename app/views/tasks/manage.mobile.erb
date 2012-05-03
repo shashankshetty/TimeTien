@@ -1,0 +1,37 @@
+<% title "task management" %>
+<%= javascript_include_tag "tasks_common" %>
+<%= form_tag :action => "start_task" do |f| %>
+    <%= render "shared/messages", :target => @task %>
+    <% if !flash[:error].blank? %>
+        <div class="error"><%= flash[:error] %></div><br/>
+    <% end %>
+    <div class="field">
+      <%= label_tag "start new task" %>
+      <p></p>
+      <%= select_tag(:select_tag, options_for_select(available_tags_with_option_to_add, @manage_task.tag_id)) %>
+      <br/>
+      <%= text_field_tag(:add_tag) %>
+      <%= submit_tag "start", "data-icon" => 'play' %>
+    </div>
+    <p>&nbsp;</p>
+    <div id="tabs" data-role="collapsible-set" data-theme="a" data-content-theme="d">
+      <div id="ongoing_tasks" data-role="collapsible">
+        <h3>Ongoing Tasks</h3>
+        <%= render :partial => "task", :locals => {:tasks => ongoing_tasks, :tasks_type => "ongoing"} %>
+      </div>
+      <div id="completed_tasks" data-role="collapsible">
+        <h3>Completed Tasks</h3>
+        <%= render :partial => "task", :locals => {:tasks => completed_tasks, :tasks_type => "completed"} %>
+      </div>
+      <% group_invites = current_user.nil? ? [] : current_user.get_group_invites %>
+      <% if group_invites.length > 0 %>
+      <div id="group_invites" data-role="collapsible">
+        <h3>Group Invites</h3>
+        <%= render :partial => "shared/group_invites", :locals => {:group_invites => group_invites} %>
+      </div>
+      <% end %>
+    </div>
+<% end %>
+
+
+

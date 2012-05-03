@@ -1,30 +1,25 @@
 class TasksController < ApplicationController
   def new
     @task = Tassk.new
-    respond_to do |format|
-      format.html
-    end
   end
 
   def manage
     @manage_task = ManageTask.new(params, current_user)
-    respond_to do |format|
-      format.html
-    end
   end
 
   def edit
     @task = Tassk.find(params[:id])
-    respond_to do |format|
-      format.html
-    end
   end
 
   def stop_task
     @task = Tassk.find(params[:id])
     @task.end_time = Time.now
     set_message_for_render @task.save, "stopped"
-    render_manage
+    @manage_task = ManageTask.new(params, current_user)
+    respond_to do |format|
+      format.html { render action: :manage }
+      format.mobile { render action: :manage }
+    end
   end
 
   def start_task
@@ -40,7 +35,11 @@ class TasksController < ApplicationController
         set_message_for_render @task.save, "started"
       end
     end
-    render_manage
+    @manage_task = ManageTask.new(params, current_user)
+    respond_to do |format|
+      format.html { render action: :manage }
+      format.mobile { render action: :manage }
+    end
   end
 
   def create
@@ -53,8 +52,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if result
         format.html { render action: :edit }
+        format.mobile { render action: :edit }
       else
         format.html { render action: :new }
+        format.mobile { render action: :new }
       end
     end
   end
@@ -67,6 +68,7 @@ class TasksController < ApplicationController
     set_message_for_render @task.save, "updated"
     respond_to do |format|
       format.html { render action: :edit }
+      format.mobile { render action: :edit }
     end
   end
 
@@ -75,6 +77,7 @@ class TasksController < ApplicationController
     set_message_for_redirect @task.destroy, "deleted"
     respond_to do |format|
       format.html { redirect_to root_url }
+      format.mobile { redirect_to root_url }
     end
   end
 
@@ -108,13 +111,6 @@ class TasksController < ApplicationController
       flash[:success] = "Task was successfully #{action}."
     else
       flash[:error] = @task.errors.full_messages
-    end
-  end
-
-  def render_manage
-    @manage_task = ManageTask.new(params, current_user)
-    respond_to do |format|
-      format.html { render action: :manage }
     end
   end
 

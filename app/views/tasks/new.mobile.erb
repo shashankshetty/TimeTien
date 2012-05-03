@@ -1,0 +1,9 @@
+<% title "new task" %>
+
+<%= form_tag :action => "create" do %>
+    <%= render 'form' %>
+    <div class="actions">
+      <%= submit_tag "Create Task", :class => "button" %>
+    </div>
+<% end %>
+

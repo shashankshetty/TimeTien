@@ -1,0 +1,18 @@
+<% title "manage tags" %>
+<%= javascript_include_tag "tags" %>
+<div class="right"><%= link_to 'add new tag', new_tag_path %></div><br/>
+
+<div class="ui-grid-b">
+  <% @tags.each do |tag| %>
+      <div class="ui-block-a"><b><%= tag.name %>
+        <% if !tag.description.nil? %>
+            (<%= truncate(tag.description) %>)
+        <% end %></b>
+        <br/>
+        Group: <%= tag.group.nil? ? "" : tag.group.name %>
+        <br/>
+        Goal: <%= time_allocated(tag) %></div>
+      <div class="ui-block-b"><%= link_to 'edit', edit_tag_path(tag) %></div>
+      <div class="ui-block-c"><%= link_to 'delete', tag, confirm: 'Are you sure?', method: :delete %></div>
+  <% end %>
+</div>

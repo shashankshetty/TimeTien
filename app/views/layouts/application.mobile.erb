@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TimeZen - <%= yield(:title) %></title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "jquery.mobile-1.1.0.min" %>
+  <%= stylesheet_link_tag "mobile-layout" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery.mobile-1.1.0.min" %>
+</head>
+<body>
+<div data-role="page">
+  <div id="header" data-role="header" role="banner" data-position="fixed">
+    <% if user_signed_in? %>
+        <%= link_to 'home', root_url, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-icon" => "home", "data-wrapperels" => "span" %>
+        <%= link_to "sign out", destroy_user_session_path, "data-role" => "button", "data-inline" => "false", :method => 'delete', "data-wrapperels" => "span" %>
+    <% else %>
+        <%= link_to 'about', about_path, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-wrapperels" => "span", :class => "right" %>
+    <% end %>
+    <h1>Time Zen</h1>
+  </div>
+  <div id="main" data-role="content">
+    <div class="title"><%= yield(:title) %>
+      <hr/>
+    </div>
+    <% flash.each do |key, value| %>
+        <% if key.to_s != "error" && !value.blank? %>
+            <div class="<%= key %>"><%= value %></div>
+        <% end %>
+    <% end %>
+    <% if !(flash[:info].nil? && flash[:notice].nil? && flash[:success].nil? && flash[:error].nil?) %>
+    <% end %>
+    <%= yield %>
+  </div>
+  <div id="footer" data-role="footer" role="banner" data-position="fixed">
+    <%= link_to 'full site', :mobile => 0, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-wrapperels" => "span" %>
+    <%= link_to "manage tags", tags_path, "data-role" => "button", "data-inline" => "false", "data-wrapperels" => "span", :class => "right" %>
+  </div>
+</div>
+</body>
+</html>

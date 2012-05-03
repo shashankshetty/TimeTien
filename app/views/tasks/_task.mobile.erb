@@ -1,0 +1,19 @@
+<% if tasks.count == 0 %>
+    <div class="center notice">You have no <%= tasks_type %> tasks!</div>
+<% else %>
+    <ul data-role="listview" data-split-icon="stop">
+      <% tasks.each do |task| %>
+          <li data-theme="d">
+            <a href="/tasks/<%= task.id %>/edit"><%= task.tag.name %><br/>
+              started @ <%= format_time_d_m_y(task.start_time) %>
+              <% if tasks_type == 'completed' %>
+                  <br/>completed @ <%= format_time_d_m_y(task.end_time) %>
+              <% end %>
+            </a>
+            <% if tasks_type == 'ongoing' %>
+                <%= link_to 'stop', stop_task_path(task) %>
+            <% end %>
+          </li>
+      <% end %>
+    </ul>
+<% end %>

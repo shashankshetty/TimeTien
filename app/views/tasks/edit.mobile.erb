@@ -1,0 +1,9 @@
+<% title "edit task" %>
+<div class="right"><%= link_to 'add new task', new_task_path %></div><br/>
+<%= form_tag({:action => "update"}, {:method => "put"}) do %>
+    <%= render 'form' %>
+    <div class="actions">
+      <%= submit_tag "Update Task", "data-role" => "button" %>
+      <%= link_to 'Delete Task', delete_task_path(@task), confirm: 'Are you sure?', :"data-role" => "button" %>
+    </div>
+<% end %>

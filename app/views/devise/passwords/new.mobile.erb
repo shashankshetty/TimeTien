@@ -1,0 +1,13 @@
+<% title "forgot your password?" %>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :post}) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div>
+      <%= f.email_field :email, :placeholder => "Enter Email" %></div>
+    <p></p>
+    <div><%= f.submit "Reset" %></div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>
+<%= link_to 'return home', root_url, "data-role" => "button", "data-icon" => "home" %>
