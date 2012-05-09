@@ -14,6 +14,7 @@ $.fn.changeTextOnHover = (text) ->
 jQuery ->
   $(".groups").hide()
   $(".group_invites").hide()
+  $(".dropdown-toggle").dropdown()
 
   $("#manage_groups").click((event) ->
     $(".group_invites").hide()
@@ -33,11 +34,6 @@ jQuery ->
     $(".group_invites").show("blind")
   )
 
-  $("html").click(() ->
-    $(".groups").hide()
-    $(".group_invites").hide()
-  )
-
   $("#user_settings").changeTextOnHover("change user settings")
 
   $(".datetime").datetimepicker(
@@ -54,5 +50,9 @@ jQuery ->
   $(".multiselect").multiselect({
   selectedList: 2
   }).multiselectfilter()
+
+  $("input[name^='multiselect_']").each(() ->
+    $(this).addClass("multiselect-item")
+  )
 
   $('table').hide() if $('table > tbody > tr').length == 0

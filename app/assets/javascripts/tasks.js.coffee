@@ -3,11 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("#tabs").tabs()
-  $("#tabs").removeClass("ui-widget-content")
-
-  for element in $("#tabs").children()
-    $(element).removeClass("ui-tabs-panel ui-widget-content")
+  $('#tasks_tab a:first').tab('show')
 
   $("#ongoing_tasks > .tablesorter").tablesorter
     widthFixed: false,

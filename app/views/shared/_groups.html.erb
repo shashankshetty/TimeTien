@@ -1,12 +1,11 @@
-<div class="groups ui-tabs-nav ui-widget-header ui-corner-all">
-  <div align="center" class="group_title"><%= link_to 'add new group', new_group_path %></div>
-  <div align="center" class="group_title"><%= link_to 'analyze group tasks', analyze_group_tasks_path %></div>
-  <hr/><div align="center" class="group_title"><%= link_to 'my group listings', groups_path %></div><p></p>
-  <% if user_groups.count > 0 %>
-      <% user_groups.each do |group| %>
-          <div align="center"><%= link_to group.name, edit_group_path(group) %></div>
-      <% end %>
-  <% else %>
-      <div align="center">You are not part<br/>of any groups.</div>
-  <% end %><br />
-</div>
+<li><%= link_to 'add new group', new_group_path %></li>
+<li><%= link_to 'analyze group tasks', analyze_group_tasks_path %></li>
+<li class="divider"></li>
+<li><%= link_to 'my group listings↓', groups_path %></li>
+<% if user_groups.count > 0 %>
+    <% user_groups.each do |group| %>
+        <li><em><%= link_to group.name, edit_group_path(group) %></em></li>
+    <% end %>
+<% else %>
+    <li>You are not part<br/>of any groups.</li>
+<% end %>

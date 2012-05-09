@@ -4,13 +4,6 @@
 
 @import "layout";
 
-.pagination {
-  background-color: #d4d1bf;
-  text-align: center;
-  font-weight: bold;
-  @include rounded-corners(3px);
-}
-
 .list {
   list-style-type: none;
   margin: 0;
@@ -24,7 +17,7 @@
 
 .list_text {
   font-weight: normal;
-  font-color: green;
+  font-color: $green;
 }
 
 .search_criteria {
@@ -56,4 +49,9 @@
   .search_criteria {
     padding: 40px 100px;
   }
+}
+
+.current {
+  font-weight: bold;
+  color: #eff2f5;
 }

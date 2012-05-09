@@ -6,7 +6,7 @@ jQuery ->
   $("#hours").setMask('99')
   $("#minutes").setMask('59')
 
-  $('a.title').cluetip({splitTitle: '|'});
+  $("a[rel=popover]").popover()
 
   $("#tags").tablesorter
     widthFixed: false,

@@ -4,12 +4,11 @@
 
 $black: #3D3D3D;
 $white: #FFFFFF;
-$blue: #0000FF;
-$yellow: #FFFF00;
+$yellow: #FF9900;
 $green: #00CC00;
 $red: #FF0000;
 $background: #f7f3de url(jquery_ui_theme/images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
-$font-family: Arial, "Trebuchet MS", Helvetica, sans-serif;
+$font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, sans-serif;
 
 @mixin rounded-corners($radius){
   border-radius: $radius;
@@ -20,10 +19,11 @@ $font-family: Arial, "Trebuchet MS", Helvetica, sans-serif;
 @mixin links($color){
   a {
     color: $color;
+    font-size: 16px;
     text-decoration: none;
     &:hover {
       background-color: none;
-      color: #00CCFF;
+      color: $yellow;
     }
   }
 }
@@ -34,21 +34,15 @@ $font-family: Arial, "Trebuchet MS", Helvetica, sans-serif;
   font-size: 14px;
 }
 
-@mixin message($color){
+@mixin message($color, $background_color){
   width: 680px;
   border: 2px solid $color;
   padding: 10px;
-  background-color: #f0f0f0;
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
-  }
+  background-color: $background_color;
+  text-align: left;
+  padding: 8px;
+  font-size: 16px;
+  @include rounded-corners(3px);
 }
 
 body {
@@ -83,55 +77,45 @@ body {
   @include links($black);
 }
 
-#header {
-  @include layout;
-  background-color: $black;
-  width: 100%;
-  color: $white;
-  padding-top: 5px;
-  border-bottom: solid 2px darken($black, 10%);
-  h1 {
-    font-size: 21px;
-  }
-}
-
-fieldset {
-  border: 1px solid #000000;
-  padding: 50px;
-}
-
-#container {
-  margin: 0 10px;
-}
-
-.notice {
-  color: #66CC66;
-  font-size: 15px;
-}
-
 label {
   font-weight: bold;
+  font-size: 16px;
+  display: inline;
+}
+
+.app-name {
+  font-weight: bold;
+  font-size: 24px;
+  color: $yellow;
+  padding-left: 5px;
 }
 
 input, textarea {
-  height: 21px;
+  height: 24px;
+  width: 300px;
   border: 1px solid #ccc;
-  font-size: 12px;
+  font-size: 16px;
   @include rounded-corners(3px);
 }
 
 select {
-  height: 28px;
+  height: 34px;
   background: transparent;
   background-color: $white;
   padding: 5px;
-  font-size: 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
   @include rounded-corners(3px);
 }
 
+.checkbox {
+  height: 20px;
+  width: 20px;
+  display: inline;
+}
+
 .button {
-  height: 32px;
+  height: 34px;
   background: $background;
   color: $black;
   border: 1px solid #dedede;
@@ -141,28 +125,28 @@ select {
   padding: 5px 10px 5px 10px;
   cursor: pointer;
   &:hover {
-    color: #FF9900;
+    color: $yellow;
   }
   @include rounded-corners(3px);
   background-repeat: no-repeat;
 }
 
 .linkbutton {
-  height: 32px;
+  height: 34px;
   width: 150px;
   padding: 2px 20px 2px 30px;
   background: $background;
   border: 1px solid #dedede;
   text-decoration: none;
   font-family: $font-family;
-  font-size: 14px;
+  font-size: 16px;
   color: $black;
   &:hover {
     background-color: $white;
   }
   a {
     &:hover {
-      color: #FF9900;
+      color: $yellow;
     }
   }
   @include rounded-corners(3px);
@@ -187,9 +171,7 @@ select {
 }
 
 .title {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 16px;
+  font-size: 18px;
   hr {
     border: 0;
     background-color: #9E9E9E;
@@ -208,15 +190,34 @@ select {
 }
 
 .error {
-  @include message($red)
+  @include message($red, #f2dede);
+  div.error_message {
+    font-size: 16px;
+  }
+}
+
+#error_explanation {
+  @include message($red, #f2dede);
+  h2 {
+    font-size: 16px;
+    margin-bottom: -10px;
+  }
+  ul {
+    list-style-type: none;
+  }
 }
 
 .alert {
-  @include message($red)
+  @include message($red, "#f2dede")
 }
 
 .success {
-  @include message($green)
+  @include message($green, #dff0d8)
+}
+
+.notice {
+  color: #66CC66;
+  font-size: 15px;
 }
 
 .error_message {
@@ -231,24 +232,8 @@ hr {
   height: 2px;
 }
 
-#user_nav {
-  @include links($yellow);
-  float: right;
-  font-size: 16px;
-  padding-top: 10px;
-  padding-right: 5px;
-}
-
 .datetime {
   width: 160px;
-}
-
-#menu {
-  @include links($black);
-  padding-bottom: 10px;
-  padding-right: 5px;
-  height: 10px;
-  font-weight: bold;
 }
 
 .ui-multiselect {
@@ -261,25 +246,13 @@ hr {
 
 #footer {
   @include links($black);
-  padding-bottom: 10px;
-  padding-right: 5px;
-  position: absolute;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  left: 0px;
   bottom: 0px;
   height: 30px;
   width: 100%;
-  text-align: center;
-}
-
-.group_invites {
-  padding: 1px 30px;
-  position: absolute;
-  background-color: $background;
-  border: 1px solid #9E9E9E;
-  @include links($black);
-  z-index: 10;
-  h1 {
-    font-size: 21px;
-  }
 }
 
 .group_title {
@@ -299,8 +272,28 @@ hr {
 #invite {
   padding-left: 3px;
   padding-right: 3px;
-  background-color: $black;
-  color: $yellow;
+  background-color: $yellow;
+  color: $black;
   font-weight: bold;
 }
 
+.tab-header {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.ui-datepicker-trigger {
+  height: 16px;
+  padding-left: 5px;
+}
+
+.gravatar {
+  width: 20px;
+  height: 20px;
+}
+
+.multiselect-item {
+  display: inline;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}

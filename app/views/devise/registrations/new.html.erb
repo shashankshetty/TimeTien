@@ -2,8 +2,8 @@
 <%= javascript_include_tag "users" %>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <div class="right"><%= link_to 'return home', root_url %></div>
-    <%= devise_error_messages! %>
+    <div class="right"><%= link_to 'return home', root_url %></div><br/><br/>
+    <%= devise_error_messages! %><br/>
 
     <div><%= f.label :email %><br/>
       <%= f.email_field :email %>

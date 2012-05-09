@@ -1,17 +1,14 @@
 <%= javascript_include_tag "tasks" %>
 <%= render "shared/messages", :target => @task %>
 <div class="field">
-  <%= label_tag :start_time %>
-  <br/>
+  <%= label_tag :start_time %><br/>
   <%= text_field_tag :start_time, format_time_m_d_y(@task.start_time), :class => "datetime", :name => "task[start_time]" %>
 </div><br/>
 <div class="field">
-  <%= label_tag :end_time %>
-  <br/>
+  <%= label_tag :end_time %><br/>
   <%= text_field_tag :end_time, format_time_m_d_y(@task.end_time), :class => "datetime", :name => "task[end_time]" %>
 </div><br/>
 <div class="field">
-  <%= label_tag :tag_id %>
-  <br/>
+  <%= label_tag :tag_id %><br/>
   <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
 </div><br/>

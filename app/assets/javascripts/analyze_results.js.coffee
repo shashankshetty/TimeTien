@@ -69,3 +69,5 @@ jQuery ->
       $("#dialog-task").dialog("open")
     )
   )
+
+  $(".current").wrapInner('<a href="#"></a>')
