@@ -60,9 +60,19 @@ class GroupsController < ApplicationController
 
   def destroy
     @group = Group.find(params[:id])
-    set_message_for_redirect @group.destroy, "deleted"
-    respond_to do |format|
-      format.html { redirect_to groups_url }
+    if @group.tags.count > 0
+      flash.now[:alert] = "One ore more tags are associated with the group. Delete the tags before deleting the group."
+      respond_to do |format|
+        format.html { render action: :edit }
+      end
+    else
+      @group.membership.each do |member|
+        member.destroy
+      end
+      set_message_for_redirect @group.destroy, "deleted"
+      respond_to do |format|
+        format.html { redirect_to groups_url }
+      end
     end
   end
 
@@ -81,7 +91,6 @@ class GroupsController < ApplicationController
       respond_to do |format|
         format.html { render action: :edit }
         format.mobile { render action: :edit }
-
       end
     end
   end

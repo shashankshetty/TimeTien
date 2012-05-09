@@ -36,7 +36,8 @@ $font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, san
 
 @mixin message($color, $background_color){
   width: 680px;
-  border: 2px solid $color;
+  border: 1px solid $color;
+  color: $color;
   padding: 10px;
   background-color: $background_color;
   text-align: left;
@@ -122,7 +123,7 @@ select {
   font-family: $font-family;
   font-weight: bold;
   font-size: 16px;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 25px 5px 25px;
   cursor: pointer;
   &:hover {
     color: $yellow;
@@ -133,32 +134,27 @@ select {
 
 .linkbutton {
   height: 34px;
-  width: 150px;
-  padding: 2px 20px 2px 30px;
   background: $background;
-  border: 1px solid #dedede;
-  text-decoration: none;
-  font-family: $font-family;
-  font-size: 16px;
   color: $black;
+  border: 1px solid #dedede;
+  font-family: $font-family;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 25px 2px 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
   &:hover {
-    background-color: $white;
-  }
-  a {
-    &:hover {
-      color: $yellow;
-    }
+    color: $yellow;
   }
   @include rounded-corners(3px);
   background-repeat: no-repeat;
-  margin: 2px;
 }
 
 .delete_short {
-  padding: 2px 8px 2px 8px;
+  padding: 12px 8px 10px 10px;
   background-repeat: no-repeat;
   background-image: url('cancel.png');
-  background-size: 16px;
+  background-size: 18px;
   background-position: center left;
 }
 
@@ -208,11 +204,15 @@ select {
 }
 
 .alert {
-  @include message($red, "#f2dede")
+  @include message($red, #f2dede)
 }
 
 .success {
   @include message($green, #dff0d8)
+}
+
+.info {
+  @include message(#C09853, #fff29b)
 }
 
 .notice {
@@ -253,20 +253,6 @@ hr {
   bottom: 0px;
   height: 30px;
   width: 100%;
-}
-
-.group_title {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.groups {
-  padding: 1px 20px;
-  position: absolute;
-  border: 1px solid #9E9E9E;
-  background-color: $background;
-  z-index: 10;
-  @include links($black);
 }
 
 #invite {
