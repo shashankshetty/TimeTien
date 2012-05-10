@@ -40,22 +40,31 @@ class TagsController < ApplicationController
 
   def destroy
     @tag = Tag.find(params[:id])
-    set_message_for_redirect @tag.destroy, "deleted"
-    respond_to do |format|
-      format.html { redirect_to tags_url }
-      format.mobile { redirect_to tags_url }
+    if @tag.tasks.where("user_id != ?", current_user.id).count > 0
+      flash[:alert] = "Cannot delete the tag. Other users in the group using tha tag."
+      respond_to do |format|
+        format.html { render action: :edit }
+        format.mobile { render action: :edit }
+      end
+    else
+      result = @tag.destroy
+      if result
+        flash[:success] = "Tag was successfully deleted."
+        respond_to do |format|
+          format.html { redirect_to tags_url }
+          format.mobile { redirect_to tags_url }
+        end
+      else
+        flash[:alert] = @tag.errors.full_messages
+        respond_to do |format|
+          format.html { render action: :edit }
+          format.mobile { render action: :edit }
+        end
+      end
     end
   end
 
   private
-
-  def set_message_for_redirect(result, action)
-    if result
-      flash[:success] = "Tag was successfully #{action}."
-    else
-      flash[:error] = @tag.errors.full_messages
-    end
-  end
 
   def set_message_for_render(result, action)
     if result

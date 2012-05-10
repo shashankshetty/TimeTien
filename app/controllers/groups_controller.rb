@@ -69,9 +69,18 @@ class GroupsController < ApplicationController
       @group.membership.each do |member|
         member.destroy
       end
-      set_message_for_redirect @group.destroy, "deleted"
-      respond_to do |format|
-        format.html { redirect_to groups_url }
+      result = @group.destroy
+
+      if result
+        flash[:success] = "Group was successfully deleted."
+        respond_to do |format|
+          format.html { redirect_to groups_url }
+        end
+      else
+        flash.now[:alert] = @group.errors.full_messages
+        respond_to do |format|
+          format.html { render action: :edit }
+        end
       end
     end
   end
@@ -96,14 +105,6 @@ class GroupsController < ApplicationController
   end
 
   private
-
-  def set_message_for_redirect(result, action)
-    if result
-      flash[:success] = "Group was successfully #{action}."
-    else
-      flash[:error] = @group.errors.full_messages
-    end
-  end
 
   def set_message_for_render(result, action)
     if result

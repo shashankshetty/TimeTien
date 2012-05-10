@@ -28,7 +28,7 @@
         <% end %><br />
         <div class="actions">
           <%= f.submit :class => "button" %>
-          <%= link_to 'Delete', @group, confirm: 'Are you sure?', method: :delete, :class => "linkbutton" %>
+          <%= link_to 'Delete', @group, confirm: 'Deleting the group will delete all the associated tags and tasks. Are you sure you want to delete?', method: :delete, :class => "linkbutton" %>
         </div>
     <% else %>
         <p>

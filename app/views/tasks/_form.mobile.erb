@@ -1,5 +1,5 @@
-<%= stylesheet_link_tag "query.mobile.datebox.min" %>
-<%= stylesheet_link_tag "query.mobile.simpledialog.min" %>
+<%= stylesheet_link_tag "jquery.mobile.datebox.min" %>
+<%= stylesheet_link_tag "jquery.mobile.simpledialog.min" %>
 <%= stylesheet_link_tag "demos.css" %>
 <%= javascript_include_tag "jquery.mousewheel.min" %>
 <%= javascript_include_tag "jquery.mobile.datebox.min" %>
@@ -8,18 +8,15 @@
 <%= render "shared/messages", :target => @task %>
 <div class="field">
   <%= label_tag :start_time %>
-  <br/>
   <%= text_field_tag :start_time, format_time_m_d_y(@task.start_time), :name => "task[start_time]", :type => "date",
                      'data-role' => 'datebox', 'data-options' => '{"mode": "slidebox", "dateFormat":"%m/%d/%Y %I:%M %p", "timeFormatOverride":12, "fieldsOrderOverride":["y","m","d","h","i"]}' %>
 </div><br/>
 <div class="field">
   <%= label_tag :end_time %>
-  <br/>
   <%= text_field_tag :end_time, format_time_m_d_y(@task.end_time), :name => "task[end_time]", :type => "date",
                      'data-role' => 'datebox', 'data-options' => '{"mode": "slidebox", "dateFormat":"%m/%d/%Y %I:%M %p", "timeFormatOverride":12, "fieldsOrderOverride":["y","m","d","h","i"]}' %>
 </div><br/>
 <div class="field">
   <%= label_tag :tag_id %>
-  <br/>
   <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
 </div><br/>

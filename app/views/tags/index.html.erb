@@ -10,7 +10,6 @@
     <th>Group</th>
     <th>Goal</th>
     <th></th>
-    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -21,7 +20,6 @@
         <td align="center"><%= tag.group.nil? ? "" : tag.group.name %></td>
         <td align="center"><%= time_allocated(tag) %></td>
         <td align="center"><%= link_to '', edit_tag_path(tag), :class => "edit_short" %></td>
-        <td align="center"><%= link_to '', tag, confirm: 'Are you sure?', method: :delete, :class => "delete_short" %></td>
       </tr>
   <% end %>
   </tbody>

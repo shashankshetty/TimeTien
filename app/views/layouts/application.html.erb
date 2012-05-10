@@ -5,6 +5,7 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
 <div class="navbar">
@@ -61,7 +62,8 @@
 </div>
 <div id="main" class="container">
   <div class="title"><%= yield(:title) %>
-    <hr/></div>
+    <hr/>
+  </div>
   <% flash.each do |key, value| %>
       <% if key.to_s != "error" && !value.blank? %>
           <div class="<%= key %>"><%= value %></div>

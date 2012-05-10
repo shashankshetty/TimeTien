@@ -15,7 +15,3 @@
   <br/>
   <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
 </div><br/>
-<div class="actions">
-  <%= submit_tag "Update Task", :class => "button" %>
-  <%= link_to 'Delete', delete_task_path(@task), confirm: 'Are you sure?', :class => 'linkbutton' %>
-</div>

@@ -8,7 +8,7 @@ module TasksHelper
   end
 
   def ongoing_tasks
-    @manage_task.tasks.where('end_time IS NULL').order('end_time DESC')
+    @manage_task.tasks.where('end_time IS NULL').order('start_time DESC')
   end
 
   def completed_tasks

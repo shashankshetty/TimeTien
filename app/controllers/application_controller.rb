@@ -36,11 +36,13 @@ class ApplicationController < ActionController::Base
   helper_method :mobile_device?
 
   def prepare_for_mobile
-    session[:mobile_request] =  params[:mobile] if params[:mobile]
+    session[:mobile_request] = params[:mobile] if params[:mobile]
     if mobile_device?
       request.format = :mobile
-    #else
-    #  request.format = :html
+    else
+      if session[:mobile_request] == "0"
+        request.format = :html
+      end
     end
   end
 end

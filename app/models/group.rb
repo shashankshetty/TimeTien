@@ -33,6 +33,11 @@ class Group < ActiveRecord::Base
           if user_to_add.blank?
             user = User.find_by_id(id)
             self.users << user
+            if user.tasks.where("tag_id in (#{tags.collect { |c| c.id }.join(',')})").count > 0
+              group_member = get_membership(id)
+              group_member.accepted = true
+              membership << group_member
+            end
           end
         end
         users_to_delete = self.membership.where("user_id not in (#{users_to_update.collect { |c| c }.join(',')})")

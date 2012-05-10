@@ -8,13 +8,14 @@
         <div class="error"><%= flash[:error] %></div><br/>
     <% end %>
     <div class="field">
-      <%= label_tag "start new task" %><br/>
-      <%= select_tag(:select_tag, options_for_select(available_tags_with_option_to_add, @manage_task.tag_id)) %>&nbsp;<%= text_field_tag(:add_tag) %>&nbsp;<%= submit_tag "      start     ", :class => 'play' %>
+      <%= label_tag "start new task" %>
+      <br/>
+      <%= select_tag(:select_tag, options_for_select(available_tags_with_option_to_add, @manage_task.tag_id == "[new_tag]" ? '' : @manage_task.tag_id)) %>&nbsp;<%= text_field_tag(:add_tag) %>&nbsp;<%= submit_tag "      start     ", :class => 'play' %>
     </div>
     <p>&nbsp;</p>
     <ul class="nav nav-tabs" id="tasks_tab">
-      <li class="active"><%= link_to 'Ongoing Tasks', '#ongoing_tasks', 'data-toggle' => 'tab', :class=>'tab-header' %></li>
-      <li><%= link_to 'Completed Tasks', '#completed_tasks', 'data-toggle' => 'tab', :class=>'tab-header' %></li>
+      <li class="active"><%= link_to 'Ongoing Tasks', '#ongoing_tasks', 'data-toggle' => 'tab', :class => 'tab-header' %></li>
+      <li><%= link_to 'Completed Tasks', '#completed_tasks', 'data-toggle' => 'tab', :class => 'tab-header' %></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="ongoing_tasks">

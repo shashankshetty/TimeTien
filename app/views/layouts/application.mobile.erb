@@ -34,7 +34,9 @@
   </div>
   <div id="footer" data-role="footer" role="banner" data-position="fixed">
     <%= link_to 'full site', :mobile => 0, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-wrapperels" => "span" %>
-    <%= link_to "manage tags", tags_path, "data-role" => "button", "data-inline" => "false", "data-wrapperels" => "span", :class => "right" %>
+    <% if user_signed_in? %>
+        <%= link_to "manage tags", tags_path, "data-role" => "button", "data-inline" => "false", "data-wrapperels" => "span", :class => "right" %>
+    <% end %>
   </div>
 </div>
 </body>

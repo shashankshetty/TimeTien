@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.scss.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$black: #3D3D3D;
+$black: #2C2C2C;
 $white: #FFFFFF;
-$yellow: #FF9900;
+$yellow: #FFD80F;
 $green: #00CC00;
 $red: #FF0000;
 $background: #f7f3de url(jquery_ui_theme/images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
@@ -123,7 +123,7 @@ select {
   font-family: $font-family;
   font-weight: bold;
   font-size: 16px;
-  padding: 5px 25px 5px 25px;
+  padding: 7px 25px 7px 25px;
   cursor: pointer;
   &:hover {
     color: $yellow;

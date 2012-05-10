@@ -41,6 +41,6 @@
     </div><br/><br/>
     <div class="actions">
       <%= f.submit :class => "button" %>
-      <%= link_to 'Delete', @tag, confirm: 'Are you sure?', method: :delete, :class => "linkbutton", "data-toggle" => "modal" %>
+      <%= link_to 'Delete', @tag, confirm: 'Deleting the tag will delete all the associated tasks. Are you sure you want to delete?', method: :delete, :class => "linkbutton", "data-toggle" => "modal" %>
     </div>
 <% end %>

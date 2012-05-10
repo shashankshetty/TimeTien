@@ -7,10 +7,9 @@ jQuery ->
 
   $("#ongoing_tasks > .tablesorter").tablesorter
     widthFixed: false,
-    sortList: [
-      [1, 0]
-    ],
     headers:
+      1:
+        sorter: false,
       2:
         sorter: false,
       3:
@@ -20,10 +19,11 @@ jQuery ->
 
   $("#completed_tasks > .tablesorter").tablesorter
     widthFixed: false,
-    sortForce: [
-      [1, 0]
-    ],
     headers:
+      1:
+        sorter: false,
+      2:
+        sorter: false,
       3:
         sorter: false,
       4:
