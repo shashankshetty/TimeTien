@@ -1,4 +1,4 @@
-class AddColumnsToUsers < ActiveRecord::Migration
+class AddColumnsToTags < ActiveRecord::Migration
   def change
     add_column :tags, :user_id, :integer
 

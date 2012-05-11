@@ -31,22 +31,22 @@ ActiveRecord::Schema.define(:version => 20120304061139) do
   create_table "memberships", :force => true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
-    t.boolean  "is_admin"
-    t.boolean  "accepted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "is_admin",   :default => false
+    t.boolean  "accepted",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.integer  "user_id"
     t.integer  "time_allocated"
-    t.string   "frequency"
-    t.decimal  "pay_rate"
+    t.decimal  "pay_rate",        :precision => 6, :scale => 2
     t.string   "pay_currency"
+    t.string   "frequency"
     t.integer  "group_id"
     t.boolean  "complete_within"
   end

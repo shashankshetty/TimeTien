@@ -7,6 +7,8 @@ gem 'rails', '3.2.0'
 
 gem 'sqlite3'
 
+gem 'pg'
+
 gem 'devise', '1.5.3'
 
 gem 'chronic'

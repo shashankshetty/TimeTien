@@ -1,5 +1,5 @@
 class Tassk < ActiveRecord::Base
-  self.table_name = "Tasks"
+  self.table_name = "tasks"
   belongs_to :tag
   belongs_to :user
 

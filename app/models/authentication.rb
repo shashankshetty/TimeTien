@@ -5,7 +5,7 @@ class Authentication < ActiveRecord::Base
 
   def get_auth_details_for_github(omniauth)
     auth_details = {
-        'uid' => omniauth['extra']['raw_info']['id'] || '',
+        'uid' => omniauth['extra']['raw_info']['id'].to_s || '',
         'provider' => omniauth['provider'] || '',
         'name' => omniauth['extra']['raw_info']['name'] || '',
         'email' => omniauth['extra']['raw_info']['email'] || ''
@@ -19,7 +19,7 @@ class Authentication < ActiveRecord::Base
 
   def get_auth_details_for_google(omniauth)
     auth_details = {
-        'uid' => omniauth['uid'] || '',
+        'uid' => omniauth['uid'].to_s || '',
         'provider' => omniauth['provider'] || '',
         'name' => omniauth['info']['name'] || '',
         'email' => omniauth['info']['email'] || ''
