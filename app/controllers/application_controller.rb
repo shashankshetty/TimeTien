@@ -26,6 +26,12 @@ class ApplicationController < ActionController::Base
   end
 
   def mobile_device?
+    request.user_agent =~ /Mobile/
+  end
+
+  helper_method :mobile_device?
+
+  def mobile_request?
     if session[:mobile_request]
       session[:mobile_request] == "1"
     else
@@ -33,16 +39,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :mobile_device?
+  helper_method :mobile_request?
 
   def prepare_for_mobile
     session[:mobile_request] = params[:mobile] if params[:mobile]
-    if mobile_device?
+    if mobile_request?
       request.format = :mobile
-    else
-      if session[:mobile_request] == "0"
-        request.format = :html
-      end
     end
   end
 end
