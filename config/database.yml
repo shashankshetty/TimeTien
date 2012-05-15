@@ -6,7 +6,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: timezen_dev
+  database: timetien_dev
   pool: 8
   timeout: 5000
   username: postgres
@@ -24,7 +24,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: timezen
+  database: timetien
   pool: 5
   timeout: 5000
   username: postgres

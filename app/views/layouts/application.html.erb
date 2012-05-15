@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TimeZen - <%= yield(:title) %></title>
+  <title>TimeTien - <%= yield(:title) %></title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
@@ -10,7 +10,7 @@
 <body>
 <div class="navbar">
   <a class="brand" href="<%= root_url %>">
-    <span class="app-name"><%= image_tag "timezen.png", :width => 150, :alt => "Time Zen" %></span>
+    <span class="app-name"><%= image_tag "timetien.png", :width => 150, :alt => "Time Tien" %></span>
   </a>
 
   <div class="navbar-inner">
@@ -68,7 +68,6 @@
   </div>
 </div>
 <div id="main" class="container">
-  <div class="alert"><b>Application is in the early testing phase. You are welcome to use the application. <br/>Please be aware that the data will be purged before the beta release.</b></div>
   <div class="title"><%= yield(:title) %>
     <hr/>
   </div>
@@ -83,7 +82,7 @@
   <%= yield %>
 </div>
 <% if !user_signed_in? %>
-    <div id="footer" class="ui-tabs-nav ui-widget-header">© 2012 TimeZen</div>
+    <div id="footer" class="ui-tabs-nav ui-widget-header">© 2012 Time Tien</div>
 <% end %>
 </body>
 </html>

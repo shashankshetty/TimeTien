@@ -2,6 +2,7 @@
 <%= stylesheet_link_tag "authentications" %>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <div class="alert"><b>Application is in the early testing phase. You are welcome to use the application. <br/>Please be aware that the data will be purged before the beta release.</b></div>
     <%= render "shared/error_messages" %>
     <div class="content_left">
       <div><%= f.label :email %>

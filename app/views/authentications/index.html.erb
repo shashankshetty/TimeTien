@@ -10,7 +10,7 @@
   <% @authentications.each do |authentication| %>
       <tr>
         <td align="center"><%= image_tag "#{authentication.provider}_32.png", :size => "24x24" %></td>
-        <% msg = @authentications.count == 1 ? "Removing #{authentication.provider} can lock you out of TimeZen unless you remember login credentials to your account" : "Are you sure you want to remove #{authentication.provider}?" %>
+        <% msg = @authentications.count == 1 ? "Removing #{authentication.provider} can lock you out of Time Tien unless you remember login credentials to your account" : "Are you sure you want to remove #{authentication.provider}?" %>
          <td align="center"><%= link_to '', authentication, confirm: msg, method: :delete, :class => "delete_short" %></td>
       </tr>
   <% end %>

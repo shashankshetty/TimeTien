@@ -15,7 +15,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Timezen
+module Timetien
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -51,7 +51,7 @@ module Timezen
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    #uncomment while deploying timezen to heroku
+    #uncomment while deploying timetien to heroku
     #config.assets.initialize_on_precompile = false
 
     config.paths['app/views'] << "app/views/devise"

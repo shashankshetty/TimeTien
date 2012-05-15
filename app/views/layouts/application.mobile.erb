@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TimeZen - <%= yield(:title) %></title>
+  <title>TimeTien - <%= yield(:title) %></title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "jquery.mobile-1.1.0.min" %>
   <%= stylesheet_link_tag "mobile-layout" %>
@@ -17,7 +17,7 @@
     <% else %>
         <%= link_to 'about', about_path, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-wrapperels" => "span", :class => "right" %>
     <% end %>
-    <h1>Time Zen</h1>
+    <h1>Time Tien</h1>
   </div>
   <div id="main" data-role="content">
     <div class="title"><%= yield(:title) %>

@@ -1,4 +1,4 @@
-Timezen::Application.routes.draw do
+Timetien::Application.routes.draw do
   resources :group_users
 
   devise_for :users, :path_names => {:sign_up => "register"}, :controllers => {:registrations => 'registrations'}

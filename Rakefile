@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Timezen::Application.load_tasks
+Timetien::Application.load_tasks

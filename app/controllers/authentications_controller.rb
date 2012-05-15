@@ -33,7 +33,7 @@ class AuthenticationsController < ApplicationController
       user = User.new(:email => auth_details['email'], :password => SecureRandom.hex(10), :has_random_password => true, :display_name => display_name)
       user.authentications.build(:provider => auth_details['provider'], :uid => auth_details['uid'])
       user.save!
-      flash[:alert] = "Successfully created an account in TimeZen using #{auth_details['provider'].capitalize}. Update Display name and Time zone before continuing ..."
+      flash[:alert] = "Successfully created an account in TimeTien using #{auth_details['provider'].capitalize}. Update Display name and Time zone before continuing ..."
       sign_in_and_redirect(:user, user)
       return
     end
