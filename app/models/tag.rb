@@ -6,6 +6,7 @@ class Tag < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => {:scope => :user_id}
   validates :user_id, :uniqueness => {:scope => :name}
   validates_length_of :name, :maximum => 50
+  validates_length_of :description, :maximum => 250
 
   validates_numericality_of :pay_rate, :greater_than => 0, :less_than => 10000, :allow_nil => true
 

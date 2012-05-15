@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
 
   def show
     if (!params[:q].blank?)
-      @users = User.where("display_name like ? or email like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+      @users = User.where("LOWER(display_name) like ? or LOWER(email) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
     else
       @users = User.all
     end

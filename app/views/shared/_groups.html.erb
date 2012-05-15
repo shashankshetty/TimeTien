@@ -4,6 +4,8 @@
     <li class="divider"></li>
     <li><%= link_to 'my group listings↓', groups_path %></li>
     <% user_groups.each do |group| %>
-        <li><em><%= link_to group.name, edit_group_path(group) %></em></li>
+        <li>
+          <div align="center"><em><%= link_to group.name, edit_group_path(group) %></em></div>
+        </li>
     <% end %>
 <% end %>

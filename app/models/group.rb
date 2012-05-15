@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   validates :name, :presence => true
   validates :name, :uniqueness => true
   validates_length_of :name, :maximum => 50
+  validates_length_of :description, :maximum => 250
 
   attr_accessor :display_name, :user_tokens
   attr_accessible :name, :description, :user
@@ -33,7 +34,7 @@ class Group < ActiveRecord::Base
           if user_to_add.blank?
             user = User.find_by_id(id)
             self.users << user
-            if user.tasks.where("tag_id in (#{tags.collect { |c| c.id }.join(',')})").count > 0
+            if !user.tasks.blank? && user.tasks.where("tag_id in (#{tags.collect { |c| c.id }.join(',')})").count > 0
               group_member = get_membership(id)
               group_member.accepted = true
               membership << group_member
