@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("#group_user_tokens").tokenInput("/groups/show.json", {
+  $("#group_user_tokens").tokenInput("/get_group_users.json", {
   crossDomain: false,
   preventDuplicates: true,
   prePopulate: $("#group_user_tokens").data("pre"),
@@ -13,6 +13,12 @@ jQuery ->
   onDelete: (item) ->
     $("#group_admins option[value='" + item.id + "']").remove()
     $("#group_admins").multiselect("refresh")
+  })
+
+  $("#group_tag_tokens").tokenInput("/get_tags.json", {
+  crossDomain: false,
+  preventDuplicates: true,
+  prePopulate: $("#group_tag_tokens").data("pre")
   })
 
   $("#groups").tablesorter

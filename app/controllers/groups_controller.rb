@@ -7,15 +7,27 @@ class GroupsController < ApplicationController
     end
   end
 
-  def show
+  def get_group_users
     if (!params[:q].blank?)
-      @users = User.where("LOWER(display_name) like ? or LOWER(email) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+      users = User.where("LOWER(display_name) like ? or LOWER(email) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
     else
-      @users = User.all
+      users = User.all
     end
-    @group_users = @users.collect { |x| GroupUsers.new(x.id, "#{x.display_name} (#{x.email})") }
+    @group_users = users.collect { |x| GroupUsers.new(x.id, "#{x.display_name} (#{x.email})") }
     respond_to do |format|
       format.json { render json: @group_users }
+    end
+  end
+
+  def get_tags
+    if (!params[:q].blank?)
+      tags = current_user.tags.where("group_id is NULL and LOWER(name) like ?", "%#{params[:q]}%")
+    else
+      tags = current_user.tags
+    end
+    @group_tags = tags.collect { |x| GroupUsers.new(x.id, x.name) }
+    respond_to do |format|
+      format.json { render json: @group_tags }
     end
   end
 
@@ -52,6 +64,7 @@ class GroupsController < ApplicationController
     @group.update_attributes(params[:group])
     @group.update_users(params[:group][:user_tokens], current_user)
     @group.update_admins(params[:group_admins], current_user)
+    @group.update_tags(params[:group][:tag_tokens])
     set_message_for_render @group.save, "updated"
     respond_to do |format|
       format.html { render action: :edit }

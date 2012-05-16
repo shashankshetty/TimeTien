@@ -6,10 +6,7 @@ Timetien::Application.routes.draw do
   resources :tasks
   resources :tags
   resources :analyze_tasks
-
-  resources :groups do
-    #get :get_group_users
-  end
+  resources :groups
   resources :authentications, :only => [:index, :authenticate, :destroy]
 
   match 'about', :to => 'pages#about', :as => :about
@@ -21,10 +18,11 @@ Timetien::Application.routes.draw do
   match 'delete_analyze_task', :to => 'analyze_tasks#destroy_task', :as => 'delete_analyze_task'
   match 'analyze_group_tasks', :to => 'analyze_tasks#analyze_group_tasks', :as => 'analyze_group_tasks'
   match 'analyze_user_tasks', :to => 'analyze_tasks#analyze_user_tasks', :as => 'analyze_user_tasks'
-  #match 'get_group_users/:q', :to => 'groups#get_group_users', :as => 'get_group_users'
   match 'get_group_tags', :to => 'analyze_tasks#get_group_tags', :as => 'get_group_tags'
   match 'accept_invite/:id', :to => 'groups#accept_invite', :as => 'accept_invite'
   match '/auth/:service/callback' => 'authentications#authenticate'
+  match 'get_tags', :to => 'groups#get_tags', :as => 'get_tags'
+  match 'get_group_users', :to => 'groups#get_group_users', :as => 'get_group_users'
 
   root :to => 'tasks#manage'
   match '/user' => "tasks#manage", :as => :user_root

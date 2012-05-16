@@ -24,6 +24,11 @@
               <%= f.label :admins, "Group Admins" %>
               <br/>
               <%= select_tag :group_admins, options_for_select(@group.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @group.admins.collect { |x| x.user_id }), :multiple => true, :size => 5, :class => "multiselect" %>
+            </div><br/>
+            <div>
+              <%= f.label :tag_tokens, "Tags" %>
+              <br/>
+              <%= f.text_field :tag_tokens, "data-pre" => @group.tags.collect { |x| GroupUsers.new(x.id, x.name) }.to_json %>
             </div>
         <% end %><br />
         <div class="actions">

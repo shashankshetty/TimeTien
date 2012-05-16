@@ -9,7 +9,7 @@ class Group < ActiveRecord::Base
   validates_length_of :name, :maximum => 50
   validates_length_of :description, :maximum => 250
 
-  attr_accessor :display_name, :user_tokens
+  attr_accessor :display_name, :user_tokens, :tag_tokens
   attr_accessible :name, :description, :user
 
   def admins
@@ -62,6 +62,17 @@ class Group < ActiveRecord::Base
     if !current_user_membership.nil?
       current_user_membership.is_admin = true
       membership << current_user_membership
+    end
+  end
+
+  def update_tags(tag_ids)
+    self.tags.clear
+    if !tag_ids.blank?
+      split_ids = tag_ids.split(",")
+      split_ids.each do |id|
+        tag = Tag.find_by_id(id.to_i)
+        self.tags << tag
+      end
     end
   end
 end
