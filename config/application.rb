@@ -52,7 +52,7 @@ module Timetien
     config.assets.version = '1.0'
 
     #uncomment while deploying timetien to heroku
-    #config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false
 
     config.paths['app/views'] << "app/views/devise"
   end

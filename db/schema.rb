@@ -21,20 +21,20 @@ ActiveRecord::Schema.define(:version => 20120304061139) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "groups", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "memberships", :force => true do |t|
-    t.integer  "group_id"
+    t.integer  "project_id"
     t.integer  "user_id"
     t.boolean  "is_admin",   :default => false
     t.boolean  "accepted",   :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tags", :force => true do |t|
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20120304061139) do
     t.decimal  "pay_rate",        :precision => 6, :scale => 2
     t.string   "pay_currency"
     t.string   "frequency"
-    t.integer  "group_id"
+    t.integer  "project_id"
     t.boolean  "complete_within"
   end
 

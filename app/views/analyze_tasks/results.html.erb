@@ -10,7 +10,7 @@
         <div>
           <span><%= task.tag.name %></span>
           <div>
-            <% if @search_query.search_type == "Search" && @search_query.analyze == "group" %>
+            <% if @search_query.search_type == "Search" && @search_query.analyze == "project" %>
                 <span>User: <span class="list_text"><%= task.user.display_name %></span></span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <% end %>

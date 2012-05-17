@@ -35,9 +35,9 @@
         <%= image_tag("info.png", :size => "16x16", :alt => "facebook") %></a>
     </div><br/>
     <div class="field">
-      <%= f.label :group_id %>
+      <%= f.label :project_id %>
       <br/>
-      <%= f.collection_select(:group_id, current_user.groups, :id, :name, :include_blank => "Select") %>
+      <%= f.collection_select(:project_id, current_user.projects, :id, :name, :include_blank => "Select") %>
     </div><br/><br/>
     <div class="actions">
       <%= f.submit :class => "button" %>

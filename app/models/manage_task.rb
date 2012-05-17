@@ -1,10 +1,10 @@
 class ManageTask
-  attr_reader :options, :user, :groups
+  attr_reader :options, :user, :projects
 
   def initialize(options, user)
     @options = options || {}
     @user = user
-    @groups = user.groups || []
+    @projects = user.projects || []
   end
 
   def tag_id

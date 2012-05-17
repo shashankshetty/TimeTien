@@ -1,9 +1,0 @@
-<% if group_invites.count > 0 %>
-    <% group_invites.each do |group| %>
-        <li><%= link_to group.name, edit_group_path(group) %></li>
-    <% end %>
-<% else %>
-    <li>
-      <div align="center">You have no invites.</div>
-    </li>
-<% end %>

@@ -20,16 +20,16 @@ describe Tassk, "When asked to get all tags" do
     tag.user = user
     tag.save
 
-    group = FactoryGirl.create(:group)
+    project = FactoryGirl.create(:project)
     tag2 = FactoryGirl.create(:tag)
     tag2.user = user
     tag2.save
-    group.tags << tag2
-    group.save
+    project.tags << tag2
+    project.save
 
     tags = user.get_tags
     tags.count.should be == 2
     tags[0][0].should be == tag.name
-    tags[1][0].should include("G: #{group.name.first(5)}")
+    tags[1][0].should include("G: #{project.name.first(5)}")
   end
 end

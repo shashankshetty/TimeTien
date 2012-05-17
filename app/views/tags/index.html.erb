@@ -7,7 +7,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Group</th>
+    <th>Project</th>
     <th>Goal</th>
     <th></th>
   </tr>
@@ -17,7 +17,7 @@
       <tr>
         <td align="center"><%= tag.name %></td>
         <td align="center"><%= truncate(tag.description) %></td>
-        <td align="center"><%= tag.group.nil? ? "" : tag.group.name %></td>
+        <td align="center"><%= tag.project.nil? ? "" : tag.project.name %></td>
         <td align="center"><%= time_allocated(tag) %></td>
         <td align="center"><%= link_to '', edit_tag_path(tag), :class => "edit_short" %></td>
       </tr>

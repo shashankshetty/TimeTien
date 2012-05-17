@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $.fn.changeTextOnHover = (text) ->
   initial_text = $(this).text()
   $(this).mouseover(() ->
@@ -12,26 +8,26 @@ $.fn.changeTextOnHover = (text) ->
   )
 
 jQuery ->
-  $(".groups").hide()
-  $(".group_invites").hide()
+  $(".projects").hide()
+  $(".project_invites").hide()
   $(".dropdown-toggle").dropdown()
 
-  $("#manage_groups").click((event) ->
-    $(".group_invites").hide()
+  $("#manage_projects").click((event) ->
+    $(".project_invites").hide()
     event.stopPropagation()
     left = $(this).position().left - $(this).outerWidth() + 73
     top = $(this).position().top - ($(document).scrollTop() - ($("#menu").outerHeight()) - 5)
-    $(".groups").css('top': top, 'left': left)
-    $(".groups").show("blind")
+    $(".projects").css('top': top, 'left': left)
+    $(".projects").show("blind")
   )
 
-  $("#group_invites").click((event) ->
-    $(".groups").hide()
+  $("#project_invites").click((event) ->
+    $(".projects").hide()
     event.stopPropagation()
     left = $(this).position().left - $(this).outerWidth() + 93
     top = $(this).position().top - ($(document).scrollTop() - ($("#menu").outerHeight()) - 5)
-    $(".group_invites").css('top': top, 'left': left)
-    $(".group_invites").show("blind")
+    $(".project_invites").css('top': top, 'left': left)
+    $(".project_invites").show("blind")
   )
 
   $("#user_settings").changeTextOnHover("change user settings")

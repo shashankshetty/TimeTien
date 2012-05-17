@@ -41,7 +41,7 @@ class TagsController < ApplicationController
   def destroy
     @tag = Tag.find(params[:id])
     if @tag.tasks.where("user_id != ?", current_user.id).count > 0
-      flash[:alert] = "Cannot delete the tag. Other users in the group using tha tag."
+      flash[:alert] = "Cannot delete the tag. Other users in the project using tha tag."
       respond_to do |format|
         format.html { render action: :edit }
         format.mobile { render action: :edit }

@@ -1,4 +1,4 @@
-class GroupUsers
+class NameValuePair
   attr_accessor :name, :id
 
   def initialize(id, name)

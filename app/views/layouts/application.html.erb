@@ -16,8 +16,8 @@
   <div class="navbar-inner">
     <div class="container" style="width:100%">
       <% if user_signed_in? %>
-          <% group_invites = current_user.nil? ? [] : current_user.get_group_invites %>
-          <% user_groups = current_user.nil? ? [] : current_user.get_user_groups %>
+          <% project_invites = current_user.nil? ? [] : current_user.get_project_invites %>
+          <% user_projects = current_user.nil? ? [] : current_user.get_user_projects %>
           <ul class="nav pull-right" style="padding-top: 5px">
             <% if mobile_device? %>
                 <li><%= link_to 'switch to mobile site', :mobile => 1 %></li>
@@ -44,16 +44,16 @@
             </li>
             <li class="dropdown" id="menu3">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#menu3">
-                manage groups&nbsp;<span id="invite"><%= group_invites.count %></span>
+                manage projects&nbsp;<span id="invite"><%= project_invites.count %></span>
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <%= render "shared/groups", :user_groups => user_groups %>
+                <%= render "shared/projects", :user_projects => user_projects %>
                 <li class="divider"></li>
                 <li class="menu-center">
-                  <div align="center">group invites</div>
+                  <div align="center">project invites</div>
                 </li>
-                <%= render "shared/group_invites", :group_invites => group_invites %>
+                <%= render "shared/project_invites", :project_invites => project_invites %>
               </ul>
             </li>
             <li class="divider-vertical"></li>

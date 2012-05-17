@@ -23,11 +23,11 @@
         <h3>Completed Tasks</h3>
         <%= render :partial => "task", :locals => {:tasks => completed_tasks, :tasks_type => "completed"} %>
       </div>
-      <% group_invites = current_user.nil? ? [] : current_user.get_group_invites %>
-      <% if group_invites.length > 0 %>
-      <div id="group_invites" data-role="collapsible">
-        <h3>Group Invites</h3>
-        <%= render :partial => "shared/group_invites", :locals => {:group_invites => group_invites} %>
+      <% project_invites = current_user.nil? ? [] : current_user.get_project_invites %>
+      <% if project_invites.length > 0 %>
+      <div id="project_invites" data-role="collapsible">
+        <h3>project Invites</h3>
+        <%= render :partial => "shared/project_invites", :locals => {:project_invites => project_invites} %>
       </div>
       <% end %>
     </div>

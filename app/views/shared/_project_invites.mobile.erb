@@ -1,0 +1,13 @@
+<div align="center" class="m_project_invites ui-tabs-nav ui-widget-header ui-corner-all">
+  <div id="project_invites">
+    <% if project_invites.count > 0 %>
+        <div style="font-style:italic;font-size: smaller;">(Click to accept)</div>
+        <div></div>
+        <% project_invites.each do |project| %>
+            <div align="center"><%= link_to project.name, edit_project_path(project) %></div>
+        <% end %>
+    <% else %>
+        <div align="center">You have no<br/>outstanding invites.</div>
+    <% end %>
+  </div>
+</div>

@@ -17,8 +17,8 @@ class SearchQuery
     @options[:analyze]
   end
 
-  def groups
-    @options[:search_group]
+  def projects
+    @options[:search_project]
   end
 
   def tags
@@ -37,8 +37,8 @@ class SearchQuery
     parse_datetime(@options[:end_time])
   end
 
-  def has_groups?
-    groups.present?
+  def has_projects?
+    projects.present?
   end
 
   def has_tags?
@@ -89,8 +89,8 @@ class SearchQuery
     end
   end
 
-  def get_tags_for_groups
-    return Tag.find(:all, :conditions => "group_id in (#{groups.collect { |c| c }.join(',')})").collect { |x| [x.name, x.id.to_s] } if has_groups?
+  def get_tags_for_projects
+    return Tag.find(:all, :conditions => "project_id in (#{projects.collect { |c| c }.join(',')})").collect { |x| [x.name, x.id.to_s] } if has_projects?
     []
   end
 

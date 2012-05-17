@@ -3,16 +3,16 @@ class AnalyzeTasksController < ApplicationController
     display_index [], :index
   end
 
-  def analyze_group_tasks
+  def analyze_project_tasks
     display_index [], :index
   end
 
-  def get_group_tags
-    if params[:groups] != "null" && (params[:groups].present?)
-      group_tags = Tag.find(:all, :conditions => "group_id in (#{params[:groups].collect { |c| c }.join(',')})").collect { |x| GroupUsers.new(x.id, x.name) }
+  def get_project_tags
+    if params[:projects] != "null" && (params[:projects].present?)
+      project_tags = Tag.find(:all, :conditions => "project_id in (#{params[:projects].collect { |c| c }.join(',')})").collect { |x| NameValuePair.new(x.id, x.name) }
     end
     respond_to do |format|
-      format.json { render json: group_tags || [] }
+      format.json { render json: project_tags || [] }
     end
   end
 

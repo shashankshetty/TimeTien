@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   belongs_to :user
-  belongs_to :group
+  belongs_to :project
   has_many :tasks, :class_name => "Tassk", :dependent => :destroy
 
   validates :name, :presence => true, :uniqueness => {:scope => :user_id}

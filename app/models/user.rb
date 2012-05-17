@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :tags, :dependent => :destroy
   has_many :membership
   has_many :authentications, :dependent => :destroy
-  has_many :groups, :through => :membership, :order => "groups.updated_at"
+  has_many :projects, :through => :membership, :order => "projects.updated_at"
   validates_length_of :display_name, :maximum => 30
 
   # Include default devise modules. Others available are:
@@ -14,48 +14,48 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :display_name, :email, :password, :password_confirmation, :has_random_password, :remember_me, :time_zone
 
-  def get_user_groups
+  def get_user_projects
     my_memberships =  self.membership.where("accepted = ?", true)
-    user_groups = []
+    user_projects = []
     my_memberships.each do |member|
-      user_groups << member.group
+      user_projects << member.project
     end
-    user_groups
+    user_projects
   end
 
   def get_tags
     tags = []
     self.tags.each { |tag| tags << tag }
-    get_user_groups.each do |group|
-      group.tags.each do |tag|
+    get_user_projects.each do |project|
+      project.tags.each do |tag|
         unless tags.include?(tag)
           tags << tag
         end
       end
     end
-    tags.sort_by { |x| x.group_id || 0 }.collect { |tag| [tag.group.nil? ? tag.name : "#{tag.name} (G: #{tag.group.name.first(5)})", tag.id.to_s] }
+    tags.sort_by { |x| x.project_id || 0 }.collect { |tag| [tag.project.nil? ? tag.name : "#{tag.name} (G: #{tag.project.name.first(5)})", tag.id.to_s] }
   end
 
-  def get_group_tags
+  def get_project_tags
     tags = []
-    get_user_groups.each do |group|
-      group.tags.each do |tag|
+    get_user_projects.each do |project|
+      project.tags.each do |tag|
         tags << tag
       end
     end
-    tags.sort_by { |x| x.group_id || 0 }.collect { |tag| [tag.name, tag.id.to_s] }
+    tags.sort_by { |x| x.project_id || 0 }.collect { |tag| [tag.name, tag.id.to_s] }
   end
 
-  def get_groups
-    get_user_groups.sort_by { |x| x.name }.collect { |group| [group.name, group.id.to_s] }
+  def get_projects
+    get_user_projects.sort_by { |x| x.name }.collect { |project| [project.name, project.id.to_s] }
   end
 
-  def get_group_invites
-    group_invites = []
+  def get_project_invites
+    project_invites = []
     unaccepted_memberships = Membership.find(:all, :conditions => {:user_id => id, :accepted => false})
     unaccepted_memberships.each do |membership|
-      group_invites << membership.group
+      project_invites << membership.project
     end
-    group_invites
+    project_invites
   end
 end

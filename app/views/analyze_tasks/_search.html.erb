@@ -1,18 +1,18 @@
 <%= stylesheet_link_tag "analyze_tasks" %>
 <%= form_tag :action => "query_tasks" do |f| %>
     <div class="search_criteria">
-      <% if params[:action] == "analyze_group_tasks" || @search_query.analyze == 'group' %>
+      <% if params[:action] == "analyze_project_tasks" || @search_query.analyze == 'project' %>
           <div class="field">
-            <%= label_tag "Group" %>
+            <%= label_tag "Project" %>
             <br/>
-            <%= select_tag :search_group, options_for_select(current_user.get_groups, @search_query.groups), :multiple => true, :size => 5 %>
+            <%= select_tag :search_project, options_for_select(current_user.get_projects, @search_query.projects), :multiple => true, :size => 5 %>
           </div><br/>
           <div class="field">
             <%= label_tag "Tag" %>
             <br/>
-            <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_groups, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
+            <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_projects, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
           </div><br/>
-          <%= hidden_field_tag :analyze, "group" %>
+          <%= hidden_field_tag :analyze, "project" %>
       <% else %>
           <div class="field">
             <%= label_tag "Tag" %>

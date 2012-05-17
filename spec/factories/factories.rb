@@ -20,9 +20,9 @@ FactoryGirl.define do
     f.start_time Time.now-2.days
   end
 
-  factory :group do |f|
-    f.sequence(:name) { |n| "Group#{n}" }
-    f.description "Group description"
+  factory :project do |f|
+    f.sequence(:name) { |n| "Project#{n}" }
+    f.description "Project description"
     end
 
   factory :membership do |f|

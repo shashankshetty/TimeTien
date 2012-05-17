@@ -31,8 +31,8 @@
       <label for="complete_within">Check if your goal is to complete the task within the allocated time</label>
     </div><br/>
     <div class="field">
-      <%= f.label :group_id %>
-      <%= f.collection_select(:group_id, current_user.groups, :id, :name, :include_blank => "Select") %>
+      <%= f.label :project_id %>
+      <%= f.collection_select(:project_id, current_user.projects, :id, :name, :include_blank => "Select") %>
     </div><br/>
     <div class="actions">
       <%= f.submit "data-role" => "button" %>

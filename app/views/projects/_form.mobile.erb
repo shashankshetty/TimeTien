@@ -1,30 +1,30 @@
-<%= form_for(@group) do |f| %>
-    <%= render "shared/messages", :target => @group %>
-    <% membership = @group.get_membership(current_user.id) %>
+<%= form_for(@project) do |f| %>
+    <%= render "shared/messages", :target => @project %>
+    <% membership = @project.get_membership(current_user.id) %>
     <p>
       <span><b>Name</b></span><br/>
-      <%= @group.name %>
+      <%= @project.name %>
     </p>
     <p>
       <b>Description</b><br/>
-      <%= @group.description %>
+      <%= @project.description %>
     </p>
     <p>
       <b>Members</b><br/>
-      <% @group.users.each do |member| %>
+      <% @project.users.each do |member| %>
           <%= "#{member.display_name} (#{member.email})" %><br/>
       <% end %>
     </p>
     <p>
-      <b>Group Admins</b><br/>
-      <% @group.admins.each do |admin| %>
+      <b>Admins</b><br/>
+      <% @project.admins.each do |admin| %>
           <%= "#{admin.user.display_name} (#{admin.user.email})" %><br/>
       <% end %>
     </p>
     <% if !membership.accepted %>
         <p>&nbsp;</p>
         <div class="actions">
-          <%= link_to 'Accept Invite', accept_invite_path(@group), "data-role" => 'button' %>
+          <%= link_to 'Accept Invite', accept_invite_path(@project), "data-role" => 'button' %>
         </div>
     <% end %>
 <% end %>

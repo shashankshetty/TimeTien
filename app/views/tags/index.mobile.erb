@@ -9,7 +9,7 @@
             (<%= truncate(tag.description) %>)
         <% end %></b>
         <br/>
-        Group: <%= tag.group.nil? ? "" : tag.group.name %>
+        Project: <%= tag.project.nil? ? "" : tag.project.name %>
         <br/>
         Goal: <%= time_allocated(tag) %></div>
       <div class="ui-block-b"><%= link_to 'edit', edit_tag_path(tag) %></div>

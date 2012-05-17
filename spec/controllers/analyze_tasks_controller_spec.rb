@@ -41,37 +41,37 @@ describe AnalyzeTasksController do
     end
   end
 
-  describe "GET index to group tasks" do
+  describe "GET index to project tasks" do
     it "assigns all tasks as @tasks" do
-      get :analyze_group_tasks
+      get :analyze_project_tasks
       assigns(:search_query).tasks.should eq([])
     end
   end
 
-  describe "POST get tags groups" do
-    it "returns all the tags for the selected groups" do
+  describe "POST get tags projects" do
+    it "returns all the tags for the selected projects" do
       tag1 = FactoryGirl.create(:tag)
       tag2 = FactoryGirl.create(:tag)
-      group = FactoryGirl.create(:group)
-      tag1.group = group
-      tag2.group = group
+      project = FactoryGirl.create(:project)
+      tag1.project = project
+      tag2.project = project
       tag1.save
       tag2.save
-      post :get_group_tags, :groups => [group.id], :format => :json
+      post :get_project_tags, :projects => [project.id], :format => :json
       parsed_body = JSON.parse(response.body)
       parsed_body[0]["name"].should == tag1.name
       parsed_body[1]["name"].should == tag2.name
     end
 
-    it "returns no tags if no group is selected" do
-      post :get_group_tags, :groups => "null", :format => :json
+    it "returns no tags if no project is selected" do
+      post :get_project_tags, :projects => "null", :format => :json
       parsed_body = JSON.parse(response.body)
       parsed_body.should be_empty
     end
 
-    it "returns no tags if the group has no tags" do
-      group = FactoryGirl.create(:group)
-      post :get_group_tags, :groups => [group.id], :format => :json
+    it "returns no tags if the project has no tags" do
+      project = FactoryGirl.create(:project)
+      post :get_project_tags, :projects => [project.id], :format => :json
       parsed_body = JSON.parse(response.body)
       parsed_body.should be_empty
     end

@@ -1,4 +1,4 @@
-class Group < ActiveRecord::Base
+class Project < ActiveRecord::Base
   belongs_to :user
   has_many :tags
   has_many :membership
@@ -35,9 +35,9 @@ class Group < ActiveRecord::Base
             user = User.find_by_id(id)
             self.users << user
             if !user.tasks.blank? && user.tasks.where("tag_id in (#{tags.collect { |c| c.id }.join(',')})").count > 0
-              group_member = get_membership(id)
-              group_member.accepted = true
-              membership << group_member
+              project_member = get_membership(id)
+              project_member.accepted = true
+              membership << project_member
             end
           end
         end
@@ -51,10 +51,10 @@ class Group < ActiveRecord::Base
     if !user_ids.blank?
       sanitized_user_ids = user_ids.reject { |s| s.nil? or s.empty? }
       sanitized_user_ids.each do |id|
-        group_member = get_membership(id)
-        if !group_member.nil?
-          group_member.is_admin = true
-          membership << group_member
+        project_member = get_membership(id)
+        if !project_member.nil?
+          project_member.is_admin = true
+          membership << project_member
         end
       end
     end

@@ -1,12 +1,12 @@
 Timetien::Application.routes.draw do
-  resources :group_users
+  resources :project_users
 
   devise_for :users, :path_names => {:sign_up => "register"}, :controllers => {:registrations => 'registrations'}
 
   resources :tasks
   resources :tags
   resources :analyze_tasks
-  resources :groups
+  resources :projects
   resources :authentications, :only => [:index, :authenticate, :destroy]
 
   match 'about', :to => 'pages#about', :as => :about
@@ -16,13 +16,13 @@ Timetien::Application.routes.draw do
   match 'stop_task/:id' => 'tasks#stop_task', :as => 'stop_task'
   match 'delete_task/:id', :to => 'tasks#destroy', :as => 'delete_task'
   match 'delete_analyze_task', :to => 'analyze_tasks#destroy_task', :as => 'delete_analyze_task'
-  match 'analyze_group_tasks', :to => 'analyze_tasks#analyze_group_tasks', :as => 'analyze_group_tasks'
+  match 'analyze_project_tasks', :to => 'analyze_tasks#analyze_project_tasks', :as => 'analyze_project_tasks'
   match 'analyze_user_tasks', :to => 'analyze_tasks#analyze_user_tasks', :as => 'analyze_user_tasks'
-  match 'get_group_tags', :to => 'analyze_tasks#get_group_tags', :as => 'get_group_tags'
-  match 'accept_invite/:id', :to => 'groups#accept_invite', :as => 'accept_invite'
+  match 'get_project_tags', :to => 'analyze_tasks#get_project_tags', :as => 'get_project_tags'
+  match 'accept_invite/:id', :to => 'projects#accept_invite', :as => 'accept_invite'
   match '/auth/:service/callback' => 'authentications#authenticate'
-  match 'get_tags', :to => 'groups#get_tags', :as => 'get_tags'
-  match 'get_group_users', :to => 'groups#get_group_users', :as => 'get_group_users'
+  match 'get_tags', :to => 'projects#get_tags', :as => 'get_tags'
+  match 'get_project_users', :to => 'projects#get_project_users', :as => 'get_project_users'
 
   root :to => 'tasks#manage'
   match '/user' => "tasks#manage", :as => :user_root

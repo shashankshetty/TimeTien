@@ -1,0 +1,9 @@
+<% if project_invites.count > 0 %>
+    <% project_invites.each do |project| %>
+        <li><%= link_to project.name, edit_project_path(project) %></li>
+    <% end %>
+<% else %>
+    <li>
+      <div align="center">You have no invites.</div>
+    </li>
+<% end %>

@@ -1,0 +1,23 @@
+<%= javascript_include_tag "projects" %>
+<% title "manage projects" %>
+
+<div class="right"><%= link_to 'add new project', new_project_path %></div><br/>
+
+<table id="projects" class="tablesorter">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @projects.each do |project| %>
+      <tr>
+        <td align="center"><%= project.name %></td>
+        <td align="center"><%= project.description %></td>
+        <td align="center"><%= link_to '', edit_project_path(project), :class => "edit_short" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
