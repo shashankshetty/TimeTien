@@ -75,6 +75,20 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+  def total_time_taken
+    self.tags.map(&:tasks).flatten.map(&:time_spent).sum
+  end
+
+  def billable_amounts
+    billable_amounts = []
+    currencies = self.tags.select("DISTINCT(pay_currency)").order("pay_currency")
+    currencies.each do |currency|
+      tags_with_currency = tags.where("pay_currency = ?", currency.pay_currency)
+      tags_with_currency.each { |tag| billable_amounts << NameValuePair.new((tag.pay_rate * (tag.tasks.flatten.map(&:time_spent).sum/3600)), tag.pay_currency) }
+    end
+    billable_amounts
+  end
 end
 
 

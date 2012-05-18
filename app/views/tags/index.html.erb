@@ -6,9 +6,10 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Description</th>
     <th>Project</th>
     <th>Goal</th>
+    <th>Time Logged</th>
+    <th>Billable Amount</th>
     <th></th>
   </tr>
   </thead>
@@ -16,9 +17,10 @@
   <% @tags.each do |tag| %>
       <tr>
         <td align="center"><%= tag.name %></td>
-        <td align="center"><%= truncate(tag.description) %></td>
         <td align="center"><%= tag.project.nil? ? "" : tag.project.name %></td>
         <td align="center"><%= time_allocated(tag) %></td>
+        <td align="center"><%= display_time(tag.total_time_taken) %></td>
+        <td align="center"><%= number_to_currency(tag.billable_amount, :unit => tag.pay_currency) %></td>
         <td align="center"><%= link_to '', edit_tag_path(tag), :class => "edit_short" %></td>
       </tr>
   <% end %>

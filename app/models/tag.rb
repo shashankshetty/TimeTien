@@ -12,9 +12,18 @@ class Tag < ActiveRecord::Base
 
   validate :validate_complete_within
 
-    def validate_complete_within
-      if complete_within
-        errors.add(:complete_within, "cannot be checked if the Allocated Time is blank") if (time_allocated.blank? || frequency.blank?)
-      end
+  def validate_complete_within
+    if complete_within
+      errors.add(:complete_within, "cannot be checked if the Allocated Time is blank") if (time_allocated.blank? || frequency.blank?)
     end
+  end
+
+  def total_time_taken
+    tasks.flatten.map(&:time_spent).sum
+  end
+
+  def billable_amount
+    return nil if pay_rate.nil?
+    pay_rate * (total_time_taken/3600)
+  end
 end

@@ -28,7 +28,7 @@ describe Tag, "When asked to validate" do
     tag.complete_within = true
     tag.should_not be_valid
     tag.errors[:complete_within].should_not be_empty
-    end
+  end
 
   it "should not allow pay rate greater than 9999" do
     tag = FactoryGirl.create(:tag)
@@ -42,5 +42,19 @@ describe Tag, "When asked to validate" do
     tag.pay_rate = -100
     tag.should_not be_valid
     tag.errors[:pay_rate].should_not be_empty
+  end
+end
+
+describe "When asked to calculate earning" do
+  before :each do
+    Time.zone = "Central Time (US & Canada)"
+  end
+
+  it "should return the total earning with the currency" do
+    tag = FactoryGirl.create(:tag)
+    tag.pay_rate = 10
+    tag.pay_currency = "$"
+    Tassk.create(:tag => tag, :start_time => Time.now-60.minutes, :end_time => Time.now)
+    tag.billable_amount.to_i.should == 10
   end
 end

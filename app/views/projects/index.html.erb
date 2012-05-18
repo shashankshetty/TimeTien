@@ -7,7 +7,8 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Description</th>
+    <th>Time Logged</th>
+    <th>Billable Amount</th>
     <th></th>
   </tr>
   </thead>
@@ -15,7 +16,10 @@
   <% @projects.each do |project| %>
       <tr>
         <td align="center"><%= project.name %></td>
-        <td align="center"><%= project.description %></td>
+        <td align="center"><%= display_time(project.total_time_taken) %></td>
+        <td align="center"><% project.billable_amounts.each do |amount| %>
+            <%= number_to_currency(amount.id, :unit => amount.name) %>&nbsp;
+        <% end %></td>
         <td align="center"><%= link_to '', edit_project_path(project), :class => "edit_short" %></td>
       </tr>
   <% end %>
