@@ -1,4 +1,21 @@
+<%= stylesheet_link_tag "projects" %>
+<%= javascript_include_tag "projects" %>
 <% title "new project" %>
 
-<%= render 'form' %>
-
+<%= form_for(@project) do |f| %>
+    <%= render "shared/messages", :target => @project %>
+    <% membership = @project.get_membership(current_user.id) %>
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div><br/>
+    <div class="field">
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_area :description, :rows => 1 %>
+    </div><br/>
+    <div class="actions">
+      <%= f.submit :class => "button" %>
+    </div>
+<% end %>

@@ -5,13 +5,18 @@
 <div class="ui-grid-b">
   <% @tags.each do |tag| %>
       <div class="ui-block-a"><b><%= tag.name %>
-        <% if !tag.description.nil? %>
+        <% if !tag.description.blank? %>
             (<%= truncate(tag.description) %>)
         <% end %></b>
         <br/>
         Project: <%= tag.project.nil? ? "" : tag.project.name %>
         <br/>
-        Goal: <%= time_allocated(tag) %></div>
+        Goal: <%= time_allocated(tag) %>
+        <br/>
+        Time Logged: <%= display_time(tag.total_time_taken) %>
+        <br/>
+        Billable Amount: <%= number_to_currency(tag.billable_amount, :unit => tag.pay_currency) %>
+      </div>
       <div class="ui-block-b"><%= link_to 'edit', edit_tag_path(tag) %></div>
   <% end %>
 </div>

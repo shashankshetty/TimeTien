@@ -1,0 +1,13 @@
+<% title "manage projects" %>
+
+<div class="ui-grid-b">
+  <% @projects.each do |project| %>
+      <div class="ui-block-a"><b><%= project.name %></b><br/>
+        Time Logged: <%= display_time(project.total_time_taken) %>
+        <br/>
+        Billable Amount:
+        <% project.billable_amounts.each do |amount| %>
+            <%= number_to_currency(amount.id, :unit => amount.name) %>&nbsp;
+        <% end %></div>
+  <% end %>
+</div>

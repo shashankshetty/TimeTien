@@ -1,6 +1,6 @@
 <% if project_invites.count > 0 %>
     <% project_invites.each do |project| %>
-        <li><%= link_to project.name, edit_project_path(project) %></li>
+        <li><div align="center"><%= link_to project.name, edit_project_path(project) %></div></li>
     <% end %>
 <% else %>
     <li>

@@ -42,19 +42,26 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new
     @project.update_attributes(params[:project])
-    result = @project.save
-    if result
-      member_result = Membership.create!(:user => current_user, :project => @project, :is_admin => true, :accepted => true)
-      if !member_result
-        result = member_result
-      end
-    end
-    set_message_for_render result, "created"
-    respond_to do |format|
-      if result
-        format.html { render action: :edit }
-      else
+
+    if @project.validate_project_uniqueness_scope(current_user, @project)
+      respond_to do |format|
         format.html { render action: :new }
+      end
+    else
+      result = @project.save
+      if result
+        member_result = Membership.create!(:user => current_user, :project => @project, :is_admin => true, :accepted => true)
+        if !member_result
+          result = member_result
+        end
+      end
+      set_message_for_render result, "created"
+      respond_to do |format|
+        if result
+          format.html { render action: :edit }
+        else
+          format.html { render action: :new }
+        end
       end
     end
   end
@@ -65,7 +72,10 @@ class ProjectsController < ApplicationController
     @project.update_users(params[:project][:user_tokens], current_user)
     @project.update_admins(params[:project_admins], current_user)
     @project.update_tags(params[:project][:tag_tokens])
-    set_message_for_render @project.save, "updated"
+    unless @project.validate_project_uniqueness_scope(current_user, @project)
+      set_message_for_render @project.save, "updated"
+    end
+
     respond_to do |format|
       format.html { render action: :edit }
     end

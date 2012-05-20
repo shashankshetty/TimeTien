@@ -5,12 +5,19 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :membership
 
   validates :name, :presence => true
-  validates :name, :uniqueness => true
   validates_length_of :name, :maximum => 50
   validates_length_of :description, :maximum => 250
 
   attr_accessor :display_name, :user_tokens, :tag_tokens
   attr_accessible :name, :description, :user
+
+  def validate_project_uniqueness_scope(current_user, project)
+    existing_projects = current_user.projects.where("name = ?", project.name)
+    if existing_projects.count > 0 && existing_projects.first.id != project.id
+      errors.add(:name, "Project with same name already exists.")
+      true
+    end
+  end
 
   def admins
     self.membership.where("is_admin = ?", true)
@@ -34,7 +41,7 @@ class Project < ActiveRecord::Base
           if user_to_add.blank?
             user = User.find_by_id(id)
             self.users << user
-            if !user.tasks.blank? && user.tasks.where("tag_id in (#{tags.collect { |c| c.id }.join(',')})").count > 0
+            if !user.tasks.blank? && tags.count > 0 && user.tasks.where("tag_id in (#{tags.collect { |c| c.id }.join(',')})").count > 0
               project_member = get_membership(id)
               project_member.accepted = true
               membership << project_member
