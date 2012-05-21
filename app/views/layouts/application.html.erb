@@ -74,12 +74,17 @@
             <% if mobile_device? %>
                 <li><%= link_to 'switch to mobile site', :mobile => 1 %></li>
             <% end %>
-            <li><%= link_to 'about', about_path %></li>
+            <% unless params[:controller] == "devise/sessions" && params[:action] == "new" %>
+                <li class="login"><%= link_to 'login', new_user_session_path %></li>
+            <% end %>
           </ul>
       <% end %>
     </div>
   </div>
 </div>
+<div id="tagline" align="center"><%= image_tag "tagline.png", :width => 180, :alt => "Organize your life" %></div>
+<p>&nbsp;</p>
+
 <div id="main" class="container">
   <div class="title"><%= yield(:title) %>
     <hr/>

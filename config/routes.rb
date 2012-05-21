@@ -9,8 +9,6 @@ Timetien::Application.routes.draw do
   resources :projects
   resources :authentications, :only => [:index, :authenticate, :destroy]
 
-  match 'about', :to => 'pages#about', :as => :about
-
   match 'query_tasks' => 'analyze_tasks#query_tasks', :as => 'query_tasks'
   match 'start_task' => 'tasks#start_task', :as => 'start_task'
   match 'stop_task/:id' => 'tasks#stop_task', :as => 'stop_task'
@@ -24,7 +22,7 @@ Timetien::Application.routes.draw do
   match 'get_tags', :to => 'projects#get_tags', :as => 'get_tags'
   match 'get_project_users', :to => 'projects#get_project_users', :as => 'get_project_users'
 
-  root :to => 'tasks#manage'
+  root :to => 'home#index'
   match '/user' => "tasks#manage", :as => :user_root
 
   # The priority is based upon order of creation:

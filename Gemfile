@@ -9,6 +9,8 @@ gem 'sqlite3'
 
 gem 'pg'
 
+gem 'thin'
+
 gem 'devise', '1.5.3'
 
 gem 'chronic'

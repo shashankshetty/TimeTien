@@ -52,3 +52,8 @@ jQuery ->
   )
 
   $('table').hide() if $('table > tbody > tr').length == 0
+
+  $('.carousel').carousel({
+  interval: 5000,
+  pause: "hover"
+  })
