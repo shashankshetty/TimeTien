@@ -27,5 +27,5 @@ production:
   database: timetien
   pool: 5
   timeout: 5000
-  username: postgres
-  password: postgres
+  username: timetien_general
+  password: MyFirstApp@123

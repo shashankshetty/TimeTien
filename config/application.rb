@@ -54,6 +54,8 @@ module Timetien
     #uncomment while deploying timetien to heroku
     config.assets.initialize_on_precompile = false
 
+    config.assets.compile = true
+
     config.paths['app/views'] << "app/views/devise"
   end
 end
