@@ -42,6 +42,7 @@ Timetien::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
+
   # Precompile additional assets (application.js, application.css.scss, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
@@ -57,4 +58,10 @@ Timetien::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.assets.precompile += %w( authentications.css  analyze_tasks.css.scss authentications.css.scss demos.css jquery.mobile-1.1.0.min.css
+      jquery.mobile.datebox.min.css jquery.mobile.simpledialog.min.css layout.css.scss mobile-layout.css.scss projects.css.scss
+      scaffolds.css.scss tags.css.scss tasks.css.scss analyze_results.js.coffee analyze_tasks.js.coffee common.js.coffee
+      jquery-1.7.1.min.js jquery.mobile-1.1.0.min.js jquery.mobile.datebox.min.js jquery.mobile.simpledialog.min.js
+      jquery.mousewheel.min.js projects.js.coffee tags.js.coffee tasks.js.coffee tasks_common.js.coffee users.js.coffee)
 end
