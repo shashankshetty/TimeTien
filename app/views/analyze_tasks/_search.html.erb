@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "analyze_tasks" %>
 <%= form_tag :action => "query_tasks" do |f| %>
     <div class="search_criteria">
       <% if params[:action] == "analyze_project_tasks" || @search_query.analyze == 'project' %>

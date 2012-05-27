@@ -1,10 +1,9 @@
 <% title search_title %>
-<%= javascript_include_tag "analyze_results" %>
 <div id="message"></div>
-<div class="content_left">
+<div class="analyze_left">
 <%= render "search", :search_query => @search_query %>
 </div>
-<ul id='task_results' class='list content_right'>
+<ul id='task_results' class='list analyze_right'>
   <% @search_query.tasks.each do |task| %>
       <li id="li_<%=task.id %>" class="ui-tabs-nav ui-widget-header">
         <div>

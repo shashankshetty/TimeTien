@@ -1,5 +1,4 @@
 <% title "task management" %>
-<%= javascript_include_tag "tasks_common" %>
 <%= form_tag :action => "start_task" do |f| %>
     <%= render "shared/messages", :target => @task %>
     <% if !flash[:error].blank? %>
