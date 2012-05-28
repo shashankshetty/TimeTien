@@ -9,4 +9,3 @@
 //= require jquery-ui
 //= require vendor
 //= require bootstrap
-//= require_directory ./global

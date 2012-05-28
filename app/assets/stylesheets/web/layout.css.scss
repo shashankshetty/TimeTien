@@ -3,7 +3,7 @@ $white: #FFFFFF;
 $yellow: #FFD80F;
 $green: #00CC00;
 $red: #FF0000;
-$background: #f7f3de url(jquery_ui_theme/images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
+$background: #f7f3de url(../images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
 $font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, sans-serif;
 
 @mixin rounded-corners($radius){
@@ -149,7 +149,7 @@ select {
 .delete_short {
   padding: 12px 8px 10px 10px;
   background-repeat: no-repeat;
-  background-image: url('cancel.png');
+  background-image: url('images/cancel.png');
   background-size: 18px;
   background-position: center left;
 }
@@ -157,7 +157,7 @@ select {
 .edit_short {
   padding: 2px 8px 2px 8px;
   background-repeat: no-repeat;
-  background-image: url('edit.png');
+  background-image: url('images/edit.png');
   background-size: 16px;
   background-position: center left;
 }
