@@ -27,5 +27,5 @@ production:
   database: timetien
   pool: 5
   timeout: 5000
-  username: timetien_general
-  password: MyFirstApp@123
+  username: tt_track_general
+  password: TimeTrackAppForAll@123
