@@ -203,6 +203,10 @@ select {
   @include message($red, #f2dede)
 }
 
+.alert2 {
+  @include message($red, #f2dede)
+}
+
 .success {
   @include message($green, #dff0d8)
 }

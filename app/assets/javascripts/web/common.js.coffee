@@ -12,24 +12,6 @@ jQuery ->
   $(".project_invites").hide()
   $(".dropdown-toggle").dropdown()
 
-  $("#manage_projects").click((event) ->
-    $(".project_invites").hide()
-    event.stopPropagation()
-    left = $(this).position().left - $(this).outerWidth() + 73
-    top = $(this).position().top - ($(document).scrollTop() - ($("#menu").outerHeight()) - 5)
-    $(".projects").css('top': top, 'left': left)
-    $(".projects").show("blind")
-  )
-
-  $("#project_invites").click((event) ->
-    $(".projects").hide()
-    event.stopPropagation()
-    left = $(this).position().left - $(this).outerWidth() + 93
-    top = $(this).position().top - ($(document).scrollTop() - ($("#menu").outerHeight()) - 5)
-    $(".project_invites").css('top': top, 'left': left)
-    $(".project_invites").show("blind")
-  )
-
   $("#user_settings").changeTextOnHover("change user settings")
 
   $(".datetime").datetimepicker(
