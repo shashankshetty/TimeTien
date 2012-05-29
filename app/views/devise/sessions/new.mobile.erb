@@ -1,6 +1,6 @@
 <% title "sign in" %>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div class="alert2"><b>Application is in the early testing phase. You are welcome to use the application. <br/>Please be aware that the data will be purged before the beta release.</b></div>
+    <div class="alert2"><b>Application is in the early testing phase. You are welcome to use the application. <br/>Please be aware that the data will be purged before the beta release.</b></div><p></p>
     <%= render "shared/error_messages" %>
     <div>
       <%= f.email_field :email, :placeholder => "Enter Email" %>
