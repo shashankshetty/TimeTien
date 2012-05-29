@@ -3,10 +3,9 @@
 <head>
   <title>TimeTien - <%= yield(:title) %></title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "mobile/application" %>
-  <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "mobile/application" %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
 <div data-role="page">
@@ -15,7 +14,9 @@
         <%= link_to 'home', root_url, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-icon" => "home", "data-wrapperels" => "span" %>
         <%= link_to "sign out", destroy_user_session_path, "data-role" => "button", "data-inline" => "false", :method => 'delete', "data-wrapperels" => "span" %>
     <% end %>
-    <h1>Time Tien</h1>
+    <div align="center">
+        <span class="app-name"><%= image_tag "timetien.png", :width => 150, :alt => "Time Tien" %></span>
+    </div>
   </div>
   <div id="main" data-role="content">
     <div class="title"><%= yield(:title) %>

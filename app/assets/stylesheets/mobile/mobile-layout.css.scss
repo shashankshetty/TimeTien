@@ -46,11 +46,53 @@ $red: #FF0000;
 
 .ui-icon-play {
   color: $green;
-  background: url('play.png') 50% 50% no-repeat;
+  background: url('images/play.png') 50% 50% no-repeat;
 }
 
 .ui-icon-stop {
   color: $red;
-  background: url('stop.png') 50% 50% no-repeat;
+  background: url('images/stop.png') 50% 50% no-repeat;
   background-size:  20px 20px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 16px;
+  display: inline;
+}
+
+.app-name {
+  font-weight: bold;
+  font-size: 24px;
+  padding-left: 5px;
+}
+
+input, textarea {
+  height: 24px;
+  width: 300px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+select {
+  height: 34px;
+  background: transparent;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+input, textarea {
+  height: 24px;
+  width: 300px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+select {
+  height: 34px;
+  background: transparent;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
 }
