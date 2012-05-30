@@ -48,12 +48,13 @@ class TasksController < ApplicationController
     @task.end_time = parse_datetime(params[:task]["end_time"])
     @task.user = current_user
     result = @task.save
-    set_message_for_render result, "created"
     respond_to do |format|
       if result
-        format.html { render action: :edit }
-        format.mobile { render action: :edit }
+        set_message_for_redirect result, "updated"
+        format.html { redirect_to edit_task_path(@task) }
+        format.mobile { redirect_to edit_task_path(@task) }
       else
+        set_message_for_render result, "created"
         format.html { render action: :new }
         format.mobile { render action: :new }
       end

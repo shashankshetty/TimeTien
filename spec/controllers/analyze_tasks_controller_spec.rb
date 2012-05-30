@@ -79,7 +79,9 @@ describe AnalyzeTasksController do
 
   describe "POST query tasks" do
     it "returns message to select atleast one tag" do
-      Tassk.create! valid_attributes
+      task = FactoryGirl.create(:tassk)
+      task.user = @user
+      task.save
       post :query_tasks, :query => "Search"
       assigns(:search_query).search_type.should be == "Search"
       assigns(:search_query).tasks.should eq([])
@@ -89,7 +91,9 @@ describe AnalyzeTasksController do
 
   describe "POST search tasks" do
     it "returns all the relevant tasks" do
-      task = Tassk.create! valid_attributes
+      task = FactoryGirl.create(:tassk)
+      task.user = @user
+      task.save
       post :query_tasks, :query => "Search", :search_tag => [task.tag.id]
       assigns(:search_query).search_type.should be == "Search"
       assigns(:search_query).tasks.should eq([task])
@@ -106,9 +110,8 @@ describe AnalyzeTasksController do
 
   describe "DELETE destroy" do
     it "cannot destroy other users task" do
-      task = Tassk.create! valid_attributes
-      user = FactoryGirl.create(:user)
-      task.user = user
+      task = FactoryGirl.create(:tassk)
+      task.user = FactoryGirl.create(:user)
       task.save
       post :destroy_task, :id => task.id, :format => :json
       parsed_body = JSON.parse(response.body)
@@ -116,14 +119,18 @@ describe AnalyzeTasksController do
     end
 
     it "destroys the requested task" do
-      task = Tassk.create! valid_attributes
+      task = FactoryGirl.create(:tassk)
+      task.user = @user
+      task.save
       expect {
         post :destroy_task, :id => task.id, :format => :json
       }.to change(Tassk, :count).by(-1)
     end
 
     it "returns a success message" do
-      task = Tassk.create! valid_attributes
+      task = FactoryGirl.create(:tassk)
+      task.user = @user
+      task.save
       post :destroy_task, :id => task.id, :format => :json
       parsed_body = JSON.parse(response.body)
       parsed_body["status"].should == "success"

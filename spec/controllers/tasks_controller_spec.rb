@@ -26,19 +26,19 @@ describe TasksController do
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
-  def valid_attributes
-    {
-        :tag_id => FactoryGirl.create(:tag),
-        :start_time => Time.now,
-        :user_id => @user.id
-    }
+
+  before(:each) do
+    @task = FactoryGirl.create(:tassk)
+    @task.user = @user
+    @task.save
+
+    @tag = @task.tag
   end
 
   describe "GET manage" do
     it "assigns all tasks as @tasks" do
-      task = Tassk.create! valid_attributes
       get :manage
-      assigns(:manage_task).tasks.should eq([task])
+      assigns(:manage_task).tasks.should eq([@task])
     end
   end
 
@@ -51,13 +51,20 @@ describe TasksController do
 
   describe "GET edit" do
     it "assigns the requested task as @task" do
-      task = Tassk.create! valid_attributes
-      get :edit, :id => task.id
-      assigns(:task).should eq(task)
+      get :edit, :id => @task.id
+      assigns(:task).should eq(@task)
     end
   end
 
   describe "POST create" do
+    def valid_attributes
+      {
+          :tag_id => @tag.id,
+          :start_time => Time.now,
+          :user_id => @user.id
+      }
+    end
+
     describe "with valid params" do
       it "creates a new Task" do
         expect {
@@ -73,7 +80,8 @@ describe TasksController do
 
       it "renders edit template" do
         post :create, :task => valid_attributes
-        response.should render_template(:edit)
+        task = assigns(:task)
+        response.should redirect_to(edit_task_path(task))
       end
     end
 
@@ -95,13 +103,21 @@ describe TasksController do
   end
 
   describe "PUT update" do
+    def valid_attributes
+      {
+          :tag_id => @tag.id,
+          :start_time => Time.now,
+          :user_id => @user.id
+      }
+    end
+
     describe "with valid params" do
       it "updates the requested task" do
-        task = Tassk.create! valid_attributes
         # Assuming there are no other tasks in the database, this
         # specifies that the Task created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
+        task = Tassk.create! valid_attributes
         Tassk.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => task.id, :task => {'these' => 'params'}
       end
@@ -121,18 +137,14 @@ describe TasksController do
 
     describe "with invalid params" do
       it "assigns the task as @task" do
-        task = Tassk.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         Tassk.any_instance.stub(:save).and_return(false)
-        put :update, :id => task.id, :task => {}
-        assigns(:task).should eq(task)
+        put :update, :id => @task.id, :task => {}
+        assigns(:task).should eq(@task)
       end
 
       it "re-renders the 'edit' template" do
-        task = Tassk.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         Tassk.any_instance.stub(:save).and_return(false)
-        put :update, :id => task.id, :task => {}
+        put :update, :id => @task.id, :task => {}
         response.should render_template("edit")
       end
     end
@@ -140,39 +152,42 @@ describe TasksController do
 
   describe "DELETE destroy" do
     it "destroys the requested task" do
-      task = Tassk.create! valid_attributes
       expect {
-        delete :destroy, :id => task.id
+        delete :destroy, :id => @task.id
       }.to change(Tassk, :count).by(-1)
     end
 
     it "redirects to home page" do
-      task = Tassk.create! valid_attributes
-      delete :destroy, :id => task.id
+      delete :destroy, :id => @task.id
       response.should redirect_to(root_url)
     end
   end
 
   describe "Start the task" do
+    def valid_attributes
+      {
+          :tag_id => @tag.id,
+          :start_time => Time.now,
+          :user_id => @user.id
+      }
+    end
+
     describe "with valid params" do
       it "creates the task with user, current time and selected tag" do
-        task = Tassk.create! valid_attributes
         expect {
-          post :start_task, :task => valid_attributes, :select_tag => task.tag
+          post :start_task, :task => valid_attributes, :select_tag => @tag.id
         }.to change(Tassk, :count).by(1)
       end
 
       it "assigns a newly created task as @task" do
-        task = Tassk.create! valid_attributes
-        post :start_task, :task => valid_attributes, :select_tag => task.tag
+        post :start_task, :task => valid_attributes, :select_tag => @tag.id
         assigns(:task).should be_a(Tassk)
         assigns(:task).user should_not be_nil
         assigns(:task).should be_persisted
       end
 
       it "re-renders home page" do
-        task = Tassk.create! valid_attributes
-        post :start_task, :id => task.id, :select_tag => task.tag
+        post :start_task, :id => @task.id, :select_tag => @tag.id
         response.should render_template("manage")
       end
     end
@@ -189,16 +204,14 @@ describe TasksController do
   describe "Stop the task" do
 
     it "stops the existing task" do
-      task = Tassk.create! valid_attributes
       now = Time.mktime(2012, 1, 20, 0, 0, 0)
       Time.stub!(:now).and_return(now)
-      post :stop_task, :id => task.id, :select_tag => task.tag
+      post :stop_task, :id => @task.id, :select_tag => @task.tag
       (assigns(:task).end_time == now).should be_true
     end
 
     it "re-renders home page" do
-      task = Tassk.create! valid_attributes
-      post :stop_task, :id => task.id, :select_tag => task.tag
+      post :stop_task, :id => @task.id, :select_tag => @task.tag
       response.should render_template("manage")
     end
   end
