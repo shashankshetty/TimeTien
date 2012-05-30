@@ -13,7 +13,7 @@ class TasksController < ApplicationController
 
   def stop_task
     @task = Tassk.find(params[:id])
-    @task.end_time = Time.now
+    @task.end_time = Time.zone.now
     set_message_for_render @task.save, "stopped"
     @manage_task = ManageTask.new(params, current_user)
     respond_to do |format|
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
       if flash.now[:error].blank?
         @task = Tassk.new
         @task.user = current_user
-        @task.start_time = Time.now
+        @task.start_time = Time.zone.now
         @task.tag = @tag
         set_message_for_render @task.save, "started"
       end

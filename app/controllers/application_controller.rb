@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     Time.zone = current_user.time_zone if user_signed_in?
+    Chronic.time_class = Time.zone
   end
 
   def after_sign_in_path_for(resource)
