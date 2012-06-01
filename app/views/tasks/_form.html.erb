@@ -10,7 +10,7 @@
   <%= text_field_tag :end_time, format_time_m_d_y(@task.end_time), :class => "datetime", :name => "task[end_time]" %>
 </div><br/>
 <div class="field">
-  <%= label_tag :tag_id %>
+  <%= label_tag :task_name %>
   <br/>
   <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
 </div><br/>

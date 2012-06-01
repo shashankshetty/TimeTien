@@ -24,7 +24,9 @@ class TasksController < ApplicationController
 
   def start_task
     if params[:select_tag] == ''
-      flash.now[:error] = "Select a tag to start the task"
+      flash.now[:error] = "Select a task to start"
+    elsif params[:select_tag] == '[new_tag]' && params[:add_tag] == ''
+      flash.now[:error] = "Add new task to start"
     else
       @tag = get_tag
       if flash.now[:error].blank?
@@ -88,7 +90,7 @@ class TasksController < ApplicationController
     if params[:select_tag] == '[new_tag]'
       @tag = Tag.find(:first, :conditions => {:name => params[:add_tag], :user_id => current_user.id})
       if @tag
-        flash.now[:error] = "Tag with same name already exists in your list"
+        flash.now[:error] = "Task with same name already exists in your list"
       else
         @tag = Tag.new(:name => params[:add_tag], :user => current_user)
         @tag.save

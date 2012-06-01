@@ -194,15 +194,17 @@ describe TasksController do
 
     describe "with invalid params" do
       it "returns an error message if Tag is not selected" do
-        Tassk.create! valid_attributes
         post :start_task, :task => valid_attributes, :select_tag => ""
-        flash.now[:error].should == "Select a tag to start the task"
+        flash.now[:error].should == "Select a task to start"
+      end
+      it "returns an error message if Tag is new_tag and add_tag is blank" do
+        post :start_task, :task => valid_attributes, :select_tag => "[new_tag]", :add_tag => ""
+        flash.now[:error].should == "Add new task to start"
       end
     end
   end
 
   describe "Stop the task" do
-
     it "stops the existing task" do
       now = Time.mktime(2012, 1, 20, 0, 0, 0)
       Time.stub!(:now).and_return(now)

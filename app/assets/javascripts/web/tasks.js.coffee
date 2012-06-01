@@ -1,12 +1,16 @@
+showHideAddTag = () ->
+  if($("#select_tag").val() == "[new_tag]")
+    $("#add_tag").show()
+  else
+    $("#add_tag").hide()
+
+
 $.fn.addTag = () ->
   $("#select_tag").bind 'change', ->
-    if($("#select_tag").val() == "[new_tag]")
-      $("#add_tag").show()
-    else
-      $("#add_tag").hide()
+    showHideAddTag()
 
 jQuery ->
-  $("#add_tag").hide()
+  showHideAddTag()
   $("#select_tag").addTag()
   $('#tasks_tab a:first').tab('show')
 

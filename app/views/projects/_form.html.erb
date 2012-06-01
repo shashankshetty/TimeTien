@@ -23,13 +23,13 @@
           <%= select_tag :project_admins, options_for_select(@project.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @project.admins.collect { |x| x.user_id }), :multiple => true, :size => 5, :class => "multiselect" %>
         </div><br/>
         <div>
-          <%= f.label :tag_tokens, "Tags" %>
+          <%= f.label :tag_tokens, "Tasks" %>
           <br/>
           <%= f.text_field :tag_tokens, "data-pre" => @project.tags.collect { |x| NameValuePair.new(x.id, x.name) }.to_json %>
         </div><br/>
         <div class="actions">
           <%= f.submit :class => "button" %>
-          <%= link_to 'Delete', @project, confirm: 'Deleting the project will delete all the associated tags and tasks. Are you sure you want to delete?', method: :delete, :class => "linkbutton" %>
+          <%= link_to 'Delete', @project, confirm: 'Deleting the project will delete all the associated tasks. Are you sure you want to delete?', method: :delete, :class => "linkbutton" %>
         </div>
     <% else %>
         <p>

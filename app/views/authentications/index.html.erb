@@ -1,4 +1,4 @@
-<% title "manage authentication services" %>
+<% title "manage logins" %>
 <%= render "shared/error_messages" %>
 <table id="authentications" class="tablesorter">
   <thead>
@@ -16,7 +16,7 @@
   <% end %>
 </table>
 
-<div class="title">add more authentications to your account</div>
+<p class="title">additional ways to login to Time Tien</p>
 <div id="authentication_services">
   <% if @authentications.select {|item|"google" == item.provider }.empty? %>
     <%= link_to image_tag("google_32.png", :size => "24x24", :alt => "google"), "/auth/google" %>

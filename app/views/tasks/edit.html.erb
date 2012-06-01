@@ -1,5 +1,5 @@
 <% title "edit task" %>
-<div class="right"><%= link_to 'add new task', new_task_path %></div><br/>
+<div class="right"><%= link_to 'add task', new_task_path %></div><br/>
 <%= form_tag({:action => "update"}, {:method => "put"}) do %>
     <%= render 'form' %>
     <div class="actions">

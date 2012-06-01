@@ -41,7 +41,7 @@ class TagsController < ApplicationController
   def destroy
     @tag = Tag.find(params[:id])
     if @tag.tasks.where("user_id != ?", current_user.id).count > 0
-      flash[:alert] = "Cannot delete the tag. Other users in the project using tha tag."
+      flash[:alert] = "Cannot delete the task. Other users in the project are using the task."
       respond_to do |format|
         format.html { render action: :edit }
         format.mobile { render action: :edit }
@@ -49,7 +49,7 @@ class TagsController < ApplicationController
     else
       result = @tag.destroy
       if result
-        flash[:success] = "Tag was successfully deleted."
+        flash[:success] = "Task was successfully deleted."
         respond_to do |format|
           format.html { redirect_to tags_url }
           format.mobile { redirect_to tags_url }
@@ -68,7 +68,7 @@ class TagsController < ApplicationController
 
   def set_message_for_render(result, action)
     if result
-      flash.now[:success] = "Tag was successfully #{action}."
+      flash.now[:success] = "Task was successfully #{action}."
     else
       flash.now[:error] = @tag.errors.full_messages
     end

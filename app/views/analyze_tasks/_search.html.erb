@@ -7,14 +7,14 @@
             <%= select_tag :search_project, options_for_select(current_user.get_projects, @search_query.projects), :multiple => true, :size => 5 %>
           </div><br/>
           <div class="field">
-            <%= label_tag "Tag" %>
+            <%= label_tag "Task" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_projects, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
           </div><br/>
           <%= hidden_field_tag :analyze, "project" %>
       <% else %>
           <div class="field">
-            <%= label_tag "Tag" %>
+            <%= label_tag "Task" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
           </div><br/>

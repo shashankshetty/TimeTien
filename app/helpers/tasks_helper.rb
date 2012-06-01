@@ -1,6 +1,6 @@
 module TasksHelper
   def available_tags_with_option_to_add
-    [['Select', ''], ['[Add New Tag]', '[new_tag]']].concat(current_user.get_tags)
+    [['Select', ''], ['[Add New]', '[new_tag]']].concat(current_user.get_tags)
   end
 
   def available_tags

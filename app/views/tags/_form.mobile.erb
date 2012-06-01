@@ -36,6 +36,6 @@
     </div><br/>
     <div class="actions">
       <%= f.submit "data-role" => "button" %>
-      <%= link_to 'Delete Tag', @tag, confirm: 'Deleting the tag will delete all the associated tasks. Are you sure you want to delete?', method: :delete, :"data-role" => "button"  %>
+      <%= link_to 'Delete Tag', @tag, confirm: 'Deleting the task will delete all the time tracked using the task. Are you sure you want to delete?', method: :delete, :"data-role" => "button"  %>
     </div>
 <% end %>

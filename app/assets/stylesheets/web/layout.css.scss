@@ -2,6 +2,7 @@ $black: #2C2C2C;
 $white: #FFFFFF;
 $yellow: #FFD80F;
 $green: #00CC00;
+$hover: #44cc9c;
 $red: #FF0000;
 $background: #f7f3de url(images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
 $font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -19,7 +20,7 @@ $font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, san
     text-decoration: none;
     &:hover {
       background-color: none;
-      color: $yellow;
+      color: $hover;
     }
   }
 }
@@ -121,8 +122,9 @@ select {
   font-size: 16px;
   padding: 7px 25px 7px 25px;
   cursor: pointer;
+  width: 80px;
   &:hover {
-    color: $yellow;
+    color: $hover;
   }
   @include rounded-corners(3px);
   background-repeat: no-repeat;
@@ -139,8 +141,9 @@ select {
   padding: 8px 25px 2px 25px;
   margin-bottom: 5px;
   cursor: pointer;
+  width: 80px;
   &:hover {
-    color: $yellow;
+    color: $hover;
   }
   @include rounded-corners(3px);
   background-repeat: no-repeat;
