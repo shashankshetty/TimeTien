@@ -5,6 +5,7 @@ $.fn.addTag = () ->
     else
       $("#add_tag").hide()
 
-jQuery ->
+jQuery(document).live('pageinit', (event) ->
   $("#add_tag").hide()
   $("#select_tag").addTag()
+)

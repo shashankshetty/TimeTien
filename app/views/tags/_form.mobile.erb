@@ -35,7 +35,7 @@
       <%= f.collection_select(:project_id, current_user.projects, :id, :name, :include_blank => "Select") %>
     </div><br/>
     <div class="actions">
-      <%= f.submit "data-role" => "button" %>
-      <%= link_to 'Delete Tag', @tag, confirm: 'Deleting the task will delete all the time tracked using the task. Are you sure you want to delete?', method: :delete, :"data-role" => "button"  %>
+      <%= f.submit "Submit", "data-role" => "button" %>
+      <%= link_to 'Delete Task', @tag, "data-ajax" => "false", confirm: 'Deleting the task will delete all the time tracked using the task. Are you sure you want to delete?', method: :delete, :"data-role" => "button"  %>
     </div>
 <% end %>

@@ -4,6 +4,6 @@
     <%= render 'form' %>
     <div class="actions">
       <%= submit_tag "Update Task", "data-role" => "button" %>
-      <%= link_to 'Delete Task', delete_task_path(@task), confirm: 'Are you sure you want to delete the task?', :"data-role" => "button" %>
+      <%= link_to 'Delete Task', delete_task_path(@task), "data-ajax" => "false", confirm: 'Are you sure you want to delete the task?', :"data-role" => "button" %>
     </div>
 <% end %>
