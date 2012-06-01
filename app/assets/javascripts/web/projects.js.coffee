@@ -1,5 +1,6 @@
 jQuery ->
   $("#project_user_tokens").tokenInput("/get_project_users.json", {
+  theme: "facebook",
   crossDomain: false,
   preventDuplicates: true,
   prePopulate: $("#project_user_tokens").data("pre"),
@@ -12,6 +13,7 @@ jQuery ->
   })
 
   $("#project_tag_tokens").tokenInput("/get_tags.json", {
+  theme: "facebook",
   crossDomain: false,
   preventDuplicates: true,
   prePopulate: $("#project_tag_tokens").data("pre")
