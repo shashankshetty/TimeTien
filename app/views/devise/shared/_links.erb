@@ -8,7 +8,7 @@
 <% end -%>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <p></p>
-  <span>Don't have a login? </span><%= link_to "Register", new_registration_path(resource_name), :class => "button" %><br />
+  <span></span><%= link_to "Click here to register", new_registration_path(resource_name) %><br />
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
