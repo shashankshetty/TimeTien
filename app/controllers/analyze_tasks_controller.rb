@@ -25,7 +25,7 @@ class AnalyzeTasksController < ApplicationController
 
   def analyze
     tasks = AnalyzeTask.analyze(@search_query)
-    message = "No tasks found with goal! Assign goal to tags to analyze how you are doing" if tasks.count == 0
+    message = "No tasks found with goal! Assign goal to tasks to analyze how you are doing" if tasks.count == 0
     @search_query.search_type = "Analyze"
     render_search_results_with_message tasks, message
   end
@@ -36,7 +36,7 @@ class AnalyzeTasksController < ApplicationController
     return render_search_results_with_message [], validation unless (validation.blank?)
     @search_query.search_type = params[:query]
     if @search_query.tags.nil?
-      return render_search_results_with_message [], "Select atleast one tag before you continue..."
+      return render_search_results_with_message [], "Select atleast one task before you continue..."
     end
     if (@search_query.search_type == 'Search')
       search
