@@ -1,5 +1,5 @@
 <%= form_tag :action => "query_tasks" do |f| %>
-    <div class="search_criteria">
+    <div class="search_criteria draggable">
       <% if params[:action] == "analyze_project_tasks" || @search_query.analyze == 'project' %>
           <div class="field">
             <%= label_tag "Project" %>

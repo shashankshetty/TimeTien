@@ -1,6 +1,6 @@
 class SearchQuery
   attr_reader :options, :user
-  attr_accessor :tasks, :search_type
+  attr_accessor :tasks, :search_type, :summary
 
   def validate_start_time_earlier_than_end_time
     if (start_time && end_time && start_time > end_time)

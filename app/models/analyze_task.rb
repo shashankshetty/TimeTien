@@ -8,6 +8,16 @@ class AnalyzeTask
     group_tasks(tasks)
   end
 
+  def self.summarize(tasks)
+    grouped_tasks = []
+    tags = tasks.map { |task| task.tag }.uniq
+    tags.each do |tag|
+      tag_tasks = tasks.find_all { |t| t.tag.name == tag.name }
+      grouped_tasks << NameValuePair.new(tag_tasks.sum(&:time_spent), tag.name)
+    end
+    grouped_tasks
+  end
+
   def self.group_tasks(tasks)
     grouped_tasks = []
     tags = tasks.map { |task| task.tag }.uniq

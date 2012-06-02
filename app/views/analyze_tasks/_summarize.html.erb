@@ -1,0 +1,7 @@
+<div class="hero-unit draggable">
+  <div align="center" class="summary_title">Total time logged</div>
+  <p></p>
+  <% @search_query.summary.each do |sum| %>
+    <div><b><%= sum.name %>:</b> <%=  display_time(sum.id)%></div>
+  <% end %>
+</div>

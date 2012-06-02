@@ -30,13 +30,22 @@
 }
 
 .analyze_left {
-  padding: 10px;
   margin-left: -320px;
+  margin-top: 0px;
   width: 100px;
 }
 
 .analyze_right {
   margin-left: 0px;
+  margin-top: 0px;
+}
+
+.analyze_far_right {
+  margin-left: 720px;
+  margin-top: 0px;
+  width: 250px;
+  position: absolute;
+  float: left;
 }
 
 .analyze_center {
@@ -50,4 +59,10 @@
 .current {
   font-weight: bold;
   color: #eff2f5;
+}
+
+.summary_title {
+  font-weight: bold;
+  font-size: medium;
+  text-decoration: underline;
 }

@@ -80,6 +80,6 @@ module TasksHelper
   end
 
   def search_title
-    @search_query.blank? || @search_query.search_type.blank? ? "search/analyze tasks" : @search_query.search_type
+    @search_query.blank? || @search_query.search_type.blank? ? "search tasks/track goals" : @search_query.search_type
   end
 end

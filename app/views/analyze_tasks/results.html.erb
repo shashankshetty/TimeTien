@@ -1,7 +1,9 @@
 <% title search_title %>
-<div id="message"></div>
 <div class="analyze_left">
 <%= render "search", :search_query => @search_query %>
+</div>
+<div class="analyze_far_right">
+  <%= render "summarize", :search_query => @search_query %>
 </div>
 <ul id='task_results' class='list analyze_right'>
   <% @search_query.tasks.each do |task| %>

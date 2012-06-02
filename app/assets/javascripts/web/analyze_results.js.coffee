@@ -23,7 +23,7 @@ $.fn.deleteTask = () ->
   )
 
 jQuery ->
-  $(".search_criteria").draggable()
+  $(".draggable").draggable()
 
   $('span[id^="over_the_limit"]').formatPerformanceColumn()
   $('.list_text').css 'color', '#131B3B'

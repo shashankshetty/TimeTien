@@ -25,10 +25,24 @@ body {
 
 .navbar ul li a.dropdown-toggle {
   color: #fbfbfb;
+  font-family: arial;
+  font-size: medium;
+}
+
+.navbar ul li ul li {
+  font-family: arial;
+  font-size: medium;
 }
 
 .navbar .container {
   background-color: #2A2A2A;
+}
+
+.hero-unit {
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 20px;
+  padding-bottom: 10px;
 }
 
 .item {

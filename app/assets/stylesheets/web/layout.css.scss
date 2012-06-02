@@ -5,7 +5,7 @@ $green: #00CC00;
 $hover: #44cc9c;
 $red: #FF0000;
 $background: #f7f3de url(images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
-$font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, sans-serif;
+$font-family: arial, Helvetica, sans-serif, verdana;
 
 @mixin rounded-corners($radius){
   border-radius: $radius;
@@ -27,7 +27,7 @@ $font-family: "Helvetica Neue", Helvetica, "Trebuchet MS", Arial, Helvetica, san
 
 @mixin layout {
   background-color: #FFF;
-  font-family: verdana;
+  font-family: $font-family;
   font-size: 14px;
 }
 

@@ -1,10 +1,10 @@
 class AnalyzeTasksController < ApplicationController
   def analyze_user_tasks
-    display_index [], :index
+    display_index [], [], :index
   end
 
   def analyze_project_tasks
-    display_index [], :index
+    display_index [], [], :index
   end
 
   def get_project_tags
@@ -41,7 +41,7 @@ class AnalyzeTasksController < ApplicationController
     if (@search_query.search_type == 'Search')
       search
     end
-    if (@search_query.search_type == 'Analyze')
+    if (@search_query.search_type == 'Track Goals')
       analyze
     end
   end
@@ -68,15 +68,17 @@ class AnalyzeTasksController < ApplicationController
 
   def render_search_results_with_message(tasks, message)
     flash.now[:info] = message
-    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(12), :results
+    summary = AnalyzeTask.summarize(tasks)
+    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(12), summary, :results
     return
   end
 
-  def display_index(tasks, view)
+  def display_index(tasks, summary, view)
     if @search_query.nil?
       @search_query = SearchQuery.new(params, current_user)
     end
     @search_query.tasks = tasks
+    @search_query.summary = summary
     respond_to do |format|
       format.html { render action: view }
     end

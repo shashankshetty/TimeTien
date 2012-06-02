@@ -1,6 +1,6 @@
 <% if user_projects.count > 0 %>
     <li class="divider"></li>
-    <li><div align="center"><%= link_to 'my projects↓', projects_path %></div></li>
+    <li><div align="center"><%= link_to 'all my projects↓', projects_path %></div></li>
     <% user_projects.each do |project| %>
         <li>
           <div align="center"><em><%= link_to project.name, edit_project_path(project) %></em></div>
