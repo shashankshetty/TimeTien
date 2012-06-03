@@ -49,3 +49,13 @@ body {
   height: 500px;
   widows: 600px;
 }
+
+.modal {
+  height: 500px;
+  width: 600px;
+  .modal-body {
+    height: 450px;
+    max-height: 500px;
+    width: 600px;
+  }
+}

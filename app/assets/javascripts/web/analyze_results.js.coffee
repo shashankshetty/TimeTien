@@ -22,6 +22,19 @@ $.fn.deleteTask = () ->
     $("#message").text(message.text)
   )
 
+get_data = () ->
+  labels = $("#names").val().split('##')
+  total_time = $("#total").val().split('##')
+
+  graph_data = []
+  length = labels.length-1
+  for i in [0..length]
+    graph_data.push({
+    label: labels[i],
+    data: parseFloat(total_time[i])
+    })
+  return graph_data
+
 jQuery ->
   $(".draggable").draggable()
 
@@ -67,3 +80,18 @@ jQuery ->
   )
 
   $(".current").wrapInner('<a href="#"></a>')
+
+  $('#chart-modal').modal('hide')
+  $('#chart-modal').on('show', () ->
+    data = get_data()
+    $.plot($("#chart"), data, {
+      series: {
+        pie: {
+            show: true
+        }
+      },
+      legend: {
+          show: false
+      }
+    })
+  )
