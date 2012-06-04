@@ -1,6 +1,6 @@
 class SearchQuery
   attr_reader :options, :user
-  attr_accessor :tasks, :search_type, :summary
+  attr_accessor :tasks, :search_type, :summary, :download_csv
 
   def validate_start_time_earlier_than_end_time
     if (start_time && end_time && start_time > end_time)
@@ -11,6 +11,7 @@ class SearchQuery
   def initialize(options, user)
     @options = options || {}
     @user = user
+    @download_csv = false
   end
 
   def analyze

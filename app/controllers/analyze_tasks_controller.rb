@@ -1,3 +1,5 @@
+require 'csv'
+
 class AnalyzeTasksController < ApplicationController
   def analyze_user_tasks
     display_index [], [], :index
@@ -40,8 +42,13 @@ class AnalyzeTasksController < ApplicationController
     end
     if (@search_query.search_type == 'Search')
       search
-    end
-    if (@search_query.search_type == 'Track Goals')
+    elsif (@search_query.search_type == 'Track Goals')
+      analyze
+    elsif (params[:csv_type] == 'Search')
+      @search_query.download_csv = true
+      search
+    elsif (params[:csv_type] == 'Analyze')
+      @search_query.download_csv = true
       analyze
     end
   end
@@ -79,8 +86,21 @@ class AnalyzeTasksController < ApplicationController
     end
     @search_query.tasks = tasks
     @search_query.summary = summary
-    respond_to do |format|
-      format.html { render action: view }
+
+    if (@search_query.download_csv)
+      csv_string = CSV.generate do |csv|
+        csv << ["Task", "Start Time", "End Time"]
+        @search_query.tasks.each do |task|
+          csv << [task.tag.name, task.start_time, task.end_time]
+        end
+      end
+      send_data csv_string,
+                :type => 'text/csv; charset=iso-8859-1; header=present',
+                :disposition => "attachment; filename=goal_history_#{Time.zone.now.strftime('%Y-%m-%d_%H:%M:%S')}.csv"
+    else
+      respond_to do |format|
+        format.html { render action: view }
+      end
     end
   end
 end

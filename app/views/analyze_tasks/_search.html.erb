@@ -5,25 +5,31 @@
             <%= label_tag "Project" %>
             <br/>
             <%= select_tag :search_project, options_for_select(current_user.get_projects, @search_query.projects), :multiple => true, :size => 5 %>
-          </div><br/>
+          </div>
+          <br/>
+
           <div class="field">
             <%= label_tag "Task" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_projects, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
-          </div><br/>
+          </div>
+          <br/>
           <%= hidden_field_tag :analyze, "project" %>
       <% else %>
           <div class="field">
             <%= label_tag "Task" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
-          </div><br/>
+          </div>
+          <br/>
           <%= hidden_field_tag :analyze, "task" %>
       <% end %>
       <div class="field">
         <%= label_tag "From" %>
         <br/>
-        <%= text_field_tag :start_time, format_time_m_d_y(@search_query.start_time), :class => "datetime" %></div><br/>
+        <%= text_field_tag :start_time, format_time_m_d_y(@search_query.start_time), :class => "datetime" %></div>
+      <br/>
+
       <div class="field">
         <%= label_tag "To" %>
         <br/>
@@ -34,5 +40,11 @@
         <%= submit_tag "Search", :name => 'query', :class => 'search' %>
         <%= submit_tag "Track Goals", :name => 'query', :class => 'search' %>
       </div>
+      <% if @search_query.tasks.count > 0 %>
+          <div align="center">
+            <%= hidden_field_tag :csv_type, @search_query.search_type %>
+            <%= submit_tag "Download CSV", :name => 'query', :class => 'search' %>
+          </div>
+      <% end %>
     </div>
 <% end %>
