@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>Sign in</h3>
       </div>
-      <div id="login" class="modal-body graph">
+      <div id="login" class="modal-padding">
         <%= render "shared/error_messages" %>
         <div>
           <div><%= f.label :email %>
@@ -16,6 +16,7 @@
             <%= f.email_field :email %>
           </div>
           <br/>
+
           <div><%= f.label :password %>
             <br/>
             <%= f.password_field :password %>
@@ -25,15 +26,20 @@
               <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
           <% end %>
           <p></p>
+
           <p>
             <%= f.submit "Sign in", :class => 'btn btn-large btn-info' %>
           </p>
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-              <%= link_to "Forgot your password?", new_password_path(resource_name) %><br/>
+              <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+              <br/>
           <% end -%>
-        </div><p></p>
+        </div>
+        <p></p>
+
         <div>
           <p class="login-screen">Sign in using your account with:</p>
+
           <div id="authentication_services">
             <%= link_to image_tag("google_32.png", :size => "32x32", :alt => "google"), "/auth/google" %>
             <%= link_to image_tag("github_32.png", :size => "32x32", :alt => "github"), "/auth/github" %>
@@ -45,5 +51,21 @@
         <%= render :partial => "devise/shared/links" %>
       </div>
     </div>
-    <div id="footer">© 2012 Time Tien</div>
+    <div id="wrapper">
+      <div class="slider-wrapper theme-default">
+        <div id="slider" class="nivoSlider">
+          <%= image_tag "tags.png", 'data-thumb' => "tasks.png" %>
+          <%= image_tag "tasks.png", 'data-thumb' => "tasks.png" %>
+          <%= image_tag "analyze.png", 'data-thumb' => "tasks.png" %>
+          <%= image_tag "projects.png", 'data-thumb' => "tasks.png" %>
+        </div>
+      </div>
+      <div class="description">
+        Time Tien is an efficient way to organize your time.
+      </div>
+    </div>
+    <div id="footer" align="center">
+      <hr/>
+      © 2012 Time Tien
+    </div>
 <% end %>

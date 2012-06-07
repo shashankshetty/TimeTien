@@ -6,7 +6,6 @@ $hover: #44cc9c;
 $red: #FF0000;
 $blue: #053799;
 $lightblue: #054bd4;
-$background: #f7f3de url(images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
 $font-family: arial, Helvetica, sans-serif, verdana;
 
 @mixin rounded-corners($radius){
@@ -127,7 +126,7 @@ select {
 
 .button {
   height: 34px;
-  background: $background;
+  background: #f7f3de;
   color: $black;
   border: 1px solid #dedede;
   font-family: $font-family;
@@ -246,17 +245,7 @@ hr {
 
 #footer {
   @include links($black);
-  padding: 5px;
-  text-align: center;
-  position: fixed;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: $white;
-  left: 0px;
-  bottom: 0px;
-  color: $white;
-  height: 30px;
-  width: 100%;
+  color: $black;
 }
 
 #invite {
@@ -298,4 +287,13 @@ hr {
   color: #fbfbfb;
   font-weight: bold;
   border-color: #fbfbfb;
+}
+
+.description {
+  font-family: sans-serif Helvetica;
+  font-size: large;
+}
+
+.modal-padding {
+  padding: 40px;
 }

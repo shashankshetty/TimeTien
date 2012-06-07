@@ -27,7 +27,9 @@ jQuery ->
       3:
         sorter: false,
       4:
-        sorter: false
+        sorter: false,
+      5:
+        sorter: false,
 
   $("#completed_tasks > .tablesorter").tablesorter
     widthFixed: false,
@@ -39,4 +41,6 @@ jQuery ->
       3:
         sorter: false,
       4:
+        sorter: false,
+      5:
         sorter: false

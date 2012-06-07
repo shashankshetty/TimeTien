@@ -30,7 +30,8 @@
                 <% end %>
             <% end %>
             <% if @search_query.search_type == "Search" %>
-                <span>Time Spent: </span><span class="list_text"><%= display_time(task.time_spent) %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <% time_spent = display_time(task.time_spent) %>
+                <span>Time Spent: </span><span class="list_text"><%= time_spent == '' ? '0m' : time_spent %></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <% earning = calculate_earning(task.tag, task.time_spent)
                    if !earning.nil? %>
                     <span>Earnings: </span><span class="list_text"><%= earning %></span>

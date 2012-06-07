@@ -6,10 +6,13 @@
       <tr>
         <th>Task</th>
         <th>Start time</th>
+        <% if tasks_type == 'completed' %>
+            <th>End time</th>
+        <% end %>
         <th>Time Taken</th>
-        <th>
-          <% if tasks_type == 'completed' %>End time
-          <% end %></th>
+        <% if tasks_type == 'ongoing' %>
+            <th></th>
+        <% end %>
         <th></th>
         <th></th>
       </tr>
@@ -18,11 +21,12 @@
       <% tasks.each do |task| %>
           <tr>
             <td align="center"><%= task.tag.name %></td>
-            <td align="center"><%= format_time_d_m_y(task.start_time) %></td>
+            <td align="right"><%= format_time_d_m_y(task.start_time) %></td>
             <% if tasks_type == 'completed' %>
-                <td align="center"><%= format_time_d_m_y(task.end_time) %></td>
+                <td align="right"><%= format_time_d_m_y(task.end_time) %></td>
             <% end %>
-            <td align="center"><%= display_time(task.time_spent) %></td>
+            <% time_spent = display_time(task.time_spent) %>
+            <td align="right"><%= time_spent == '' ? '0m' : time_spent %></td>
             <% if tasks_type == 'ongoing' %>
                 <td align="center"><%= link_to 'stop', stop_task_path(task), :class => 'stop' %></td>
             <% end %>

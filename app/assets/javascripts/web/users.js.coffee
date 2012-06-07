@@ -8,3 +8,11 @@ jQuery ->
 
   if ($(this).attr('title').trim() == 'TimeTien -')
     $(".title").remove();
+
+  $(window).load(() ->
+    $('#slider').nivoSlider({
+      pauseTime: 5000
+    })
+  )
+
+  $("#login-modal").modal('hide')

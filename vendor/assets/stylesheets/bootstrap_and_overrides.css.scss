@@ -34,7 +34,7 @@ body {
 .navbar .navbar-inner {
   background-color: #253043;
   background-repeat: repeat;
-  background-image: url('images/background.png');
+  background-image: url('web/images/background.png');
 }
 
 li.home {
@@ -57,11 +57,10 @@ li.home {
 }
 
 .modal {
-  height: 500px;
+  height: 650px;
   width: 600px;
   .modal-body {
-    height: 450px;
-    max-height: 500px;
-    width: 600px;
+    height: 600px;
+    width: 750px;
   }
 }
