@@ -42,8 +42,8 @@ jQuery ->
     $("#main").css("width","85%")
     marker_pos = $("#marker").offset()
     main_pos = $(".main-footer").offset()
-    if (main_pos.top < marker_pos.top)
-      $("#main").css("height",marker_pos.top + 250)
+    if (main_pos.top < (marker_pos.top+100))
+      $("#main").css("height", (marker_pos.top + 200))
 
 
   $('span[id^="over_the_limit"]').formatPerformanceColumn()
