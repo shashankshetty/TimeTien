@@ -38,6 +38,14 @@ get_data = () ->
 jQuery ->
   $(".draggable").draggable()
 
+  if ($(this).attr('title').trim().indexOf('Search') > 0 || $(this).attr('title').trim().indexOf('Analyze') > 0)
+    $("#main").css("width","85%")
+    marker_pos = $("#marker").offset()
+    main_pos = $(".main-footer").offset()
+    if (main_pos.top < marker_pos.top)
+      $("#main").css("height",marker_pos.top)
+
+
   $('span[id^="over_the_limit"]').formatPerformanceColumn()
   $('.list_text').css 'color', '#131B3B'
   $("#search_project").multiselect({

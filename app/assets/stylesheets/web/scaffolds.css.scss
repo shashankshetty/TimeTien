@@ -1,9 +1,14 @@
 body {
-  background-color: #F4F4F4;
-  color: #333;
+  color: #4e4e4e;
   font-family: arial, Helvetica, sans-serif, verdana;
   font-size: 13px;
   line-height: 18px;
+}
+
+.body-class {
+  background-color: #253043;
+  background-repeat: repeat;
+  background-image: url('images/background.png');
 }
 
 p, ol, ul, td {
@@ -55,8 +60,4 @@ div {
     font-size: 12px;
     list-style: square;
   }
-}
-
-.body-class {
-  background-color: #fbfbfb;
 }

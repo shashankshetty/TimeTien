@@ -30,6 +30,6 @@ describe Tassk, "When asked to get all tags" do
     tags = user.get_tags
     tags.count.should be == 2
     tags[0][0].should be == tag.name
-    tags[1][0].should include("G: #{project.name.first(5)}")
+    tags[1][0].should include("#{project.name.first(5)}")
   end
 end

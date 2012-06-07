@@ -1,19 +1,17 @@
 <%= form_tag :action => "query_tasks" do |f| %>
-    <div class="search_criteria draggable">
+    <div>
       <% if params[:action] == "analyze_project_tasks" || @search_query.analyze == 'project' %>
           <div class="field">
             <%= label_tag "Project" %>
             <br/>
             <%= select_tag :search_project, options_for_select(current_user.get_projects, @search_query.projects), :multiple => true, :size => 5 %>
           </div>
-          <br/>
 
           <div class="field">
             <%= label_tag "Task" %>
             <br/>
             <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_projects, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
           </div>
-          <br/>
           <%= hidden_field_tag :analyze, "project" %>
       <% else %>
           <div class="field">
@@ -21,29 +19,25 @@
             <br/>
             <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
           </div>
-          <br/>
           <%= hidden_field_tag :analyze, "task" %>
       <% end %>
       <div class="field">
         <%= label_tag "From" %>
         <br/>
         <%= text_field_tag :start_time, format_time_m_d_y(@search_query.start_time), :class => "datetime" %></div>
-      <br/>
-
       <div class="field">
         <%= label_tag "To" %>
         <br/>
         <%= text_field_tag :end_time, format_time_m_d_y(@search_query.end_time), :class => "datetime" %></div>
-      <br/>
 
       <div>
-        <%= submit_tag "Search", :name => 'query', :class => 'search' %>
-        <%= submit_tag "Track Goals", :name => 'query', :class => 'search' %>
+        <%= submit_tag "Search", :name => 'query', :class => 'btn btn-primary btn-large' %>
+        <%= submit_tag "Track Goals", :name => 'query', :class => 'btn btn-primary btn-large' %>
       </div>
       <% if @search_query.tasks.count > 0 %>
-          <div align="center">
+          <div><br/>
             <%= hidden_field_tag :csv_type, @search_query.search_type %>
-            <%= submit_tag "Download CSV", :name => 'query', :class => 'search' %>
+            <%= submit_tag "        Download CSV        ", :name => 'query', :class => 'btn btn-large' %>
           </div>
       <% end %>
     </div>

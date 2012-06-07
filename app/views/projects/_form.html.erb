@@ -26,10 +26,10 @@
           <%= f.label :tag_tokens, "Tasks" %>
           <br/>
           <%= f.text_field :tag_tokens, "data-pre" => @project.tags.collect { |x| NameValuePair.new(x.id, x.name) }.to_json %>
-        </div><br/>
+        </div><br/><br/>
         <div class="actions">
-          <%= f.submit :class => "button" %>
-          <%= link_to 'Delete', @project, confirm: 'Deleting the project will delete all the associated tasks. Are you sure you want to delete?', method: :delete, :class => "linkbutton" %>
+          <%= f.submit :class => "btn btn-primary btn-large" %>
+          <%= link_to 'Delete', @project, confirm: 'Deleting the project will delete all the associated tasks. Are you sure you want to delete?', method: :delete, :class => "btn btn-large" %>
         </div>
     <% else %>
         <p>

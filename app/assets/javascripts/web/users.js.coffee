@@ -5,3 +5,6 @@ jQuery ->
     message = $(".alert").text()
     index = message.indexOf(". ")
     $(".alert").html(message.substr(0, index) + '<div style="color:red">' + message.substr(index + 2) + '</div>') if (index > 0)
+
+  if ($(this).attr('title').trim() == 'TimeTien -')
+    $(".title").remove();

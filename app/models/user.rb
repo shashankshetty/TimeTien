@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
         end
       end
     end
-    tags.sort_by { |x| x.project_id || 0 }.collect { |tag| [tag.project.nil? ? tag.name : "#{tag.name} (G: #{tag.project.name.first(5)})", tag.id.to_s] }
+    tags.sort_by { |x| x.project_id || 0 }.collect { |tag| [tag.project.nil? ? tag.name : "#{tag.name} (#{tag.project.name.first(8)})", tag.id.to_s] }
   end
 
   def get_project_tags

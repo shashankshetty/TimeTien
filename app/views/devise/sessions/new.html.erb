@@ -1,38 +1,49 @@
-<% title "sign in" %>
-
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div class="alert2"><b>Application is in the early testing phase. You are welcome to use the application. <br/>Please be aware that the data will be purged before the beta release.</b></div><p></p>
-    <%= render "shared/error_messages" %>
-    <div class="content_left">
-      <div><%= f.label :email %>
-        <br/>
-        <%= f.email_field :email %>
-      </div>
-      <br/>
+    <div class="alert2">
+      <b>Application is in the early testing phase. You are welcome to use the application. <br/>Please be aware that
+        the data will be purged before the beta release.</b></div><p></p>
 
-      <div><%= f.label :password %>
-        <br/>
-        <%= f.password_field :password %>
+    <div class="modal fade hide" id="login-modal">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Sign in</h3>
       </div>
-      <p></p>
-      <% if devise_mapping.rememberable? %>
-          <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-      <% end %>
-      <p></p>
-
-      <div>
-        <%= f.submit "Sign in", :class => 'button' %>
+      <div id="login" class="modal-body graph">
+        <%= render "shared/error_messages" %>
+        <div>
+          <div><%= f.label :email %>
+            <br/>
+            <%= f.email_field :email %>
+          </div>
+          <br/>
+          <div><%= f.label :password %>
+            <br/>
+            <%= f.password_field :password %>
+          </div>
+          <p></p>
+          <% if devise_mapping.rememberable? %>
+              <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+          <% end %>
+          <p></p>
+          <p>
+            <%= f.submit "Sign in", :class => 'btn btn-large btn-info' %>
+          </p>
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+              <%= link_to "Forgot your password?", new_password_path(resource_name) %><br/>
+          <% end -%>
+        </div><p></p>
+        <div>
+          <p class="login-screen">Sign in using your account with:</p>
+          <div id="authentication_services">
+            <%= link_to image_tag("google_32.png", :size => "32x32", :alt => "google"), "/auth/google" %>
+            <%= link_to image_tag("github_32.png", :size => "32x32", :alt => "github"), "/auth/github" %>
+            <span class="intro">*</span>
+          </div>
+        </div>
+        <div>*github can be used only if you have public email address set up in your github profile.</div>
+        <p class="login-screen">Don't have a Time Tien account:</p>
+        <%= render :partial => "devise/shared/links" %>
       </div>
-      <%= render :partial => "devise/shared/links" %>
     </div>
-    <div class="content_right">
-      <div class="title">Sign in using your account with</div>
-      <div id="authentication_services">
-        <%= link_to image_tag("google_32.png", :size => "32x32", :alt => "google"), "/auth/google" %>
-        <%= link_to image_tag("github_32.png", :size => "32x32", :alt => "github"), "/auth/github" %>
-        <span class="intro">*</span>
-      </div>
-    </div>
-    <p>&nbsp;</p>
-    <div class="content_right">*github can be used only if you have public email address set up in your github profile.</div>
+    <div id="footer">© 2012 Time Tien</div>
 <% end %>

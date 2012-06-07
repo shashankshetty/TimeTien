@@ -6,6 +6,7 @@
       <tr>
         <th>Task</th>
         <th>Start time</th>
+        <th>Time Taken</th>
         <th>
           <% if tasks_type == 'completed' %>End time
           <% end %></th>
@@ -21,6 +22,7 @@
             <% if tasks_type == 'completed' %>
                 <td align="center"><%= format_time_d_m_y(task.end_time) %></td>
             <% end %>
+            <td align="center"><%= display_time(task.time_spent) %></td>
             <% if tasks_type == 'ongoing' %>
                 <td align="center"><%= link_to 'stop', stop_task_path(task), :class => 'stop' %></td>
             <% end %>

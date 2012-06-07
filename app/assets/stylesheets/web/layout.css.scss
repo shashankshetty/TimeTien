@@ -1,9 +1,11 @@
 $black: #2C2C2C;
-$white: #FFFFFF;
+$white: #FBFBFB;
 $yellow: #FFD80F;
 $green: #00CC00;
 $hover: #44cc9c;
 $red: #FF0000;
+$blue: #053799;
+$lightblue: #054bd4;
 $background: #f7f3de url(images/ui-bg_fine-grain_15_f7f3de_60x60.png) 50% 50% repeat;
 $font-family: arial, Helvetica, sans-serif, verdana;
 
@@ -53,11 +55,13 @@ body {
   @include layout;
   margin-left: auto;
   margin-right: auto;
-  width: 700px;
-  padding: 8px;
   font-family: $font-family;
+  color: #4e4e4e;
   font-size: 14px;
   background-color: #fbfbfb;
+  padding: 30px 70px 70px;
+  width: 700px;
+  height: 100%;
   h2 {
     font-size: 20px;
     padding-bottom: 10px;
@@ -72,11 +76,20 @@ body {
     font-size: 14px;
     font-weight: bold;
   }
+  @include links($lightblue);
+}
+
+.btn-link {
   @include links($black);
+}
+
+.login-screen {
+  font-size: 16px;
 }
 
 label {
   font-weight: bold;
+  color: #4e4e4e;
   font-size: 16px;
   display: inline;
 }
@@ -130,25 +143,6 @@ select {
   background-repeat: no-repeat;
 }
 
-.linkbutton {
-  height: 34px;
-  background: $background;
-  color: $black;
-  border: 1px solid #dedede;
-  font-family: $font-family;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 8px 25px 2px 25px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  width: 80px;
-  &:hover {
-    color: $hover;
-  }
-  @include rounded-corners(3px);
-  background-repeat: no-repeat;
-}
-
 .delete_short {
   padding: 12px 8px 10px 10px;
   background-repeat: no-repeat;
@@ -167,6 +161,8 @@ select {
 
 .title {
   font-size: 18px;
+  font-weight: bold;
+  color: rgba(64, 64, 64, 0.98);
   hr {
     border: 0;
     background-color: #9E9E9E;
@@ -206,6 +202,7 @@ select {
   @include message($red, #f2dede)
 }
 
+// delete when you remove testing message
 .alert2 {
   @include message($red, #f2dede)
 }
@@ -249,11 +246,15 @@ hr {
 
 #footer {
   @include links($black);
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   position: fixed;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: $white;
   left: 0px;
   bottom: 0px;
+  color: $white;
   height: 30px;
   width: 100%;
 }
@@ -261,7 +262,7 @@ hr {
 #invite {
   padding-left: 3px;
   padding-right: 3px;
-  background-color: $yellow;
+  background-color: $white;
   color: $black;
   font-weight: bold;
 }
@@ -287,14 +288,6 @@ hr {
   padding-bottom: 20px;
 }
 
-#tagline {
-  width: 100%;
-  margin-top: -20px;
-  height: 20px;
-  background-color: #FFD810;
-  align: center;
-}
-
 .menu-center {
   align: center;
   font-weight: bold;
@@ -306,4 +299,3 @@ hr {
   font-weight: bold;
   border-color: #fbfbfb;
 }
-

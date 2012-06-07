@@ -1,13 +1,13 @@
 <% if @search_query.summary.count > 0 %>
-    <div class="hero-unit draggable">
-      <div align="center" class="summary_title">Total time logged</div>
+    <div>
+      <div class="summary_title">Total time logged</div>
       <p></p>
       <% @search_query.summary.each do |sum| %>
           <div><b><%= sum.name %>:</b> <%= display_time(sum.id) %></div>
       <% end %>
       <%= hidden_field_tag 'names', labels %>
       <%= hidden_field_tag 'total', graph_data %>
-      <p align="right"><a id="graph-chart" class="btn" data-toggle="modal" href="#chart-modal">Graphical View</a></p>
+      <p><a id="graph-chart" class="btn" data-toggle="modal" href="#chart-modal">Graphical View</a></p>
     </div>
     <div class="modal fade hide" id="chart-modal">
       <div class="modal-header">

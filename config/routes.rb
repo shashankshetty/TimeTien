@@ -22,7 +22,7 @@ Timetien::Application.routes.draw do
   match 'get_tags', :to => 'projects#get_tags', :as => 'get_tags'
   match 'get_project_users', :to => 'projects#get_project_users', :as => 'get_project_users'
 
-  root :to => 'home#index'
+  root :to => 'tasks#manage'
   match '/user' => "tasks#manage", :as => :user_root
 
   # The priority is based upon order of creation:

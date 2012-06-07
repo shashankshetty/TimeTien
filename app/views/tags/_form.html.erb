@@ -38,9 +38,9 @@
       <%= f.collection_select(:project_id, current_user.projects, :id, :name, :include_blank => "Select") %>
     </div><br/><br/>
     <div class="actions">
-      <%= f.submit 'Submit', :class => "button" %>
+      <%= f.submit 'Submit', :class => "btn btn-primary btn-large" %>
       <% if params[:action] != 'new' && !(params[:action] == 'create' && @tag.errors.count > 0) %>
-        <%= link_to 'Delete', @tag, confirm: 'Deleting the task will delete all the time tracked using the task. Are you sure you want to delete?', method: :delete, :class => "linkbutton", "data-toggle" => "modal" %>
+        <%= link_to 'Delete', @tag, confirm: 'Deleting the task will delete all the time tracked using the task. Are you sure you want to delete?', method: :delete, :class => "btn btn-large btn-link", "data-toggle" => "modal" %>
       <% end %>
     </div>
 <% end %>

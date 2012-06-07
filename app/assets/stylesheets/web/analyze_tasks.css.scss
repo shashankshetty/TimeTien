@@ -8,7 +8,8 @@
 
 .list li {
   margin: 4px;
-  padding: 0.6em;
+  padding: 0.4em;
+  border-bottom: 3px #CCCCCC solid;
 }
 
 .list_text {
@@ -18,9 +19,11 @@
 
 .search_criteria {
   float: left;
-  position: absolute;
-  padding: 20px;
-  border: 1px solid #9E9E9E;
+  padding: 10px;
+}
+
+.search_result {
+  float: left;
 }
 
 .search {
@@ -29,31 +32,14 @@
   width: 80px;
 }
 
-.analyze_left {
-  margin-left: -320px;
-  margin-top: 0px;
-  width: 100px;
+.analyze-left {
+  margin-left:-30px;
+  width:180px;
+  border-right: 1px #CCCCCC solid;
 }
 
-.analyze_right {
-  margin-left: 0px;
-  margin-top: 0px;
-}
-
-.analyze_far_right {
-  margin-left: 720px;
-  margin-top: 0px;
-  width: 250px;
-  position: absolute;
-  float: left;
-}
-
-.analyze_center {
-  margin-left: 100px;
-  margin-top: 50px;
-  .search_criteria {
-    padding: 40px 100px;
-  }
+.analyze-right {
+  margin-left:250px;
 }
 
 .current {

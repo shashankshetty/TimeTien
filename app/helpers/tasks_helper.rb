@@ -1,6 +1,6 @@
 module TasksHelper
   def available_tags_with_option_to_add
-    [['Select', ''], ['[Add New]', '[new_tag]']].concat(current_user.get_tags)
+    [['Select to start a task', ''], ['[Add New]', '[new_tag]']].concat(current_user.get_tags)
   end
 
   def available_tags
@@ -12,7 +12,7 @@ module TasksHelper
   end
 
   def completed_tasks
-    @manage_task.tasks.where('end_time IS NOT NULL').order('end_time DESC').limit(15)
+    @manage_task.tasks.where('end_time IS NOT NULL').order('end_time DESC').limit(20)
   end
 
   def format_time_m_d_y(t)

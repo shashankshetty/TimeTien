@@ -76,7 +76,7 @@ class AnalyzeTasksController < ApplicationController
   def render_search_results_with_message(tasks, message)
     flash.now[:info] = message
     summary = AnalyzeTask.summarize(tasks)
-    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(12), summary, :results
+    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(25), summary, :results
     return
   end
 

@@ -12,8 +12,6 @@ jQuery ->
   $(".project_invites").hide()
   $(".dropdown-toggle").dropdown()
 
-  $("#user_settings").changeTextOnHover("change user settings")
-
   $(".datetime").datetimepicker(
     {
     ampm: true,

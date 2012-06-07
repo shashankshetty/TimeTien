@@ -3,6 +3,7 @@
 <%= form_tag({:action => "update"}, {:method => "put"}) do %>
     <%= render 'form' %>
     <div class="actions">
-      <%= submit_tag "Update Task", :class => "button" %>
+      <%= submit_tag "Update Task", :class => "btn btn-primary btn-large" %>
+      <%= link_to 'Delete', delete_task_path(@task), confirm: 'Are you sure you want to delete?', method: :delete, :class => "btn btn-large", "data-toggle" => "modal" %>
     </div>
 <% end %>

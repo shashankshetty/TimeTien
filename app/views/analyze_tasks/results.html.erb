@@ -1,15 +1,19 @@
 <% title search_title %>
-<div class="analyze_left">
-<%= render "search", :search_query => @search_query %>
+<div class="analyze-left">
+  <div class="search_criteria">
+    <%= render "search", :search_query => @search_query %>
+    <div id="marker">&nbsp;</div><hr/>
+    <%= render "summarize", :search_query => @search_query %>
+  </div>
 </div>
-<div class="analyze_far_right">
-  <%= render "summarize", :search_query => @search_query %>
-</div>
-<ul id='task_results' class='list analyze_right'>
+<ul id='task_results' class='list analyze-right'>
   <% @search_query.tasks.each do |task| %>
-      <li id="li_<%=task.id %>" class="ui-tabs-nav ui-widget-header">
+      <li id="li_<%=task.id %>">
         <div>
           <span><%= task.tag.name %></span>
+          <% if @search_query.search_type == "Search" && task.user == current_user %>
+            <span class="right"><%= link_to '', edit_task_path(task), :class => 'edit_short' %></span>
+          <% end %>
           <div>
             <% if @search_query.search_type == "Search" && @search_query.analyze == "project" %>
                 <span>User: <span class="list_text"><%= task.user.display_name %></span></span>
@@ -38,7 +42,9 @@
           <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>End: </span><span class="list_text"><%= format_time_d_m_y(task.end_time) || "ongoing" %></span>
           <% if @search_query.search_type == "Search" && task.user == current_user %>
-              <span class="right"><%= link_to '', '#', :class => 'delete_short', :id => "delete_#{task.id}", :taskId => task.id %></span>
+              <span class="right">
+                <%= link_to '', '#', :class => 'delete_short', :id => "delete_#{task.id}", :taskId => task.id %>
+              </span>
           <% end %></div>
       </li>
   <% end %>

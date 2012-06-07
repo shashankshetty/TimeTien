@@ -28,8 +28,7 @@
       <%= f.time_zone_select :time_zone %></div><br/>
     <p></p>
 
-    <div><%= f.submit "Update", :class => 'button' %></div>
-<% end %>
+    <div><%= f.submit "Update", :class => 'btn btn-primary btn-large' %></div>
+<% end %><br/>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>
-  .</p>
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %></p>

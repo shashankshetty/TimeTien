@@ -14,6 +14,9 @@ jQuery ->
   $("#select_tag").addTag()
   $('#tasks_tab a:first').tab('show')
 
+  if ($(this).attr('title').trim() == 'TimeTien - task management')
+      $(".title").find('span').remove();
+
   $("#ongoing_tasks > .tablesorter").tablesorter
     widthFixed: false,
     headers:
