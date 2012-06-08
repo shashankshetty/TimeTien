@@ -9,6 +9,8 @@
               <% if tasks_type == 'completed' %>
                   <br/>completed @ <%= format_time_d_m_y(task.end_time) %>
               <% end %>
+              <br/><% time_spent = display_time(task.time_spent) %>
+              time spent <%= time_spent == '' ? '0m' : time_spent %>
             </a>
             <% if tasks_type == 'ongoing' %>
                 <%= link_to 'stop', stop_task_path(task) %>

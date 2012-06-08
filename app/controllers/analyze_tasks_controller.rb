@@ -2,11 +2,11 @@ require 'csv'
 
 class AnalyzeTasksController < ApplicationController
   def analyze_user_tasks
-    display_index [], [], :index
+    display_index [], [], :index, 0
   end
 
   def analyze_project_tasks
-    display_index [], [], :index
+    display_index [], [], :index, 0
   end
 
   def get_project_tags
@@ -38,7 +38,7 @@ class AnalyzeTasksController < ApplicationController
     return render_search_results_with_message [], validation unless (validation.blank?)
     @search_query.search_type = params[:query]
     if @search_query.tags.nil?
-      return render_search_results_with_message [], "Select atleast one task before you continue..."
+      return render_search_results_with_message [], "Select at least one task before you continue..."
     end
     if (@search_query.search_type == 'Search')
       search
@@ -76,22 +76,23 @@ class AnalyzeTasksController < ApplicationController
   def render_search_results_with_message(tasks, message)
     flash.now[:info] = message
     summary = AnalyzeTask.summarize(tasks)
-    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(25), summary, :results
+    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(5), summary, :results, tasks.count
     return
   end
 
-  def display_index(tasks, summary, view)
+  def display_index(tasks, summary, view, count)
     if @search_query.nil?
       @search_query = SearchQuery.new(params, current_user)
     end
     @search_query.tasks = tasks
+    @search_query.total_results_count = count
     @search_query.summary = summary
 
     if (@search_query.download_csv)
       csv_string = CSV.generate do |csv|
-        csv << ["Task", "Start Time", "End Time"]
+        csv << ["Task", "Start Time", "End Time", "Time Out(min)"]
         @search_query.tasks.each do |task|
-          csv << [task.tag.name, task.start_time, task.end_time]
+          csv << [task.tag.name, task.start_time, task.end_time, task.time_out]
         end
       end
       send_data csv_string,

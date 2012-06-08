@@ -16,3 +16,6 @@ jQuery ->
   )
 
   $("#login-modal").modal('hide')
+
+  if ($(this).attr('title').trim().indexOf('forgot your password?') > 0 || $(this).attr('title').trim().indexOf('registration') > 0)
+    $("#login").hide()
