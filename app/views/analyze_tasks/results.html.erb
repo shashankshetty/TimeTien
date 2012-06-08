@@ -1,6 +1,7 @@
 <% title search_title %>
 <div class="analyze-left">
   <div class="search_criteria">
+    <span class="query-title">Search</span>&nbsp;&nbsp;<span class="pointer" data-toggle="collapse" data-target="#query">(collapse/expand)</span><br/><br/>
     <%= render "search", :search_query => @search_query %>
     <div id="marker">&nbsp;</div><hr/>
     <%= render "summarize", :search_query => @search_query %>
