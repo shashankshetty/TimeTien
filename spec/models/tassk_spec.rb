@@ -18,6 +18,13 @@ describe Tassk, "When asked to validate" do
     task = FactoryGirl.create(:tassk)
     task.end_time = task.start_time-1.day
     task.should_not be_valid
+    end
+
+  it "should not have time_out more than difference between start and end times" do
+    task = FactoryGirl.create(:tassk)
+    task.end_time = task.start_time-1.hour
+    task.time_out = 120*60
+    task.should_not be_valid
   end
 end
 
@@ -37,6 +44,13 @@ describe Tassk, "When asked to get time spent on a task" do
     now = task.start_time + 60
     Time.stub!(:now).and_return(now)
     task.time_spent.should be == 60
+    end
+
+  it "should get the difference between (end_time - start_time) -time_out" do
+    task = FactoryGirl.create(:tassk)
+    task.end_time = task.start_time + 3600
+    task.time_out = 30
+    task.time_spent.should be == 1800
   end
 end
 

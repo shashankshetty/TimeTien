@@ -14,3 +14,12 @@
   <br/>
   <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
 </div><br/>
+<div class="field">
+  <%= label_tag "Time Out" %>
+  <span> (HH:MM)</span>
+  <a class="title" rel="popover" href="#" data-original-title="Break/Time out in (HH:MM)" data-content="Total break time between a task">
+    <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
+  <%= text_field_tag :hours, get_time_out_hours, :class => 'time' %>
+  : <%= text_field_tag :minutes, get_time_out_minutes, :class => 'time' %>
+</div><br/>
+

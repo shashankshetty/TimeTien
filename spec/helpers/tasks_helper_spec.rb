@@ -101,4 +101,19 @@ describe TasksHelper do
       helper.calculate_earning(tag, total_seconds).should == "$100.00"
     end
   end
+
+  describe "When asked to get hours and minutes portion of time_out" do
+    before :each do
+      @task = FactoryGirl.create(:tassk)
+      @task.time_out = 100
+    end
+
+    it "should return the hour part of the time" do
+      helper.get_time_out_hours.should == 1
+    end
+
+    it "should return the minutes part of the time" do
+      helper.get_time_out_minutes.should == 40
+    end
+  end
 end

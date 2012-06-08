@@ -48,6 +48,7 @@ class TasksController < ApplicationController
     @task = Tassk.new(params[:task])
     @task.start_time = parse_datetime(params[:task]["start_time"])
     @task.end_time = parse_datetime(params[:task]["end_time"])
+    @task.time_out = get_time_out
     @task.user = current_user
     result = @task.save
     respond_to do |format|
@@ -68,6 +69,7 @@ class TasksController < ApplicationController
     @task.update_attributes(params[:task])
     @task.start_time = parse_datetime(params[:task]["start_time"])
     @task.end_time = parse_datetime(params[:task]["end_time"])
+    @task.time_out = get_time_out
     set_message_for_render @task.save, "updated"
     respond_to do |format|
       format.html { render action: :edit }
@@ -99,6 +101,14 @@ class TasksController < ApplicationController
       @tag = Tag.find(params[:select_tag])
     end
     @tag
+  end
+
+  def get_time_out
+    hours = params[:hours].to_i
+    minutes = params[:minutes].to_i
+    time_out = hours * 60 + minutes
+    time_out = nil if time_out == 0
+    return time_out
   end
 
   def set_message_for_render(result, action)

@@ -82,4 +82,14 @@ module TasksHelper
   def search_title
     @search_query.blank? || @search_query.search_type.blank? ? "search tasks/track goals" : @search_query.search_type
   end
+
+  def get_time_out_hours
+    return nil if @task.time_out.blank?
+    @task.time_out/60
+  end
+
+  def get_time_out_minutes
+    return nil if @task.time_out.blank?
+    return @task.time_out.divmod(60)[1]
+  end
 end

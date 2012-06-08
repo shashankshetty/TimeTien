@@ -14,7 +14,7 @@
       <%= f.label :time_allocated %>
       <span> (HH:MM)</span>
       <a class="title" rel="popover" href="#" data-original-title="Typical time to complete the task" data-content="Set a target to complete a task to measure how you are doing? ">
-        <%= image_tag("info.png", :size => "16x16", :alt => "facebook") %></a><br/>
+        <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
       <%= text_field_tag :hours, get_hours, :class => 'time' %>
       : <%= text_field_tag :minutes, get_minutes, :class => 'time' %> /
       <%= f.collection_select(:frequency, task_frequencies, :first, :last) %>
@@ -22,7 +22,7 @@
     <div class="field">
       <%= f.label :pay_rate %>
       <a class="title" rel="popover" href="#" data-original-title="Pay Rate" data-content="Pay rate per hour">
-        <%= image_tag("info.png", :size => "16x16", :alt => "facebook") %></a><br/>
+        <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
       <%= f.collection_select(:pay_currency, currencies, :first, :last, :style => "width: 100px") %> <%= f.text_field :pay_rate, :class => "amount", :maxlength => 7 %>
       /hour
     </div><br/>
@@ -30,7 +30,7 @@
       <%= f.check_box :complete_within, :class => "checkbox" %>&nbsp;&nbsp;<%= label_tag "Check if your goal is to complete the task within the allocated time" %>
       <a href="#" rel="popover" data-original-title="Measure against Time allocated" data-content="If checked you get a green signal if you complete the task within the allocated time else you get a red signal. Ex: Tasks bound by time line.<br/>
       If unchecked you get a red signal if you complete the task within the allocated time else you get a green signal. Ex: Tasks like spending time with your kids.">
-        <%= image_tag("info.png", :size => "16x16", :alt => "facebook") %></a>
+        <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a>
     </div><br/>
     <div class="field">
       <%= f.label :project_id %>
