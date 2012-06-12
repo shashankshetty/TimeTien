@@ -7,7 +7,7 @@
     <%= render "summarize", :search_query => @search_query %>
   </div>
 </div>
-<div align="right">Total results returned: <%= @search_query.tasks.count %> of <%= @search_query.total_results_count %></div>
+<div align="right">Showing results <%= @search_query.tasks.count %> of <%= @search_query.total_results_count %></div>
 <ul id='task_results' class='list analyze-right'>
   <% @search_query.tasks.each do |task| %>
       <li id="li_<%=task.id %>">
