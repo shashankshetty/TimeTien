@@ -54,24 +54,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def update_admins(user_ids, user)
-    if !user_ids.blank?
-      sanitized_user_ids = user_ids.reject { |s| s.nil? or s.empty? }
-      sanitized_user_ids.each do |id|
-        project_member = get_membership(id)
-        if !project_member.nil?
-          project_member.is_admin = true
-          membership << project_member
-        end
-      end
-    end
-    current_user_membership = get_membership(user.id)
-    if !current_user_membership.nil?
-      current_user_membership.is_admin = true
-      membership << current_user_membership
-    end
-  end
-
   def update_tags(tag_ids)
     self.tags.clear
     if !tag_ids.blank?

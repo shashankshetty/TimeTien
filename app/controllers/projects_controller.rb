@@ -70,11 +70,19 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.update_attributes(params[:project])
     @project.update_users(params[:project][:user_tokens], current_user)
-    @project.update_admins(params[:project_admins], current_user)
     @project.update_tags(params[:project][:tag_tokens])
     unless @project.validate_project_uniqueness_scope(current_user, @project)
-      set_message_for_render @project.save, "updated"
+      result = @project.save
+      if result
+        admins = get_sanitized_admins
+        @project.membership.each do |member|
+          member.is_admin = admins.include?(member.user.id.to_s) || member.user == current_user ? true : false
+          member.save
+        end
+      end
+      set_message_for_render result, "updated"
     end
+    set_message_for_render result, "updated"
 
     respond_to do |format|
       format.html { render action: :edit }
@@ -136,4 +144,9 @@ class ProjectsController < ApplicationController
       flash.now[:error] = @project.errors.full_messages
     end
   end
+
+  def get_sanitized_admins
+    params[:project_admins].blank? ? [] : params[:project_admins].reject { |s| s.nil? or s.empty? }
+  end
+
 end
