@@ -6,10 +6,10 @@ jQuery ->
   prePopulate: $("#project_user_tokens").data("pre"),
   onAdd: (item) ->
     $("#project_admins").append($("<option></option>").attr("value", item.id).text(item.name))
-    $("#project_admins").multiselect("refresh")
+    $("#project_admins").trigger("liszt:updated")
   onDelete: (item) ->
     $("#project_admins option[value='" + item.id + "']").remove()
-    $("#project_admins").multiselect("refresh")
+    $("#project_admins").trigger("liszt:updated")
   })
 
   $("#project_tag_tokens").tokenInput("/get_tags.json", {

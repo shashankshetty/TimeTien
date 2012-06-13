@@ -11,6 +11,7 @@ jQuery ->
   $(".projects").hide()
   $(".project_invites").hide()
   $(".dropdown-toggle").dropdown()
+  $(".chzn-select").chosen()
 
   $(".datetime").datetimepicker(
     {
@@ -21,14 +22,6 @@ jQuery ->
     buttonImage: "/assets/calendar.gif",
     buttonImageOnly: true
     }
-  )
-
-  $(".multiselect").multiselect({
-  selectedList: 2
-  }).multiselectfilter()
-
-  $("input[name^='multiselect_']").each(() ->
-    $(this).addClass("multiselect-item")
   )
 
   $('table').hide() if $('table > tbody > tr').length == 0

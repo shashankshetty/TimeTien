@@ -20,7 +20,7 @@
         <div>
           <%= f.label :admins, "Admins" %>
           <br/>
-          <%= select_tag :project_admins, options_for_select(@project.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @project.admins.collect { |x| x.user_id }), :multiple => true, :size => 5, :class => "multiselect" %>
+          <%= select_tag :project_admins, options_for_select(@project.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @project.admins.collect { |x| x.user_id }), :multiple => true, :class => "chzn-select" %>
         </div><br/>
         <div>
           <%= f.label :tag_tokens, "Tasks" %>

@@ -4,20 +4,20 @@
           <div class="field">
             <%= label_tag "Project" %>
             <br/>
-            <%= select_tag :search_project, options_for_select(current_user.get_projects, @search_query.projects), :multiple => true, :size => 5 %>
+            <%= select_tag :search_project, options_for_select(current_user.get_projects, @search_query.projects), :multiple => true, :class => "chzn-select", 'data-placeholder' => "Select Projects" %>
           </div>
 
           <div class="field">
             <%= label_tag "Task" %>
             <br/>
-            <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_projects, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
+            <%= select_tag :search_tag, options_for_select(@search_query.get_tags_for_projects, @search_query.tags), :multiple => true, :class => "chzn-select", 'data-placeholder' => "Select Tasks" %>
           </div>
           <%= hidden_field_tag :analyze, "project" %>
       <% else %>
           <div class="field">
             <%= label_tag "Task" %>
             <br/>
-            <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :size => 5, :class => "multiselect" %>
+            <%= select_tag :search_tag, options_for_select(current_user.get_tags, @search_query.tags), :multiple => true, :class => "chzn-select", 'data-placeholder' => "Select Tasks" %>
           </div>
           <%= hidden_field_tag :analyze, "task" %>
       <% end %>
