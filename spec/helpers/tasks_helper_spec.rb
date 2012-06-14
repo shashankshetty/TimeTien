@@ -34,14 +34,14 @@ describe TasksHelper do
   end
 
   describe "When asked to display the time given in seconds" do
-    it "should display time in d h m format" do
-      helper.display_time(90000).should == "1d 1h"
+    it "should display time in h m format" do
+      helper.display_time(90000).should == "25hr"
     end
   end
 
   describe "When asked to display the time_allocated given in seconds" do
-    it "should display time in d h m format" do
-      helper.display_time_with_performance(6400, true).should == "-1h 47m over"
+    it "should display time in h m format" do
+      helper.display_time_with_performance(6400, true).should == "-1hr 47min over"
     end
   end
 
@@ -50,9 +50,9 @@ describe TasksHelper do
       Time.zone = "Central Time (US & Canada)"
     end
 
-    it "should display time in {d}{h}{m} format" do
+    it "should display time in {h}{m} format" do
       t = Time.now
-      helper.display_time(3700).should == "1h 2m"
+      helper.display_time(3700).should == "1hr 2min"
     end
   end
 
@@ -61,14 +61,14 @@ describe TasksHelper do
       Time.zone = "Central Time (US & Canada)"
     end
 
-    it "should display time in {d}{h}{m} over for positive number with negative sign" do
+    it "should display time in {h}{m} over for positive number with negative sign" do
       t = Time.now
-      helper.display_time_with_performance(3700, true).should == "-1h 2m over"
+      helper.display_time_with_performance(3700, true).should == "-1hr 2min over"
     end
 
-    it "should display time in {d}{h}{m} under for negative number with positive sign" do
+    it "should display time in {h}{m} under for negative number with positive sign" do
       t = Time.now
-      helper.display_time_with_performance(-3700, true).should == "+1h 2m under"
+      helper.display_time_with_performance(-3700, true).should == "+1hr 2min under"
     end
   end
 
@@ -77,14 +77,14 @@ describe TasksHelper do
       Time.zone = "Central Time (US & Canada)"
     end
 
-    it "should display time in {d}{h}{m} over for positive number with positive sign" do
+    it "should display time in {h}{m} over for positive number with positive sign" do
       t = Time.now
-      helper.display_time_with_performance(3700, false).should == "+1h 2m over"
+      helper.display_time_with_performance(3700, false).should == "+1hr 2min over"
     end
 
-    it "should display time in {d}{h}{m} under for negative number with negative sign" do
+    it "should display time in {h}{m} under for negative number with negative sign" do
       t = Time.now
-      helper.display_time_with_performance(-3700, false).should == "-1h 2m under"
+      helper.display_time_with_performance(-3700, false).should == "-1hr 2min under"
     end
   end
 

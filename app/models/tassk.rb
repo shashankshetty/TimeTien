@@ -29,4 +29,25 @@ class Tassk < ActiveRecord::Base
   def my_performance()
     return performance - ((tag.time_allocated || 0) * 60)
   end
+
+  def self.formatted_time(total_seconds)
+      total_seconds = total_seconds.abs.to_i
+
+      hours = (total_seconds / 3600)
+      minutes = (total_seconds / 60) - (hours * 60)
+      seconds = total_seconds % 60
+      if (seconds > 30)
+        minutes = minutes + 1
+      end
+      display = ''
+      display_concat = ''
+      if hours > 0
+        display = display + display_concat + "#{hours}hr"
+        display_concat = ' '
+      end
+      if minutes > 0
+        display = display + display_concat + "#{minutes}min"
+      end
+      display
+    end
 end

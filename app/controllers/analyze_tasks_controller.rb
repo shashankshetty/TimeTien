@@ -76,7 +76,7 @@ class AnalyzeTasksController < ApplicationController
   def render_search_results_with_message(tasks, message)
     flash.now[:info] = message
     summary = AnalyzeTask.summarize(tasks)
-    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(5), summary, :results, tasks.count
+    display_index Kaminari.paginate_array(tasks).page(params[:page]).per(12), summary, :results, tasks.count
     return
   end
 
@@ -90,9 +90,9 @@ class AnalyzeTasksController < ApplicationController
 
     if (@search_query.download_csv)
       csv_string = CSV.generate do |csv|
-        csv << ["Task", "Start Time", "End Time", "Time Out(min)"]
+        csv << ["Task", "Start Time", "End Time", "Time Out(min)", "Total Time Spent"]
         @search_query.tasks.each do |task|
-          csv << [task.tag.name, task.start_time, task.end_time, task.time_out]
+          csv << [task.tag.name, task.start_time, task.end_time, task.time_out, Tassk.formatted_time(task.time_spent)]
         end
       end
       send_data csv_string,

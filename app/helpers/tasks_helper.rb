@@ -46,31 +46,7 @@ module TasksHelper
   end
 
   def display_time(total_seconds)
-    total_seconds = total_seconds.abs.to_i
-
-    days = total_seconds / 86400
-    hours = (total_seconds / 3600) - (days * 24)
-    minutes = (total_seconds / 60) - (hours * 60) - (days * 1440)
-    seconds = total_seconds % 60
-    if (seconds > 30)
-      minutes = minutes + 1
-    end
-    display = ''
-    display_concat = ''
-    if days > 0
-      display = display + display_concat + "#{days}d"
-      display_concat = ' '
-    end
-    if hours > 0
-      display = display + display_concat + "#{hours}h"
-      display_concat = ' '
-    end
-    if minutes > 0
-      display = display + display_concat + "#{minutes}m"
-      #display_concat = ' '
-    end
-    #display = display + display_concat + "#{seconds}s"
-    return display
+    Tassk.formatted_time(total_seconds)
   end
 
   def calculate_earning(tag, total_seconds)
