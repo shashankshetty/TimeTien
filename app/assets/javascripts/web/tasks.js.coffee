@@ -34,13 +34,13 @@ jQuery ->
   $("#select_tag").addTag()
   $('#tasks_tab a:first').tab('show')
 
-  $("#task_type_with_times").selectTaskTypeWithTimes()
-  $("#task_type_with_times").click(() ->
+  $("#task_type_wt").selectTaskTypeWithTimes()
+  $("#task_type_wt").click(() ->
      $(this).selectTaskTypeWithTimes()
 
   )
-  $("#task_type_with_no_times").selectTaskTypeWithoutTimes()
-  $("#task_type_with_no_times").click(() ->
+  $("#task_type_wnt").selectTaskTypeWithoutTimes()
+  $("#task_type_wnt").click(() ->
     $(this).selectTaskTypeWithoutTimes()
   )
 
