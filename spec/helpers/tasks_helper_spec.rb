@@ -116,4 +116,19 @@ describe TasksHelper do
       helper.get_time_out_minutes.should == 40
     end
   end
+
+  describe "When asked to get hours and minutes portion of additional_time_spent" do
+    before :each do
+      @task = FactoryGirl.create(:tassk)
+      @task.additional_time_spent = 100
+    end
+
+    it "should return the hour part of the time" do
+      helper.get_additional_time_spent_hours.should == 1
+    end
+
+    it "should return the minutes part of the time" do
+      helper.get_additional_time_spent_minutes.should == 40
+    end
+  end
 end

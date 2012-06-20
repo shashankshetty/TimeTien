@@ -24,4 +24,14 @@ jQuery ->
     }
   )
 
+  $(".date").datepicker(
+    {
+    ampm: true,
+    dateFormat: 'm/d/yy',
+    showOn: "button",
+    buttonImage: "/assets/calendar.gif",
+    buttonImageOnly: true
+    }
+  )
+
   $('table').hide() if $('table > tbody > tr').length == 0

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608031927) do
+ActiveRecord::Schema.define(:version => 20120617045958) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -57,10 +57,12 @@ ActiveRecord::Schema.define(:version => 20120608031927) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "user_id"
     t.integer  "time_out"
+    t.integer  "additional_time_spent"
+    t.string   "task_type",             :default => "wt"
   end
 
   create_table "users", :force => true do |t|

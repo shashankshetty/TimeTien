@@ -57,29 +57,57 @@ describe TasksController do
   end
 
   describe "POST create" do
-    def valid_attributes
-      {
-          :tag_id => @tag.id,
-          :start_time => Time.now,
-          :user_id => @user.id
-      }
-    end
 
-    describe "with valid params" do
+    describe "with valid params for task type with times" do
+      def valid_attributes
+        {
+            :tag_id => @tag.id,
+            :start_time => Time.now,
+            :user_id => @user.id
+        }
+      end
+
       it "creates a new Task" do
         expect {
-          post :create, :task => valid_attributes
+          post :create, :task => valid_attributes, :task_type => "wt"
         }.to change(Tassk, :count).by(1)
       end
 
       it "assigns a newly created task as @task" do
-        post :create, :task => valid_attributes
+        post :create, :task => valid_attributes, :task_type => "wt"
         assigns(:task).should be_a(Tassk)
         assigns(:task).should be_persisted
       end
 
       it "renders edit template" do
-        post :create, :task => valid_attributes
+        post :create, :task => valid_attributes, :task_type => "wt"
+        task = assigns(:task)
+        response.should redirect_to(edit_task_path(task))
+      end
+    end
+
+    describe "with valid params for task type with no times" do
+      def valid_attributes
+        {
+            :tag_id => @tag.id,
+            :user_id => @user.id
+        }
+      end
+
+      it "creates a new Task" do
+        expect {
+          post :create, :task => valid_attributes, :task_date => "6/19/2012", :select_tag => @tag.id, :time_spent_hours => "5", :time_spent_minutes => "0", :task_type => "wnt"
+        }.to change(Tassk, :count).by(1)
+      end
+
+      it "assigns a newly created task as @task" do
+        post :create, :task => valid_attributes, :task_date => "6/19/2012", :select_tag => @tag.id, :time_spent_hours => "5", :time_spent_minutes => "0", :task_type => "wnt"
+        assigns(:task).should be_a(Tassk)
+        assigns(:task).should be_persisted
+      end
+
+      it "renders edit template" do
+        post :create, :task => valid_attributes, :task_date => "6/19/2012", :select_tag => @tag.id, :time_spent_hours => "5", :time_spent_minutes => "0", :task_type => "wnt"
         task = assigns(:task)
         response.should redirect_to(edit_task_path(task))
       end
@@ -103,15 +131,46 @@ describe TasksController do
   end
 
   describe "PUT update" do
-    def valid_attributes
-      {
-          :tag_id => @tag.id,
-          :start_time => Time.now,
-          :user_id => @user.id
-      }
+    describe "with valid params for task with no times" do
+      def valid_attributes
+        {
+            :tag_id => @tag.id,
+            :user_id => @user.id
+        }
+      end
+
+      it "updates the requested task" do
+        # Assuming there are no other tasks in the database, this
+        # specifies that the Task created on the previous line
+        # receives the :update_attributes message with whatever params are
+        # submitted in the request.
+        task = Tassk.create!(:tag => @tag, :user => @user, :start_time => DateTime.now.beginning_of_day, :end_time => DateTime.now.beginning_of_day, :additional_time_spent => 300, :task_type => 'wnt')
+        Tassk.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => task.id, :task => {'these' => 'params'}, :task_date => DateTime.now.beginning_of_day, :select_tag => @tag.id, :time_spent_hours => "5", :time_spent_minutes => "0", :task_type => 'wnt'
+      end
+
+      it "assigns the requested task as @task" do
+        task = Tassk.create!(:tag => @tag, :user => @user, :start_time => DateTime.now.beginning_of_day, :end_time => DateTime.now.beginning_of_day, :additional_time_spent => 300, :task_type => 'wnt')
+        put :update, :id => task.id, :task => valid_attributes, :task_date => DateTime.now.beginning_of_day, :select_tag => @tag.id, :time_spent_hours => "5", :time_spent_minutes => "0", :task_type => 'wnt'
+        assigns(:task).should eq(task)
+      end
+
+      it "renders edit template", :ignore => true do
+        task = Tassk.create!(:tag => @tag, :user => @user, :start_time => DateTime.now.beginning_of_day, :end_time => DateTime.now.beginning_of_day, :additional_time_spent => 300, :task_type => 'wnt')
+        put :update, :id => task.id, :task => valid_attributes, :task_date => DateTime.now.beginning_of_day, :select_tag => @tag.id, :time_spent_hours => "5", :time_spent_minutes => "0", :task_type => 'wnt'
+        response.should render_template("edit")
+      end
     end
 
-    describe "with valid params" do
+    describe "with valid params for task with times" do
+      def valid_attributes
+        {
+            :tag_id => @tag.id,
+            :start_time => Time.now,
+            :user_id => @user.id
+        }
+      end
+
       it "updates the requested task" do
         # Assuming there are no other tasks in the database, this
         # specifies that the Task created on the previous line

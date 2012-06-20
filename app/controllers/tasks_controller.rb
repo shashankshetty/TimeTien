@@ -46,11 +46,23 @@ class TasksController < ApplicationController
 
   def create
     @task = Tassk.new(params[:task])
-    @task.start_time = parse_datetime(params[:task]["start_time"])
-    @task.end_time = parse_datetime(params[:task]["end_time"])
-    @task.time_out = get_time_out
+    if params[:task_type] == "wt"
+      @task.start_time = parse_datetime(params[:task]["start_time"])
+      @task.end_time = parse_datetime(params[:task]["end_time"])
+      @task.time_out = get_time(params[:time_out_hours], params[:time_out_minutes])
+    elsif params[:task_type] == "wnt"
+      @task.start_time = parse_datetime(params["task_date"])
+      @task.end_time = parse_datetime(params["task_date"])
+      @task.additional_time_spent = get_time(params[:time_spent_hours], params[:time_spent_minutes])
+      @task.validate_additional_time_spent
+    end
+    @task.task_type = params[:task_type]
     @task.user = current_user
-    result = @task.save
+    if @task.errors.count == 0
+      result = @task.save
+    else
+      result = false
+    end
     respond_to do |format|
       if result
         set_message_for_redirect result, "updated"
@@ -67,10 +79,19 @@ class TasksController < ApplicationController
   def update
     @task = Tassk.find(params[:id])
     @task.update_attributes(params[:task])
-    @task.start_time = parse_datetime(params[:task]["start_time"])
-    @task.end_time = parse_datetime(params[:task]["end_time"])
-    @task.time_out = get_time_out
-    set_message_for_render @task.save, "updated"
+    if @task.task_type == "wt"
+      @task.start_time = parse_datetime(params[:task]["start_time"])
+      @task.end_time = parse_datetime(params[:task]["end_time"])
+      @task.time_out = get_time(params[:time_out_hours], params[:time_out_minutes])
+    elsif @task.task_type == "wnt"
+      @task.start_time = parse_datetime(params["task_date"])
+      @task.end_time = parse_datetime(params["task_date"])
+      @task.additional_time_spent = get_time(params[:time_spent_hours], params[:time_spent_minutes])
+      @task.validate_additional_time_spent
+    end
+    if @task.errors.count == 0
+      set_message_for_render @task.save, "updated"
+    end
     respond_to do |format|
       format.html { render action: :edit }
       format.mobile { render action: :edit }
@@ -103,12 +124,12 @@ class TasksController < ApplicationController
     @tag
   end
 
-  def get_time_out
-    hours = params[:hours].to_i
-    minutes = params[:minutes].to_i
-    time_out = hours * 60 + minutes
-    time_out = nil if time_out == 0
-    return time_out
+  def get_time (hours, minutes)
+    hours = hours.to_i
+    minutes = minutes.to_i
+    total_time = hours * 60 + minutes
+    total_time = nil if total_time == 0
+    total_time
   end
 
   def set_message_for_render(result, action)

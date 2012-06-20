@@ -1,25 +1,56 @@
 <%= render "shared/messages", :target => @task %>
-<div class="field">
-  <%= label_tag :start_time %>
-  <br/>
-  <%= text_field_tag :start_time, format_time_m_d_y(@task.start_time), :class => "datetime", :name => "task[start_time]" %>
-</div><br/>
-<div class="field">
-  <%= label_tag :end_time %>
-  <br/>
-  <%= text_field_tag :end_time, format_time_m_d_y(@task.end_time), :class => "datetime", :name => "task[end_time]" %>
-</div><br/>
-<div class="field">
-  <%= label_tag :task_name %>
-  <br/>
+<% new_content = params[:action] == 'new'  || (params[:action] == 'create' && @task.errors.count > 0) %>
+<% task_type =  new_content ? params[:task_type] : @task.task_type %>
+<div class="field" <% if new_content %>align="center"<%end%>>
+  <%= label_tag :task_name %><% if new_content %>&nbsp;<% else %><br/><% end %>
   <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
 </div><br/>
-<div class="field">
-  <%= label_tag "Time Out" %>
-  <span> (HH:MM)</span>
-  <a class="title" rel="popover" href="#" data-original-title="Break/Time out in (HH:MM)" data-content="Total break time between a task">
-    <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
-  <%= text_field_tag :hours, get_time_out_hours, :class => 'time' %>
-  : <%= text_field_tag :minutes, get_time_out_minutes, :class => 'time' %>
-</div><br/>
-
+<% if new_content || @task.task_type == "wt" %>
+    <div <% if new_content %>class="content_left"<%end%>>
+        <% if new_content %>
+            <div class="field">
+              <%=  radio_button_tag 'task_type', 'wt', task_type.blank? ? true : task_type == 'wt' %>&nbsp;&nbsp;<%= label_tag 'Add start and end dates' %>
+            </div><br/>
+        <%end%>
+        <div class="field">
+          <%= label_tag :start_time %>
+          <br/>
+          <%= text_field_tag :start_time, format_time_m_d_y(@task.start_time), :class => "datetime", :name => "task[start_time]" %>
+        </div><br/>
+        <div class="field">
+          <%= label_tag :end_time %>
+          <br/>
+          <%= text_field_tag :end_time, format_time_m_d_y(@task.end_time), :class => "datetime", :name => "task[end_time]" %>
+        </div><br/>
+        <div class="field">
+          <%= label_tag "Time Out" %>
+          <span> (HH:MM)</span>
+          <a class="title" rel="popover" href="#" data-original-title="Break/Time out in (HH:MM)" data-content="Total break time between a task">
+            <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
+          <%= text_field_tag :time_out_hours, get_time_out_hours, :class => 'time' %>
+          : <%= text_field_tag :time_out_minutes, get_time_out_minutes, :class => 'time' %>
+        </div>
+    </div>
+<% end %>
+<% if new_content || @task.task_type == "wnt" %>
+    <div <% if new_content %>class="content_right"<%end%>>
+        <% if new_content %>
+            <div class="field">
+                <%=  radio_button_tag 'task_type', 'wnt', task_type.blank? ? false : task_type == 'wnt' %>&nbsp;&nbsp;<%= label_tag 'Add date and time spent' %>
+            </div><br/>
+        <%end%>
+        <div class="field">
+          <%= label_tag :date %>
+          <br/>
+          <%= text_field_tag :task_date, format_date_m_d_y(@task.start_time), :class => "date" %>
+        </div><br/>
+        <div class="field">
+          <%= label_tag "Time Spent" %>
+          <span> (HH:MM)</span>
+          <a class="title" rel="popover" href="#" data-original-title="Time spent in (HH:MM)" data-content="Total time spent on the task">
+            <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
+          <%= text_field_tag :time_spent_hours, get_additional_time_spent_hours, :class => 'time' %>
+          : <%= text_field_tag :time_spent_minutes, get_additional_time_spent_minutes, :class => 'time' %>
+        </div>
+    </div>
+<% end %>

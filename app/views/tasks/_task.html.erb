@@ -21,12 +21,34 @@
       <% tasks.each do |task| %>
           <tr>
             <td align="center"><%= task.tag.name %></td>
-            <td align="right"><%= format_time_d_m_y(task.start_time) %></td>
+            <td align="right">
+              <% if task.task_type == 'wnt' %>
+                  <%= format_date_d_m_y(task.start_time) %>
+              <% else %>
+                  <%= format_time_d_m_y(task.start_time) %>
+              <% end %>
+            </td>
             <% if tasks_type == 'completed' %>
-                <td align="right"><%= format_time_d_m_y(task.end_time) %></td>
+                <td align="right">
+                  <% if task.task_type == 'wnt' %>
+                      <%= format_date_d_m_y(task.end_time) %>
+                  <% else %>
+                      <%= format_time_d_m_y(task.end_time) %>
+                  <% end %>
+                </td>
             <% end %>
             <% time_spent = display_time(task.time_spent) %>
-            <td align="right"><%= time_spent == '' ? '0m' : time_spent %></td>
+            <% if task.task_type == 'wt' %>
+                <% time_out = task.time_out.blank? ? "0m" : display_time(task.time_out * 60) %>
+                <% content = "Time Off: #{time_out}" %>
+            <% else %>
+                <% content = "Task without start and end times" %>
+            <% end %>
+            <td align="right">
+              <a href="#" rel="popover" data-original-title="Time Spent" data-content='<%= content %>'>
+                <%= time_spent == '' ? '0m' : time_spent %>
+              </a>
+            </td>
             <% if tasks_type == 'ongoing' %>
                 <td align="center"><%= link_to 'stop', stop_task_path(task), :class => 'stop' %></td>
             <% end %>

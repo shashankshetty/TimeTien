@@ -18,13 +18,23 @@ module TasksHelper
   def format_time_m_d_y(t)
     return t if t.blank?
     return t.strftime('%I:%M %p').gsub(/ 0(\d\D)/, ' \1') if (t.to_date == Date.today)
-    return t.strftime('%m/%d/%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
+    t.strftime('%m/%d/%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
   end
 
   def format_time_d_m_y(t)
     return t if t.blank?
     return t.strftime('%I:%M %p').gsub(/ 0(\d\D)/, ' \1') if (t.to_date == Date.today)
-    return t.strftime('%d-%b-%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
+    t.strftime('%d-%b-%Y %I:%M %p').gsub(/ 0(\d\D)/, ' \1')
+  end
+
+  def format_date_d_m_y(t)
+    return t if t.blank?
+    t.strftime('%d-%b-%Y').gsub(/ 0(\d\D)/, ' \1')
+  end
+
+  def format_date_m_d_y(t)
+    return t if t.blank?
+    t.strftime('%m/%d/%Y').gsub(/ 0(\d\D)/, ' \1')
   end
 
   # http://stufftohelpyouout.blogspot.com/2010/02/seconds-to-days-minutes-hours-seconds.html
@@ -67,5 +77,15 @@ module TasksHelper
   def get_time_out_minutes
     return nil if @task.time_out.blank?
     return @task.time_out.divmod(60)[1]
+  end
+
+  def get_additional_time_spent_hours
+    return nil if @task.additional_time_spent.blank?
+    @task.additional_time_spent/60
+  end
+
+  def get_additional_time_spent_minutes
+    return nil if @task.additional_time_spent.blank?
+    @task.additional_time_spent.divmod(60)[1]
   end
 end
