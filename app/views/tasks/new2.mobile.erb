@@ -2,7 +2,7 @@
 
 <%= form_tag :action => "create" do %>
     <div align="right">
-        <%= link_to 'Add date and time spent', new2_task_path(@task), :"data-role" => "button", 'data-inline'=>"true", 'data-theme'=>"b" %>
+        <%= link_to 'Add start and end times', new_task_path(@task), :"data-role" => "button", 'data-inline'=>"true", 'data-theme'=>"b" %>
     </div>
     <%= render 'form' %>
     <div class="actions">

@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   def new
-    @task = Tassk.new
+    @task = Tassk.new(:task_type => 'wt')
+  end
+
+  def new2
+    @task = Tassk.new(:task_type => 'wnt')
   end
 
   def manage
@@ -46,32 +50,36 @@ class TasksController < ApplicationController
 
   def create
     @task = Tassk.new(params[:task])
+    @task.task_type = params[:task_type]
+    @task.user = current_user
+    result = false
     if params[:task_type] == "wt"
       @task.start_time = parse_datetime(params[:task]["start_time"])
       @task.end_time = parse_datetime(params[:task]["end_time"])
       @task.time_out = get_time(params[:time_out_hours], params[:time_out_minutes])
+      result = @task.save
     elsif params[:task_type] == "wnt"
       @task.start_time = parse_datetime(params["task_date"])
       @task.end_time = parse_datetime(params["task_date"])
       @task.additional_time_spent = get_time(params[:time_spent_hours], params[:time_spent_minutes])
       @task.validate_additional_time_spent
-    end
-    @task.task_type = params[:task_type]
-    @task.user = current_user
-    if @task.errors.count == 0
-      result = @task.save
-    else
-      result = false
+      if @task.errors.count == 0
+        result = @task.save
+      end
     end
     respond_to do |format|
       if result
-        set_message_for_redirect result, "updated"
+        set_message_for_redirect result, "created"
         format.html { redirect_to edit_task_path(@task) }
         format.mobile { redirect_to edit_task_path(@task) }
       else
         set_message_for_render result, "created"
         format.html { render action: :new }
-        format.mobile { render action: :new }
+        if @task.task_type == "wnt"
+          format.mobile { render action: :new2 }
+        else
+          format.mobile { render action: :new }
+        end
       end
     end
   end
@@ -83,14 +91,15 @@ class TasksController < ApplicationController
       @task.start_time = parse_datetime(params[:task]["start_time"])
       @task.end_time = parse_datetime(params[:task]["end_time"])
       @task.time_out = get_time(params[:time_out_hours], params[:time_out_minutes])
+      set_message_for_render @task.save, "updated"
     elsif @task.task_type == "wnt"
       @task.start_time = parse_datetime(params["task_date"])
       @task.end_time = parse_datetime(params["task_date"])
       @task.additional_time_spent = get_time(params[:time_spent_hours], params[:time_spent_minutes])
       @task.validate_additional_time_spent
-    end
-    if @task.errors.count == 0
-      set_message_for_render @task.save, "updated"
+      if @task.errors.count == 0
+        set_message_for_render @task.save, "updated"
+      end
     end
     respond_to do |format|
       format.html { render action: :edit }

@@ -9,7 +9,7 @@
     <div <% if new_content %>class="content_left"<%end%>>
         <% if new_content %>
             <div class="field">
-              <%=  radio_button_tag 'task_type', 'wt', task_type.blank? ? true : task_type == 'wt' %>&nbsp;&nbsp;<%= label_tag 'Add start and end dates' %>
+              <%=  radio_button_tag 'task_type', 'wt', task_type.blank? ? true : task_type == 'wt' %>&nbsp;&nbsp;<%= label_tag 'Add start and end times' %>
             </div><br/>
         <%end%>
         <div class="field">

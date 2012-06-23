@@ -5,9 +5,17 @@
       <% tasks.each do |task| %>
           <li data-theme="d">
             <a href="/tasks/<%= task.id %>/edit"><%= task.tag.name %><br/>
-              started @ <%= format_time_d_m_y(task.start_time) %>
+              <% if task.task_type == 'wnt' %>
+                  started @ <%= format_date_d_m_y(task.start_time) %>
+              <% else %>
+                <%= format_time_d_m_y(task.start_time) %>
+              <% end %>
               <% if tasks_type == 'completed' %>
-                  <br/>completed @ <%= format_time_d_m_y(task.end_time) %>
+                  <% if task.task_type == 'wnt' %>
+                      <br/>completed @ <%= format_date_d_m_y(task.end_time) %>
+                  <% else %>
+                      <br/>completed @ <%= format_time_d_m_y(task.end_time) %>
+                  <% end %>
               <% end %>
               <br/><% time_spent = display_time(task.time_spent) %>
               time spent <%= time_spent == '' ? '0m' : time_spent %>

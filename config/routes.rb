@@ -13,6 +13,7 @@ Timetien::Application.routes.draw do
   match 'start_task' => 'tasks#start_task', :as => 'start_task'
   match 'stop_task/:id' => 'tasks#stop_task', :as => 'stop_task'
   match 'delete_task/:id', :to => 'tasks#destroy', :as => 'delete_task'
+  match 'new2', :to => 'tasks#new2', :as => 'new2_task'
   match 'delete_analyze_task', :to => 'analyze_tasks#destroy_task', :as => 'delete_analyze_task'
   match 'analyze_project_tasks', :to => 'analyze_tasks#analyze_project_tasks', :as => 'analyze_project_tasks'
   match 'analyze_user_tasks', :to => 'analyze_tasks#analyze_user_tasks', :as => 'analyze_user_tasks'

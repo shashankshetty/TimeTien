@@ -9,7 +9,7 @@
   <meta name="viewport" content="width = 480px" content="initial-scale=2, user-scalable=no"  />
 </head>
 <body>
-<div data-role="page">
+<div id="#page" data-role="page">
   <div id="header" data-role="header" role="banner" data-position="fixed">
     <% if user_signed_in? %>
         <%= link_to 'home', root_url, "data-role" => "button", "data-corners" => "true", "data-inline" => "false", "data-icon" => "home", "data-wrapperels" => "span" %>

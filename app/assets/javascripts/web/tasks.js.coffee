@@ -37,7 +37,6 @@ jQuery ->
   $("#task_type_wt").selectTaskTypeWithTimes()
   $("#task_type_wt").click(() ->
      $(this).selectTaskTypeWithTimes()
-
   )
   $("#task_type_wnt").selectTaskTypeWithoutTimes()
   $("#task_type_wnt").click(() ->

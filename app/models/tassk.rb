@@ -33,6 +33,8 @@ class Tassk < ActiveRecord::Base
   def validate_additional_time_spent
     if additional_time_spent.blank?
       errors.add(:time_spent, "can't be blank")
+    elsif additional_time_spent == 0
+      errors.add(:time_spent, "can't be zero")
     end
   end
 
