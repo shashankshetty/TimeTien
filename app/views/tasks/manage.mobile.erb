@@ -1,5 +1,8 @@
 <% title "task management" %>
 <%= form_tag :action => "start_task" do |f| %>
+    <div class="right">
+      <%= link_to 'add old task', new_task_path, :"data-role" => "button", 'data-inline'=>"true", 'data-theme'=>"b" %>
+    </div><br/><br/>
     <%= render "shared/messages", :target => @task %>
     <% if !flash[:error].blank? %>
         <div class="error"><%= flash[:error] %></div><br/>
