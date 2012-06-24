@@ -5,11 +5,7 @@ apps:
 development:
   github_key: b59c6687870545a923d6
   github_secret: 9bb88e4e8663fe46978bcd0cf9726ac5001e5c33
-  google_key: 606741848733-3cbp6hb650brq65h08e79cb8pmfpejh8.apps.googleusercontent.com
-  google_secret: P-a20OfwvWFVLse_aiJ6Euq2
 
 production:
   github_key: dc0dbc0e7c0d68b5d524
   github_secret: 1d0718fdddecb0f04856be4a6773a273e762e385
-  google_key: 606741848733.apps.googleusercontent.com
-  google_secret: wpUwb7tStz3YVtjWXqKMEZXB
