@@ -6,7 +6,7 @@ development:
   github_key: b59c6687870545a923d6
   github_secret: 9bb88e4e8663fe46978bcd0cf9726ac5001e5c33
   google_key: 606741848733-3cbp6hb650brq65h08e79cb8pmfpejh8.apps.googleusercontent.com
-  google_secret: PmYg_XixBvpbVUGesVSAq1CR
+  google_secret: P-a20OfwvWFVLse_aiJ6Euq2
 
 production:
   github_key: dc0dbc0e7c0d68b5d524

@@ -19,6 +19,8 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-openid'
 
+gem 'thin'
+
 group :development, :test do
   gem 'rspec-rails'	
   gem 'execjs'
