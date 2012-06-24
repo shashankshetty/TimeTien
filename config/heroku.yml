@@ -1,3 +1,7 @@
+apps:
+  development: timetien-dev
+  production: timetien
+
 development:
   github_key: b59c6687870545a923d6
   github_secret: 9bb88e4e8663fe46978bcd0cf9726ac5001e5c33
