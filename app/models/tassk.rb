@@ -18,14 +18,14 @@ class Tassk < ActiveRecord::Base
 
   def validate_time_out
     if start_time && end_time && task_type == "wt"
-      errors.add(:time_out, "cannot be more than or equal to difference between start and end times") if time_spent <= 0
+      errors.add(:time_out, "cannot be more than the difference between start and end times") if time_spent < 0
     end
   end
 
   def validate_start_time
     if task_type == "wt" && start_time.blank?
       errors.add(:start_time, "can't be blank")
-    elsif task_type == "wnt" && (start_time.blank? || additional_time_spent == 0)
+    elsif task_type == "wnt" && start_time.blank?
       errors.add(:task_date, "can't be blank")
     end
   end
@@ -33,8 +33,6 @@ class Tassk < ActiveRecord::Base
   def validate_additional_time_spent
     if additional_time_spent.blank?
       errors.add(:time_spent, "can't be blank")
-    elsif additional_time_spent == 0
-      errors.add(:time_spent, "can't be zero")
     end
   end
 

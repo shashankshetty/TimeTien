@@ -137,7 +137,7 @@ class TasksController < ApplicationController
     hours = hours.to_i
     minutes = minutes.to_i
     total_time = hours * 60 + minutes
-    total_time = nil if total_time == 0
+    #total_time = nil if total_time == 0
     total_time
   end
 

@@ -18,7 +18,7 @@ describe Tassk, "When asked to validate" do
     task = FactoryGirl.create(:tassk)
     task.end_time = task.start_time-1.day
     task.should_not be_valid
-    end
+  end
 
   it "should not have time_out more than difference between start and end times" do
     task = FactoryGirl.create(:tassk)
@@ -44,7 +44,7 @@ describe Tassk, "When asked to get time spent on a task" do
     now = task.start_time + 60
     Time.stub!(:now).and_return(now)
     task.time_spent.should be == 60
-    end
+  end
 
   it "should get the difference between (end_time - start_time) -time_out" do
     task = FactoryGirl.create(:tassk)
@@ -61,7 +61,7 @@ describe Tassk, "When asked to get my performance" do
     task.tag.frequency = 'task'
     task.performance = 3720
     task.my_performance().should be == 120
-    end
+  end
 end
 
 describe Tassk, "When asked to validate additional time spent for task with no times" do
@@ -69,7 +69,7 @@ describe Tassk, "When asked to validate additional time spent for task with no t
     task = FactoryGirl.create(:tassk)
     task.validate_additional_time_spent
     task.errors[:time_spent].should_not be_empty
-    end
+  end
 end
 
 describe Tassk, "When asked to validate additional time spent for task with no times" do
@@ -78,12 +78,5 @@ describe Tassk, "When asked to validate additional time spent for task with no t
     task.additional_time_spent = 300
     task.validate_additional_time_spent
     task.errors[:time_spent].should be_empty
-  end
-
-  it "should not have additional_time_spent as zero if the task type is wnt" do
-    task = FactoryGirl.create(:tassk)
-    task.task_type = 'wnt'
-    task.additional_time_spent = 0
-    task.should_not be_valid
   end
 end
