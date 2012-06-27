@@ -26,6 +26,9 @@ Timetien::Application.routes.draw do
   root :to => 'tasks#manage'
   match '/user' => "tasks#manage", :as => :user_root
 
+  match 'about', :to => 'pages#about', :as => :about
+  match 'privacy', :to => 'pages#privacy', :as => :privacy
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

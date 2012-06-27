@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!, :except => [:index, :authenticate]
+  before_filter :authenticate_user!, :except => [:index, :authenticate, :about, :privacy]
   before_filter :set_time_zone, :prepare_for_mobile
 
   private
