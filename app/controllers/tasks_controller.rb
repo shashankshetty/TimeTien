@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     elsif params[:select_tag] == '[new_tag]' && params[:add_tag] == ''
       flash.now[:error] = "Add new task to start"
     else
-      @tag = get_tag
+      @tag = get_tag params[:select_tag]
       if flash.now[:error].blank?
         @task = Tassk.new
         @task.user = current_user
@@ -49,7 +49,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Tassk.new(params[:task])
+    @task = Tassk.new
+    @task.tag = get_tag params[:task][:tag_id]
     @task.task_type = params[:task_type]
     @task.user = current_user
     result = false
@@ -118,8 +119,8 @@ class TasksController < ApplicationController
 
   private
 
-  def get_tag
-    if params[:select_tag] == '[new_tag]'
+  def get_tag(selected_tag)
+    if selected_tag == '[new_tag]' && !params[:add_tag].blank?
       @tag = Tag.find(:first, :conditions => {:name => params[:add_tag], :user_id => current_user.id})
       if @tag
         flash.now[:error] = "Task with same name already exists in your list"
@@ -127,8 +128,8 @@ class TasksController < ApplicationController
         @tag = Tag.new(:name => params[:add_tag], :user => current_user)
         @tag.save
       end
-    else
-      @tag = Tag.find(params[:select_tag])
+    elsif !selected_tag.blank? && selected_tag != '[new_tag]'
+      @tag = Tag.find(selected_tag)
     end
     @tag
   end

@@ -3,6 +3,10 @@ module TasksHelper
     [['Select to start a task', ''], ['[Add New]', '[new_tag]']].concat(current_user.get_tags)
   end
 
+  def tags_with_option_to_add
+    [['Select', ''], ['[Add New]', '[new_tag]']].concat(current_user.get_tags)
+  end
+
   def available_tags
     [['Select', '']].concat(current_user.get_tags)
   end

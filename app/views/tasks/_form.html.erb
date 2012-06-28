@@ -3,7 +3,8 @@
 <% task_type =  new_content ? params[:task_type] : @task.task_type %>
 <div class="field" <% if new_content %>align="center"<%end%>>
   <%= label_tag :task_name %><% if new_content %>&nbsp;<% else %><br/><% end %>
-  <%= select_tag :tag_id, options_for_select(available_tags, @task.tag_id), :name => "task[tag_id]" %>
+  <%= select_tag :tag_id, options_for_select(tags_with_option_to_add, @task.tag_id == "[new_tag]" ? '' : @task.tag_id), :name => "task[tag_id]"  %>
+  <%= text_field_tag(:add_tag) %>
 </div><br/>
 <% if new_content || @task.task_type == "wt" %>
     <div <% if new_content %>class="content_left"<%end%>>

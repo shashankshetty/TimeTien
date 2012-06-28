@@ -1,13 +1,13 @@
-showHideAddTag = () ->
-  if($("#select_tag").val() == "[new_tag]")
+$.fn.showHideAddTag = () ->
+  if($(this).val() == "[new_tag]")
     $("#add_tag").show()
   else
     $("#add_tag").hide()
 
 
 $.fn.addTag = () ->
-  $("#select_tag").bind 'change', ->
-    showHideAddTag()
+  $(this).bind 'change', ->
+    $(this).showHideAddTag()
 
 $.fn.selectTaskTypeWithTimes = () ->
   if $(this).is(":checked")
@@ -30,8 +30,11 @@ $.fn.selectTaskTypeWithoutTimes = () ->
     $("#time_spent_minutes").attr("disabled", false)
 
 jQuery ->
-  showHideAddTag()
+  $("#select_tag").showHideAddTag()
   $("#select_tag").addTag()
+  $("#tag_id").showHideAddTag()
+  $("#tag_id").addTag()
+
   $('#tasks_tab a:first').tab('show')
 
   $("#task_type_wt").selectTaskTypeWithTimes()
