@@ -11,23 +11,13 @@ $.fn.addTag = () ->
 
 $.fn.selectTaskTypeWithTimes = () ->
   if $(this).is(":checked")
-    $("#task_date").attr("disabled", true)
-    $("#time_spent_hours").attr("disabled", true)
-    $("#time_spent_minutes").attr("disabled", true)
-    $("#start_time").attr("disabled", false)
-    $("#end_time").attr("disabled", false)
-    $("#time_out_hours").attr("disabled", false)
-    $("#time_out_minutes").attr("disabled", false)
+    $(".wnt").hide()
+    $(".wt").show()
 
 $.fn.selectTaskTypeWithoutTimes = () ->
   if $(this).is(":checked")
-    $("#start_time").attr("disabled", true)
-    $("#end_time").attr("disabled", true)
-    $("#time_out_hours").attr("disabled", true)
-    $("#time_out_minutes").attr("disabled", true)
-    $("#task_date").attr("disabled", false)
-    $("#time_spent_hours").attr("disabled", false)
-    $("#time_spent_minutes").attr("disabled", false)
+    $(".wnt").show()
+    $(".wt").hide()
 
 jQuery ->
   $("#select_tag").showHideAddTag()

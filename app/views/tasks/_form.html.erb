@@ -1,18 +1,21 @@
 <%= render "shared/messages", :target => @task %>
 <% new_content = params[:action] == 'new'  || (params[:action] == 'create' && @task.errors.count > 0) %>
 <% task_type =  new_content ? params[:task_type] : @task.task_type %>
-<div class="field" <% if new_content %>align="center"<%end%>>
-  <%= label_tag :task_name %><% if new_content %>&nbsp;<% else %><br/><% end %>
+<% if new_content %>
+    <div class="field wt">
+      <%=  radio_button_tag 'task_type', 'wnt', task_type.blank? ? false : task_type == 'wnt' %>&nbsp;&nbsp;<%= label_tag 'Add date and time spent' %>
+    </div>
+    <div class="field wnt">
+     <%=  radio_button_tag 'task_type', 'wt', task_type.blank? ? true : task_type == 'wt' %>&nbsp;&nbsp;<%= label_tag 'Add start and end times' %>
+   </div><br/>
+<%end%>
+<div class="field">
+  <%= label_tag :task_name %><br/>
   <%= select_tag :tag_id, options_for_select(tags_with_option_to_add, @task.tag_id == "[new_tag]" ? '' : @task.tag_id), :name => "task[tag_id]"  %>
   <%= text_field_tag(:add_tag) %>
 </div><br/>
 <% if new_content || @task.task_type == "wt" %>
-    <div <% if new_content %>class="content_left"<%end%>>
-        <% if new_content %>
-            <div class="field">
-              <%=  radio_button_tag 'task_type', 'wt', task_type.blank? ? true : task_type == 'wt' %>&nbsp;&nbsp;<%= label_tag 'Add start and end times' %>
-            </div><br/>
-        <%end%>
+    <div class="wt">
         <div class="field">
           <%= label_tag :start_time %>
           <br/>
@@ -34,12 +37,7 @@
     </div>
 <% end %>
 <% if new_content || @task.task_type == "wnt" %>
-    <div <% if new_content %>class="content_right"<%end%>>
-        <% if new_content %>
-            <div class="field">
-                <%=  radio_button_tag 'task_type', 'wnt', task_type.blank? ? false : task_type == 'wnt' %>&nbsp;&nbsp;<%= label_tag 'Add date and time spent' %>
-            </div><br/>
-        <%end%>
+    <div class="wnt">
         <div class="field">
           <%= label_tag :date %>
           <br/>
