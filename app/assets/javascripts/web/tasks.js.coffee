@@ -36,6 +36,17 @@ jQuery ->
     $(this).selectTaskTypeWithoutTimes()
   )
 
+  $(".cb-enable").click(() ->
+    parent = $(this).parents('.switch')
+    $('.cb-disable',parent).removeClass('selected')
+    $(this).addClass('selected')
+  )
+  $(".cb-disable").click(() ->
+    parent = $(this).parents('.switch')
+    $('.cb-enable',parent).removeClass('selected')
+    $(this).addClass('selected')
+  )
+
   if ($(this).attr('title').trim() == 'TimeTien - task management')
     $(".title").find('span').remove()
 
