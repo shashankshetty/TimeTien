@@ -38,4 +38,9 @@
       <%= text_field_tag :time_spent_hours, get_additional_time_spent_hours, :class => 'time' %>
       : <%= text_field_tag :time_spent_minutes, get_additional_time_spent_minutes, :class => 'time' %>
     </div>
-<% end %>
+<% end %><br/>
+<div class="field">
+  <%= label_tag :comment %>
+  <br/>
+  <%= text_area_tag :comment, @task.comment, :rows => 1, :name => "task[comment]" %>
+</div>

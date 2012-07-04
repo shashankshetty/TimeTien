@@ -60,11 +60,11 @@
         : <%= text_field_tag :time_spent_minutes, get_additional_time_spent_minutes, :class => 'time' %>
       </div>
     </div>
-<% end %>
+<% end %><br/>
 <div class="field">
   <%= label_tag :comment %>
   <a class="title" rel="popover" href="#" data-original-title="Comment" data-content="Add a short comment for the task">
     <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a>
   <br/>
-  <%= text_area_tag 'comment', @task.comment, :rows => 1, :name => "task[comment]" %>
-</div><br/>
+  <%= text_area_tag :comment, @task.comment, :rows => 1, :name => "task[comment]" %>
+</div>
