@@ -14,7 +14,7 @@ timetien.png: timetien-bb69a2ca5ae8728a50480776307802c8.png
 timetien_mobile.png: timetien_mobile-a4483c0753bddf48aef5eb16b647528d.png
 twitter_32.png: twitter_32-d5ad07c40b2b038c8c99917c720060ed.png
 mobile/application.js: mobile/application-bf0737dc7a06cdec61ad38723e6cec9a.js
-web/application.js: web/application-c3f40cae479220651420afa62290b1ad.js
+web/application.js: web/application-114642393302d0716d4878d97cd8b08e.js
 mobile/application.css: mobile/application-8f34d2b5e1626f01212d0550b387decf.css
 mobile/images/ajax-loader.gif: mobile/images/ajax-loader-a1e3ed2d0f3fb90ba37c0f8dd8997c8b.gif
 mobile/images/ajax-loader.png: mobile/images/ajax-loader-7eb4011035e1cfe7c3bb86eb8d946177.png
@@ -24,12 +24,13 @@ mobile/images/icons-36-black.png: mobile/images/icons-36-black-d69bcf650f6ceff72
 mobile/images/icons-36-white.png: mobile/images/icons-36-white-5c37de3e25df5d99d43d224f10dfc02f.png
 mobile/images/play.png: mobile/images/play-57c8597020bd8a2131f3f73e640f74ae.png
 mobile/images/stop.png: mobile/images/stop-5c5c88c2139534f015493c53c4bf9859.png
-web/application.css: web/application-9adfbaa9ca4257bdb6c7d2ab8aaddede.css
+web/application.css: web/application-6d70dcd50dda37945f82d88e0d740d74.css
 web/images/background.png: web/images/background-da39ba3349dc726b16fc83e10dd2fc71.png
 web/images/cancel.png: web/images/cancel-14bf2e07b5667fbd8d5e1ef65dc30894.png
 web/images/edit.png: web/images/edit-c31bbcc317c0bb3e4f03fdfe37ec92b6.png
 web/images/play.png: web/images/play-57c8597020bd8a2131f3f73e640f74ae.png
 web/images/stop.png: web/images/stop-5c5c88c2139534f015493c53c4bf9859.png
+web/images/switch.gif: web/images/switch-fb19c1e4e96bf463740bd17e50cdae18.gif
 web/images/arrows.png: web/images/arrows-300e6abb48b074a7bec7e24cfd723df2.png
 web/images/asc.gif: web/images/asc-8154408a346ea4664d6883db5fe36cc2.gif
 web/images/bg.gif: web/images/bg-3107e5e32a57b62120071c252fcf3b11.gif

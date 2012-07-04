@@ -53,6 +53,7 @@ class TasksController < ApplicationController
     @task.tag = get_tag params[:task][:tag_id]
     @task.task_type = params[:task_type]
     @task.user = current_user
+    @task.comment = params[:task][:comment]
     result = false
     if params[:task_type] == "wt"
       @task.start_time = parse_datetime(params[:task]["start_time"])

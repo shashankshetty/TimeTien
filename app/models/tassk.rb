@@ -9,6 +9,7 @@ class Tassk < ActiveRecord::Base
   validate :validate_start_time_earlier_than_end_time
   validate :validate_time_out
   validate :validate_start_time
+  validates_length_of :comment, :maximum => 250
 
   def validate_start_time_earlier_than_end_time
     if start_time && end_time && task_type == "wt"
