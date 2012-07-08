@@ -55,7 +55,7 @@
             <%= format_time_d_m_y(task.end_time) || "ongoing" %>
           <% end %></span>
           <% time_out = task.time_out.blank? ? "0m" : display_time(task.time_out * 60) %>
-          <% if time_out != '0m' %><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>Time Out: </span><span class="list_text"><%= time_out %></span><% end %>
+          <% if !time_out.blank? && time_out != '0m' %><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>Time Out: </span><span class="list_text"><%= time_out %></span><% end %>
           <% if @search_query.search_type == "Search" && task.user == current_user %>
               <span class="right">
                 <%= link_to '', '#', :class => 'delete_short', :id => "delete_#{task.id}", :taskId => task.id %>
