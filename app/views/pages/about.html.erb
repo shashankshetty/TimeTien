@@ -1,8 +1,60 @@
 <% title "about" %>
-<p>&nbsp;</p>
-<p>TimeZen was designed to better manage your time thus helping you to better
-manage your life. The goal of TimeZen is to make it really simple to log in time
-that you care about, so you can keep track of all the things important to you.</p>
 
-<p>TimeZen helps you set a target for each task that will help you analyze your time
-usage to better manage your time.</p>
+<ul class="nav nav-tabs" id="about_tab">
+  <li class="active"><%= link_to 'track time', '#track_time', 'data-toggle' => 'tab', :class => 'tab-header' %></li>
+  <li><%= link_to 'analyze time', '#analyze_time', 'data-toggle' => 'tab', :class => 'tab-header' %></li>
+  <li><%= link_to 'manage projects', '#manage_projects', 'data-toggle' => 'tab', :class => 'tab-header' %></li>
+  <li><%= link_to 'analyze projects', '#analyze_projects', 'data-toggle' => 'tab', :class => 'tab-header' %></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="track_time">
+    <div class="header">
+      Start task<br/>
+    </div>
+    <div class="image">
+        <%= image_tag "start_task.png", :width => "400" %>
+    </div>
+    <br/><br/>
+    <div class="header">
+      track ongoing and completed tasks<br/>
+    </div>
+    <div class="image">
+        <%= image_tag "task_list.png", :width => "750" %>
+    </div>
+  </div>
+  <div class="tab-pane" id="analyze_time">
+    <div class="header">
+      Search tasks
+    </div>
+    <br/>
+    <div class="image">
+        <%= image_tag "search_tasks.png", :width => "750" %>
+    </div>
+    <br/><br/><br/>
+    <div class="header">
+      track your goals
+    </div>
+    <br/>
+    <div class="image">
+      <%= image_tag "track_goals.png", :width => "750", :height => "400" %>
+    </div>
+  </div>
+  <div class="tab-pane" id="manage_projects">
+    <div class="header">
+      manage your projects
+    </div>
+    <br/>
+    <div class="image">
+      <%= image_tag "manage_projects.png", :width => "750", :height => "400" %>
+    </div>
+  </div>
+  <div class="tab-pane" id="analyze_projects">
+    <div class="header">
+      track your project specific tasks
+    </div>
+    <br/>
+    <div class="image">
+      <%= image_tag "analyze_projects.png", :width => "750", :height => "400" %>
+    </div>
+  </div>
+</div>

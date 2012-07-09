@@ -21,4 +21,4 @@ jQuery ->
   $(this).attr('title').trim().indexOf('registration') > 0 ||
   $(this).attr('title').trim().indexOf('about') > 0 ||
   $(this).attr('title').trim().indexOf('privacy policy') > 0)
-    $("#login").hide()
+    $(".login_link").hide()

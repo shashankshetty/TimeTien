@@ -35,3 +35,7 @@ jQuery ->
   )
 
   $('table').hide() if $('table > tbody > tr').length == 0
+
+  $(".btn-font").css("color", "#ffffff")
+
+  $('#about_tab a:first').tab('show')

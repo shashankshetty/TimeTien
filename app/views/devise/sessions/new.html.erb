@@ -54,21 +54,27 @@
     <div id="wrapper">
       <div class="slider-wrapper theme-default">
         <div id="slider" class="nivoSlider">
-          <%= image_tag "tags.png", 'data-thumb' => "tasks.png" %>
-          <%= image_tag "tasks.png", 'data-thumb' => "tasks.png" %>
-          <%= image_tag "analyze.png", 'data-thumb' => "tasks.png" %>
-          <%= image_tag "projects.png", 'data-thumb' => "tasks.png" %>
+          <%= image_tag "tracktime.png", 'data-thumb' => "tracktime.png" %>
+          <%= image_tag "analyzetasks.png", 'data-thumb' => "analyzetasks.png" %>
+          <%= image_tag "analyzeprojects.png", 'data-thumb' => "analyzeprojects.png" %>
         </div>
       </div>
       <div class="description">
-        Time Tien is a simple task management application to better manage your time which would help make your life
-        easier.
-        Time Tien is designed to track both your professional as well as personal tasks all in one place.
+        Time Tien is a simple task management application to better manage your time to make your life
+        easier. Time Tien is designed to track both professional as well as personal tasks all in one place.
+      </div>
+      <p>&nbsp;</p>
+      <div>
+        <span>
+            <%= link_to 'Get to know Time Tien better', about_path, :class => "btn btn-inverse btn-large btn-font" %>
+        </span>
+        <span class="right">
+            <a id="login1" data-toggle="modal" href="#login-modal" class="btn btn-inverse btn-large login-link btn-font">Sign Up</a>
+        </span>
       </div>
     </div>
     <div id="footer" align="center">
       <hr/>
-      <span align="left"><%= link_to 'about', about_path %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <span>© 2012 Time Tien</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>© 2012 Time Tien</span>
     </div>
 <% end %>
