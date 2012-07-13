@@ -15,12 +15,12 @@
         <div>
           <%= f.label :user_tokens, "Members" %>
           <br/>
-          <%= f.text_field :user_tokens, "data-pre" => @project.users.collect { |x| NameValuePair.new(x.id, "#{x.display_name} (#{x.email})") }.to_json %>
+          <%= f.text_field :user_tokens, "data-pre" => @project.users.collect { |x| NameValuePair.new(x.id, "#{x.display_name} (#{x.email.gsub(/[0-9A-Za-z]/, 'x')})") }.to_json %>
         </div><br/>
         <div>
           <%= f.label :admins, "Admins" %>
           <br/>
-          <%= select_tag :project_admins, options_for_select(@project.users.collect { |x| ["#{x.display_name} (#{x.email})", x.id] }, @project.admins.collect { |x| x.user_id }), :multiple => true, :class => "chzn-select" %>
+          <%= select_tag :project_admins, options_for_select(@project.users.collect { |x| ["#{x.display_name} (#{x.email.gsub(/[0-9A-Za-z]/, 'x')})", x.id] }, @project.admins.collect { |x| x.user_id }), :multiple => true, :class => "chzn-select" %>
         </div><br/>
         <div>
           <%= f.label :tag_tokens, "Tasks" %>

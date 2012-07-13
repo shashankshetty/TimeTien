@@ -78,7 +78,7 @@
 
 <div id="main" class="hero-unit">
   <div class="title"><%= yield(:title) %>
-    <span class="right"><%= link_to 'return home', root_url %></span><hr/>
+    <span class="right return"><%= link_to 'return home', root_url %></span><hr/>
   </div>
   <% flash.each do |key, value| %>
       <% if key.to_s != "error" && !value.blank? %>

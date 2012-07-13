@@ -22,3 +22,6 @@ jQuery ->
   $(this).attr('title').trim().indexOf('about') > 0 ||
   $(this).attr('title').trim().indexOf('privacy policy') > 0)
     $(".login_link").hide()
+
+  if ($(this).attr('title').trim().indexOf('Time Management System') > 0)
+    $(".return").hide()

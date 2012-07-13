@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
     else
       users = User.all
     end
-    @project_users = users.collect { |x| NameValuePair.new(x.id, "#{x.display_name} (#{x.email})") }
+    @project_users = users.collect { |x| NameValuePair.new(x.id, "#{x.display_name} (#{get_email(x.email)})") }
     respond_to do |format|
       format.json { render json: @project_users }
     end
@@ -149,4 +149,12 @@ class ProjectsController < ApplicationController
     params[:project_admins].blank? ? [] : params[:project_admins].reject { |s| s.nil? or s.empty? }
   end
 
+  def get_email(email)
+    len = email.length
+    if len > 3
+      new_email = email[0..3] + email[4..len].gsub(/[0-9A-Za-z]/, 'x')
+      return new_email
+    end
+    email
+  end
 end
