@@ -40,7 +40,7 @@
             <% time_spent = display_time(task.time_spent) %>
             <% time_out = 0 %>
             <% if task.task_type == 'wt' %>
-                <% time_out = task.time_out.blank? ? "0m" : display_time(task.time_out * 60) %>
+                <% time_out = task.time_out.blank? || task.time_out == 0 ? "0m" : display_time(task.time_out * 60) %>
                 <% content = "Time Off: #{time_out}" %>
             <% else %>
                 <% content = "Task without start and end times" %>
