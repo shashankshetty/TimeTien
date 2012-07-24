@@ -16,7 +16,7 @@ module TasksHelper
   end
 
   def completed_tasks
-    @manage_task.tasks.where('end_time IS NOT NULL').order('end_time DESC').limit(20)
+    @manage_task.tasks.where('end_time IS NOT NULL').order('end_time DESC').limit(30)
   end
 
   def format_time_m_d_y(t)
