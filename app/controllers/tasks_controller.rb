@@ -88,7 +88,9 @@ class TasksController < ApplicationController
 
   def update
     @task = Tassk.find(params[:id])
-    @task.update_attributes(params[:task])
+    @task.tag = get_tag params[:task][:tag_id]
+    @task.user = current_user
+    @task.comment = params[:task][:comment]
     if @task.task_type == "wt"
       @task.start_time = parse_datetime(params[:task]["start_time"])
       @task.end_time = parse_datetime(params[:task]["end_time"])
