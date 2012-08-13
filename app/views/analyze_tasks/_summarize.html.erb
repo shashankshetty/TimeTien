@@ -3,7 +3,7 @@
       <div class="summary_title">Total time logged</div>
       <p></p>
       <% @search_query.summary.each do |sum| %>
-          <div><b><%= sum.name %>:</b> <%= display_time(sum.id) %></div>
+          <div><b><%= sum.value %>:</b> <%= display_time(sum.name) %></div>
       <% end %>
       <%= hidden_field_tag 'names', labels %>
       <%= hidden_field_tag 'total', graph_data %>

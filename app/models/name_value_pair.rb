@@ -1,8 +1,8 @@
 class NameValuePair
-  attr_accessor :name, :id
+  attr_accessor :value, :name
 
-  def initialize(id, name)
-    @id = id
+  def initialize(name, value)
     @name = name
+    @value = value
   end
 end

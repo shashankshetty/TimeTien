@@ -15,7 +15,7 @@ describe AnalyzeTask, "When asked to summarize tasks" do
     tasks << get_task(tag, user)
     tasks = AnalyzeTask.summarize(tasks)
     tasks.count.should be == 1
-    tasks[0].id.floor.should be == 7200
+    tasks[0].name.floor.should be == 7200
   end
 
   def get_task(tag, user)
