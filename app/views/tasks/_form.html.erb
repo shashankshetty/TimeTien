@@ -39,10 +39,14 @@
           <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
         <%= text_field_tag :time_out_hours, get_time_out_hours, :class => 'time' %>
         : <%= text_field_tag :time_out_minutes, get_time_out_minutes, :class => 'time' %>
-      </div><br/>
-      <div class="field">
-        <%= label_tag "Time Spent: " %><span class="font-green"><%= display_time(@task.time_spent) %></span>
       </div>
+      <% if !new_content%>
+          <br/>
+          <% display_time = display_time(@task.time_spent) %>
+          <div class="field">
+            <%= label_tag "Time Spent: " %><span class="font-green"><%= display_time.blank? ? "0m" : display_time %></span>
+          </div>
+      <% end %>
     </div>
 <% end %>
 <% if new_content || @task.task_type == "wnt" %>
