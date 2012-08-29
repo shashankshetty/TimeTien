@@ -15,7 +15,7 @@
         <div>
           <%= f.label :user_tokens, "Members" %>
           <br/>
-          <%= f.text_field :user_tokens, "data-pre" => @project.users.collect { |x| NameValuePair.new(x.id, "#{x.display_name} (#{x.email.gsub(/[0-9A-Za-z]/, 'x')})") }.to_json %>
+          <%= f.text_field :user_tokens, "data-pre" => @project.users.collect { |x| NameIdPair.new(x.id, "#{x.display_name} (#{x.email.gsub(/[0-9A-Za-z]/, 'x')})") }.to_json %>
         </div><br/>
         <div>
           <%= f.label :admins, "Admins" %>
@@ -25,7 +25,7 @@
         <div>
           <%= f.label :tag_tokens, "Tasks" %>
           <br/>
-          <%= f.text_field :tag_tokens, "data-pre" => @project.tags.collect { |x| NameValuePair.new(x.id, x.name) }.to_json %>
+          <%= f.text_field :tag_tokens, "data-pre" => @project.tags.collect { |x| NameIdPair.new(x.id, x.name) }.to_json %>
         </div><br/><br/>
         <div class="actions">
           <%= f.submit :class => "btn btn-primary btn-large" %>

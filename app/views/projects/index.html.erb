@@ -17,7 +17,7 @@
         <td align="center"><%= project.name %></td>
         <td align="center"><%= display_time(project.total_time_taken) %></td>
         <td align="center"><% project.billable_amounts.each do |amount| %>
-            <%= number_to_currency(amount.id, :unit => amount.name) %>&nbsp;
+            <%= number_to_currency(amount.name, :unit => amount.value) %>&nbsp;
         <% end %></td>
         <td align="center"><%= link_to '', edit_project_path(project), :class => "edit_short" %></td>
       </tr>

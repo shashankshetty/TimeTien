@@ -11,7 +11,7 @@ class AnalyzeTasksController < ApplicationController
 
   def get_project_tags
     if params[:projects] != "null" && (params[:projects].present?)
-      project_tags = Tag.find(:all, :conditions => "project_id in (#{params[:projects].collect { |c| c }.join(',')})").collect { |x| NameValuePair.new(x.id, x.name) }
+      project_tags = Tag.find(:all, :conditions => "project_id in (#{params[:projects].collect { |c| c }.join(',')})").collect { |x| NameIdPair.new(x.id, x.name) }
     end
     respond_to do |format|
       format.json { render json: project_tags || [] }

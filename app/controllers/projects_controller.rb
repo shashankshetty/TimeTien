@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
     else
       users = User.all
     end
-    @project_users = users.collect { |x| NameValuePair.new(x.id, "#{x.display_name} (#{get_email(x.email)})") }
+    @project_users = users.collect { |x| NameIdPair.new(x.id, "#{x.display_name} (#{get_email(x.email)})") }
     respond_to do |format|
       format.json { render json: @project_users }
     end
@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     else
       tags = current_user.tags
     end
-    @project_tags = tags.collect { |x| NameValuePair.new(x.id, x.name) }
+    @project_tags = tags.collect { |x| NameIdPair.new(x.id, x.name) }
     respond_to do |format|
       format.json { render json: @project_tags }
     end

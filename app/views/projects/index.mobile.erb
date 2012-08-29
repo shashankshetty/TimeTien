@@ -7,7 +7,7 @@
         <br/>
         Billable Amount:
         <% project.billable_amounts.each do |amount| %>
-            <%= number_to_currency(amount.id, :unit => amount.name) %>&nbsp;
+            <%= number_to_currency(amount.name, :unit => amount.value) %>&nbsp;
         <% end %></div>
   <% end %>
 </div>

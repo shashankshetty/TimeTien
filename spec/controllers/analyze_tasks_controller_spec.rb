@@ -59,8 +59,8 @@ describe AnalyzeTasksController do
       tag2.save
       post :get_project_tags, :projects => [project.id], :format => :json
       parsed_body = JSON.parse(response.body)
-      parsed_body[0]["value"].should == tag1.name
-      parsed_body[1]["value"].should == tag2.name
+      parsed_body[0]["name"].should == tag1.name
+      parsed_body[1]["name"].should == tag2.name
     end
 
     it "returns no tags if no project is selected" do
