@@ -39,6 +39,9 @@
           <%= image_tag("info.png", :size => "16x16", :alt => "info") %></a><br/>
         <%= text_field_tag :time_out_hours, get_time_out_hours, :class => 'time' %>
         : <%= text_field_tag :time_out_minutes, get_time_out_minutes, :class => 'time' %>
+      </div><br/>
+      <div class="field">
+        <%= label_tag "Time Spent: " %><span class="font-green"><%= display_time(@task.time_spent) %></span>
       </div>
     </div>
 <% end %>
