@@ -14,7 +14,7 @@ class Tag < ActiveRecord::Base
 
   def validate_complete_within
     if complete_within
-      errors.add(:complete_within, "cannot be checked if the Allocated Time is blank") if (time_allocated.blank? || frequency.blank?)
+      errors.add(:complete_within, "cannot be checked if Time allocated is blank or incomplete") if (time_allocated.blank? || frequency.blank?)
     end
   end
 

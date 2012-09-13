@@ -80,10 +80,5 @@ class TagsController < ApplicationController
     minutes = params[:minutes].to_i
     @tag.time_allocated = hours * 60 + minutes
     @tag.time_allocated = nil if @tag.time_allocated == 0
-    if params[:complete_within] == "true" || params[:complete_within] == "on"
-      @tag.complete_within = true
-    else
-      @tag.complete_within = false
-    end
   end
 end
