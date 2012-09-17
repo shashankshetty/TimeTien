@@ -22,23 +22,25 @@ class AnalyzeTasksController < ApplicationController
     tasks = AnalyzeTask.search(@search_query)
     message = "No tasks found!" if tasks.count == 0
     @search_query.search_type = "Search"
-    render_search_results_with_message tasks, message
+    summary = AnalyzeTask.summarize(tasks)
+    render_search_results_with_message tasks, summary, message
   end
 
   def analyze
     tasks = AnalyzeTask.analyze(@search_query)
     message = "No tasks found with goal! Assign goal to tasks to analyze how you are doing" if tasks.count == 0
     @search_query.search_type = "Analyze"
-    render_search_results_with_message tasks, message
+    summary = AnalyzeTask.summarize_goals(tasks)
+    render_search_results_with_message tasks, summary, message
   end
 
   def query_tasks
     @search_query = SearchQuery.new(params, current_user)
     validation = @search_query.validate_start_time_earlier_than_end_time
-    return render_search_results_with_message [], validation unless (validation.blank?)
+    return render_search_results_with_message [], [], validation unless (validation.blank?)
     @search_query.search_type = params[:query]
     if @search_query.tags.nil?
-      return render_search_results_with_message [], "Select at least one task before you continue..."
+      return render_search_results_with_message [], [], "Select at least one task before you continue..."
     end
     if (@search_query.search_type == 'Search')
       search
@@ -73,9 +75,8 @@ class AnalyzeTasksController < ApplicationController
 
   private
 
-  def render_search_results_with_message(tasks, message)
+  def render_search_results_with_message(tasks, summary, message)
     flash.now[:info] = message
-    summary = AnalyzeTask.summarize(tasks)
     display_index Kaminari.paginate_array(tasks).page(params[:page]).per(20), summary, :results, tasks.count
     return
   end

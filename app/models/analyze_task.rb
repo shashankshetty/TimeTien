@@ -13,7 +13,19 @@ class AnalyzeTask
     tags = tasks.map { |task| task.tag }.uniq
     tags.each do |tag|
       tag_tasks = tasks.find_all { |t| t.tag.name == tag.name }
-      grouped_tasks << NameValuePair.new(tag_tasks.sum(&:time_spent), tag.name)
+      grouped_tasks << NameValuePair.new(tag_tasks.sum(&:time_spent), tag)
+    end
+    grouped_tasks
+  end
+
+  def self.summarize_goals(tasks)
+    grouped_tasks = []
+    tags = tasks.map { |task| task.tag }.uniq
+    tags.each do |tag|
+      tag_tasks = tasks.find_all { |t| t.tag.name == tag.name }
+      name_value_pair = NameValuePair.new(tag_tasks.sum(&:performance), tag)
+      name_value_pair.count = tag_tasks.count
+      grouped_tasks << name_value_pair
     end
     grouped_tasks
   end

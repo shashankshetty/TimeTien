@@ -25,6 +25,33 @@ describe AnalyzeTask, "When asked to summarize tasks" do
   end
 end
 
+describe AnalyzeTask, "When asked to summarize task goals" do
+  before :each do
+    Time.zone = "Central Time (US & Canada)"
+  end
+
+  it "should summarize performance by each task" do
+    tag = FactoryGirl.create(:tag)
+    tag.name = "Work12"
+    tag.time_allocated = 8
+    tag.frequency = 'day'
+    user = FactoryGirl.create(:user)
+    tasks = []
+    tasks << get_task(tag, user)
+    tasks << get_task(tag, user)
+    tasks = AnalyzeTask.group_tasks(tasks)
+    tasks = AnalyzeTask.summarize_goals(tasks)
+    tasks.count.should be == 1
+    tasks[0].name.floor.should be == 7200
+  end
+
+  def get_task(tag, user)
+    task = Tassk.new(:start_time => Time.now-1.hours, :tag => tag, :user => user)
+    task.save
+    task
+  end
+end
+
 describe AnalyzeTask, "When asked to analyze tasks" do
   before :each do
     Time.zone = "Central Time (US & Canada)"

@@ -1,5 +1,5 @@
 class NameValuePair
-  attr_accessor :value, :name
+  attr_accessor :value, :name, :count
 
   def initialize(name, value)
     @name = name

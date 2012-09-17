@@ -1,7 +1,9 @@
 $.fn.formatPerformanceColumn = () ->
   $(this).each () ->
     performance = $(this).text()
-    if (performance.indexOf("-") == 0)
+    if (performance.indexOf("perfect") >= 0)
+      $(this).css 'color', '#0055cc'
+    else if (performance.indexOf("-") == 0)
       $(this).text(performance.substring(1, performance.length))
       $(this).css 'color', '#ff0000'
     else if (performance.indexOf("+") == 0)

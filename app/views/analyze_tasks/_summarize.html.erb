@@ -3,7 +3,16 @@
       <div class="summary_title">Total time logged</div>
       <p></p>
       <% @search_query.summary.each do |sum| %>
-          <div><b><%= sum.value %>:</b> <%= display_time(sum.name) %></div>
+          <div>
+            <b><%= sum.value.name %>:</b> <%= display_time(sum.name) %>
+            <% if @search_query.search_type == "Analyze" && !sum.value.time_allocated.blank? %>
+                /<%= display_time(sum.value.time_allocated * sum.count * 60) %><br/>
+                <% my_perf = sum.name - (sum.value.time_allocated * sum.count * 60) %>
+                <div class="progress progress-<%= get_progress_bar_color(my_perf, sum.value.complete_within) %>">
+                   <div class="bar" style="width: <%= get_progress_bar_width(sum.name, sum.value.time_allocated * sum.count) %>;"></div>
+                </div>
+            <% end %>
+          </div>
       <% end %>
       <%= hidden_field_tag 'names', labels %>
       <%= hidden_field_tag 'total', graph_data %>

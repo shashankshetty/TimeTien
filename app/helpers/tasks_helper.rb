@@ -50,6 +50,9 @@ module TasksHelper
   def display_time_with_performance(total_seconds, complete_within)
     return "n/a" if total_seconds.blank?
     display = display_time(total_seconds)
+    if display.blank?
+      return "perfect"
+    end
     if total_seconds >=0
       performance = complete_within ? "-" : "+"
       "#{performance}#{display} over"
@@ -61,6 +64,30 @@ module TasksHelper
 
   def display_time(total_seconds)
     Tassk.formatted_time(total_seconds)
+  end
+
+  def get_progress_bar_width_for_task(task)
+    get_progress_bar_width(task.performance, task.tag.time_allocated)
+  end
+
+  def get_progress_bar_width(time_spent, total_time)
+    time_spent = time_spent.abs
+    total_time = total_time*60
+    return 100 if (time_spent == 0)
+    number_to_percentage((time_spent.to_f/total_time)*100)
+  end
+
+  def get_progress_bar_color_for_task(task)
+    get_progress_bar_color(task.my_performance, task.tag.complete_within)
+  end
+
+  def get_progress_bar_color(performance, complete_within)
+    return "info" if performance == 0
+    if performance < 0
+      complete_within ? "success" : "danger"
+    elsif performance > 0
+      return complete_within ? "danger" : "success"
+    end
   end
 
   def calculate_earning(tag, total_seconds)

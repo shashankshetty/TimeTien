@@ -30,6 +30,9 @@
                    if !earning.nil? %>
                     <span>Earning: </span><span class="list_text"><%= earning %></span>
                 <% end %>
+                <div class="progress right progress-<%= get_progress_bar_color_for_task(task) %>">
+                   <div class="bar" style="width: <%= get_progress_bar_width_for_task(task) %>;"></div>
+                </div>
             <% end %>
             <% if @search_query.search_type == "Search" %>
                 <% time_spent = display_time(task.time_spent) %>
