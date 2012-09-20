@@ -5,7 +5,6 @@ analyzetasks.png: analyzetasks-44dcdd00f527c62dec1441143218e771.png
 calendar.gif: calendar-a86785b69072de0f1bccba8c7447bd80.gif
 facebook_32.png: facebook_32-56cd78cb046f8c110edbea8580a52c39.png
 favicon.ico: favicon-bbee379687817e532d998658c895dd56.ico
-fork_me.png: fork_me-89d9ff6509b4dfe9f128675dcc75a30b.png
 github_32.png: github_32-5d8085022a283d852fbdf5cd95d0173f.png
 google_32.png: google_32-31dd8ed4ed8218ffb86813de859f1825.png
 info.png: info-a602f786faa4ae0e9a389e22f484fe29.png
@@ -30,7 +29,7 @@ mobile/images/icons-36-black.png: mobile/images/icons-36-black-d69bcf650f6ceff72
 mobile/images/icons-36-white.png: mobile/images/icons-36-white-5c37de3e25df5d99d43d224f10dfc02f.png
 mobile/images/play.png: mobile/images/play-57c8597020bd8a2131f3f73e640f74ae.png
 mobile/images/stop.png: mobile/images/stop-5c5c88c2139534f015493c53c4bf9859.png
-web/application.css: web/application-7b17691368beb061a9a732ae30f1e7c3.css
+web/application.css: web/application-d49f847cdae66577859c283d48b72c2d.css
 web/images/background.png: web/images/background-da39ba3349dc726b16fc83e10dd2fc71.png
 web/images/cancel.png: web/images/cancel-14bf2e07b5667fbd8d5e1ef65dc30894.png
 web/images/edit.png: web/images/edit-c31bbcc317c0bb3e4f03fdfe37ec92b6.png

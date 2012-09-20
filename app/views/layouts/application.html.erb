@@ -68,7 +68,8 @@
             <% if mobile_device? %>
                 <li><%= link_to 'switch to mobile site', :mobile => 1 %></li>
             <% end %>
-            <li class="login login-screen"><a id="login" data-toggle="modal" href="#login-modal" class="login_link btn-font">Sign in</a></li>
+            <li class="login login-screen">
+              <a id="login" data-toggle="modal" href="#login-modal" class="login_link btn-font">Sign in</a></li>
           </ul>
       <% end %>
     </div>
@@ -78,7 +79,8 @@
 
 <div id="main" class="hero-unit">
   <div class="title"><%= yield(:title) %>
-    <span class="right return"><%= link_to 'return home', root_url %></span><hr/>
+    <span class="right return"><%= link_to 'return home', root_url %></span>
+    <hr/>
   </div>
   <% flash.each do |key, value| %>
       <% if key.to_s != "error" && !value.blank? %>
@@ -91,8 +93,10 @@
   <%= yield %>
 </div>
 <div class="main-footer"></div>
-<div id="ribbon">
-  <p><a rel="me" title="Fork me on GitHub!" href="https://github.com/shashankshetty/TimeTien">Fork me on GitHub!</a></p>
-</div>
+<% if !user_signed_in? %>
+    <div id="ribbon" class="right">
+      <a title="Fork me on GitHub!" href="https://github.com/shashankshetty/TimeTien">Fork me on GitHub</a>
+    </div>
+<% end %>
 </body>
 </html>

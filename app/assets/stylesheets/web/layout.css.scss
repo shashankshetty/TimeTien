@@ -8,13 +8,13 @@ $blue: #053799;
 $lightblue: #054bd4;
 $font-family: arial, Helvetica, sans-serif, verdana;
 
-@mixin rounded-corners($radius) {
+@mixin rounded-corners($radius){
   border-radius: $radius;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
 }
 
-@mixin links($color) {
+@mixin links($color){
   a {
     color: $color;
     font-size: 16px;
@@ -32,7 +32,7 @@ $font-family: arial, Helvetica, sans-serif, verdana;
   font-size: 14px;
 }
 
-@mixin message($color, $background_color) {
+@mixin message($color, $background_color){
   width: 680px;
   border: 1px solid $color;
   color: $color;
@@ -325,25 +325,16 @@ hr {
 }
 
 #ribbon {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  background-color: #a00;
+  overflow: hidden;
 }
-
-#ribbon p a {
-  background-attachment: scroll;
-  background-clip: border-box;
-  background-color: transparent;
-  background-image: url("images/fork_me.png");
-  background-origin: padding-box;
-  background-position: left bottom;
-  background-repeat: no-repeat;
-  background-size: auto auto;
-  height: 8.625em;
-  text-indent: -999em;
-  width: 8.625em;
-}
-
-#ribbon p a {
+#ribbon a {
+  border: 1px solid #faa;
+  color: #fff;
   display: block;
+  font: bold 81.25% 'Helvetiva Neue', Helvetica, Arial, sans-serif;
+  margin: 0.05em 0;
+  padding: 0.5em 3.5em;
+  text-align: center;
+  text-decoration: none;
 }
