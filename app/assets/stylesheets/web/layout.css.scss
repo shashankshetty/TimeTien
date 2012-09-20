@@ -8,13 +8,13 @@ $blue: #053799;
 $lightblue: #054bd4;
 $font-family: arial, Helvetica, sans-serif, verdana;
 
-@mixin rounded-corners($radius){
+@mixin rounded-corners($radius) {
   border-radius: $radius;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
 }
 
-@mixin links($color){
+@mixin links($color) {
   a {
     color: $color;
     font-size: 16px;
@@ -32,7 +32,7 @@ $font-family: arial, Helvetica, sans-serif, verdana;
   font-size: 14px;
 }
 
-@mixin message($color, $background_color){
+@mixin message($color, $background_color) {
   width: 680px;
   border: 1px solid $color;
   color: $color;
@@ -198,20 +198,20 @@ select {
 }
 
 .alert {
-  @include message($red, #f2dede)
+  @include message($red, #f2dede);
 }
 
 // delete when you remove testing message
 .alert2 {
-  @include message($red, #f2dede)
+  @include message($red, #f2dede);
 }
 
 .success {
-  @include message($green, #dff0d8)
+  @include message($green, #dff0d8);
 }
 
 .info {
-  @include message(#C09853, #fff29b)
+  @include message(#C09853, #fff29b);
 }
 
 .notice {
@@ -322,4 +322,28 @@ hr {
   font-weight: bold;
   text-decoration: underline;
   padding-left: 10px;
+}
+
+#ribbon {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+#ribbon p a {
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: transparent;
+  background-image: url("images/fork_me.png");
+  background-origin: padding-box;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: auto auto;
+  height: 8.625em;
+  text-indent: -999em;
+  width: 8.625em;
+}
+
+#ribbon p a {
+  display: block;
 }
